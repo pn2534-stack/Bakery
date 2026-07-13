@@ -1,0 +1,78 @@
+.physical-room.shops-pet-shop {
+  clip-path: none !important;
+  border: 9px solid #5c4029 !important;
+  border-radius: 26px !important;
+  box-shadow: 0 24px 64px #2b190c75, inset 0 0 0 2px #dcb175 !important;
+}
+
+.physical-room.shops-pet-shop .physical-shell {
+  background: url('assets/honeybell-pet-shop-interior.png') center/cover no-repeat !important;
+}
+
+.physical-room.shops-pet-shop .physical-shell::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  transform: none !important;
+  pointer-events: none;
+  background: radial-gradient(circle at 51% 48%, transparent 0 45%, #2f1c0e17 100%) !important;
+}
+
+.physical-room.shops-pet-shop .physical-shell::after,
+.physical-room.shops-pet-shop .physical-window,
+.physical-room.shops-pet-shop .curtain,
+.physical-room.shops-pet-shop .hanging-plants,
+.physical-room.shops-pet-shop .menu-board { display: none !important; }
+
+.physical-room.shops-pet-shop .physical-stage { inset: 11% 2.5% 6% !important; }
+.physical-room.shops-pet-shop .physical-object { background: transparent !important; }
+
+.physical-room.shops-pet-shop .physical-object .object-model {
+  opacity: .025 !important;
+  background: #fff6d8 !important;
+  border-color: #fff !important;
+  box-shadow: none !important;
+  transition: opacity .2s, filter .2s, transform .2s !important;
+}
+
+.physical-room.shops-pet-shop .physical-object:hover .object-model,
+.physical-room.shops-pet-shop .physical-object.near .object-model {
+  opacity: .32 !important;
+  outline: 3px solid #fff0ad;
+  filter: drop-shadow(0 0 14px #ffdf80) !important;
+}
+
+.physical-room.shops-pet-shop .physical-object .object-name {
+  background: #3e2b20ed !important;
+  border: 1px solid #eed3a5 !important;
+  color: #fff9eb !important;
+  box-shadow: 0 5px 14px #24140866 !important;
+}
+
+.physical-room.shops-pet-shop .physical-player {
+  z-index: 25 !important;
+  transform: scale(1.26) !important;
+  filter: drop-shadow(0 8px 5px #26150882);
+}
+
+.physical-room.shops-pet-shop .room-npc {
+  z-index: 22 !important;
+  right: 17% !important;
+  bottom: 19% !important;
+}
+
+.physical-room.shops-pet-shop .npc-pet {
+  z-index: 21 !important;
+  right: 12% !important;
+  bottom: 13% !important;
+  animation: petShopWander 5s ease-in-out infinite alternate;
+}
+
+@keyframes petShopWander {
+  to { transform: translate(-34px, -8px) rotate(-3deg); }
+}
+
+@media (max-width: 800px) {
+  .physical-room.shops-pet-shop .physical-shell { background-position: 51% center !important; }
+  .physical-room.shops-pet-shop .physical-player { transform: scale(.9) !important; }
+}

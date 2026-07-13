@@ -1,0 +1,73 @@
+.physical-room .image-hit-stage {
+  inset: 0 !important;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.physical-room .image-hit-area {
+  display: block !important;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0;
+  pointer-events: auto;
+  touch-action: manipulation;
+  cursor: pointer;
+  border-radius: 18px;
+  outline: 0 solid transparent;
+  transition: background .18s, outline .18s, filter .18s;
+  transform: none !important;
+}
+
+.physical-room .image-hit-area .object-model {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  transform: none !important;
+  border: 0 !important;
+  border-radius: inherit !important;
+  background: #fff !important;
+  opacity: 0 !important;
+}
+
+.physical-room .image-hit-area:hover,
+.physical-room .image-hit-area:focus-visible,
+.physical-room .image-hit-area.near,
+.physical-room .image-hit-area.touching {
+  background: #fff2a51f !important;
+  outline: 3px solid #fff0a7;
+  filter: drop-shadow(0 0 12px #ffd774);
+}
+
+.physical-room .image-hit-area:hover .object-model,
+.physical-room .image-hit-area:focus-visible .object-model,
+.physical-room .image-hit-area.near .object-model,
+.physical-room .image-hit-area.touching .object-model {
+  opacity: .12 !important;
+  outline: 0 !important;
+  filter: none !important;
+}
+
+.physical-room .image-hit-area .object-name {
+  left: 50% !important;
+  bottom: 7px !important;
+  z-index: 4;
+  max-width: calc(100% - 10px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+.physical-room .image-hit-area:focus-visible .object-name,
+.physical-room .image-hit-area.touching .object-name {
+  opacity: 1 !important;
+  transform: translateX(-50%) !important;
+}
+
+@media (hover:none) {
+  .physical-room .image-hit-area .object-name {
+    font-size: 10px;
+    padding: 4px 7px;
+  }
+}

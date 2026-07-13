@@ -1,0 +1,63 @@
+.location.active {
+  background: #241b15 !important;
+}
+
+.location.active .location-bg,
+.location.active .location-tint,
+.location.active .location-copy { display: none !important; }
+
+.location.active .back {
+  top: 102px !important;
+  left: 28px !important;
+  z-index: 48 !important;
+  background: #fff8ebed !important;
+}
+
+.location.active .room.physical-room {
+  inset: 96px 18px 96px 18px !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  transform: none !important;
+  border-radius: 28px !important;
+  box-shadow: 0 20px 55px #120a067a !important;
+}
+
+.location.active .room-tabs {
+  top: auto !important;
+  right: 50% !important;
+  bottom: 102px !important;
+  transform: translateX(50%) !important;
+  z-index: 47 !important;
+  max-width: calc(100% - 180px);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.physical-room.cottage-kitchen .physical-shell{background:url('assets/honeybell-cottage-kitchen.png') center/cover no-repeat!important}
+.physical-room.cottage-bedroom .physical-shell{background:url('assets/honeybell-cottage-bedroom.png') center/cover no-repeat!important}
+.physical-room.cottage-bathroom .physical-shell{background:url('assets/honeybell-cottage-bathroom.png') center/cover no-repeat!important}
+.physical-room.shops-furniture .physical-shell{background:url('assets/honeybell-furniture-store.png') center/cover no-repeat!important}
+.physical-room.shops-boutique .physical-shell{background:url('assets/honeybell-boutique.png') center/cover no-repeat!important}
+.physical-room.park-pavilion .physical-shell{background:url('assets/honeybell-park-pavilion.png') center/cover no-repeat!important}
+.physical-room.park-gardens .physical-shell{background:url('assets/honeybell-park-gardens.png') center/cover no-repeat!important}
+.physical-room.library-reading-hall .physical-shell{background:url('assets/honeybell-library.png') center/cover no-repeat!important}
+.physical-room.greenhouse-greenhouse .physical-shell{background:url('assets/honeybell-greenhouse.png') center/cover no-repeat!important}
+.physical-room.giftshop-gift-shop .physical-shell{background:url('assets/honeybell-gift-shop.png') center/cover no-repeat!important}
+.physical-room.delivery-delivery-center .physical-shell{background:url('assets/honeybell-delivery-center.png') center/cover no-repeat!important}
+.physical-room.studio-art-studio .physical-shell{background:url('assets/honeybell-art-studio.png') center/cover no-repeat!important}
+
+.physical-room:is(.cottage-kitchen,.cottage-bedroom,.cottage-bathroom,.shops-furniture,.shops-boutique,.park-pavilion,.park-gardens,.library-reading-hall,.greenhouse-greenhouse,.giftshop-gift-shop,.delivery-delivery-center,.studio-art-studio) {
+  clip-path:none!important;
+  border:8px solid #60432d!important;
+}
+
+.physical-room:is(.cottage-kitchen,.cottage-bedroom,.cottage-bathroom,.shops-furniture,.shops-boutique,.park-pavilion,.park-gardens,.library-reading-hall,.greenhouse-greenhouse,.giftshop-gift-shop,.delivery-delivery-center,.studio-art-studio) :is(.physical-window,.curtain,.hanging-plants,.menu-board){display:none!important}
+.physical-room:is(.cottage-kitchen,.cottage-bedroom,.cottage-bathroom,.shops-furniture,.shops-boutique,.park-pavilion,.park-gardens,.library-reading-hall,.greenhouse-greenhouse,.giftshop-gift-shop,.delivery-delivery-center,.studio-art-studio) .physical-shell:before{content:''!important;position:absolute!important;inset:0!important;transform:none!important;background:linear-gradient(180deg,#0000 60%,#24140a12)!important;pointer-events:none}
+.physical-room:is(.cottage-kitchen,.cottage-bedroom,.cottage-bathroom,.shops-furniture,.shops-boutique,.park-pavilion,.park-gardens,.library-reading-hall,.greenhouse-greenhouse,.giftshop-gift-shop,.delivery-delivery-center,.studio-art-studio) .physical-shell:after{display:none!important}
+
+@media(max-width:800px){
+  .location.active .room.physical-room{inset:76px 5px 78px 5px!important;border-radius:18px!important}
+  .location.active .back{top:82px!important;left:11px!important}
+  .location.active .room-tabs{bottom:82px!important;max-width:calc(100% - 20px)}
+}

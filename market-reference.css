@@ -1,0 +1,65 @@
+.physical-room.shops-market {
+  clip-path: none !important;
+  border: 9px solid #594026 !important;
+  border-radius: 26px !important;
+  box-shadow: 0 24px 64px #29190c7a, inset 0 0 0 2px #d8aa67 !important;
+}
+
+.physical-room.shops-market .physical-shell {
+  background: url('assets/honeybell-market-interior.png') center/cover no-repeat !important;
+}
+
+.physical-room.shops-market .physical-shell::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  transform: none !important;
+  pointer-events: none;
+  background: radial-gradient(circle at 52% 48%, transparent 0 42%, #2b180b19 100%) !important;
+}
+
+.physical-room.shops-market .physical-shell::after,
+.physical-room.shops-market .physical-window,
+.physical-room.shops-market .curtain,
+.physical-room.shops-market .hanging-plants,
+.physical-room.shops-market .menu-board { display: none !important; }
+
+.physical-room.shops-market .physical-stage { inset: 11% 2.5% 6% !important; }
+.physical-room.shops-market .physical-object { background: transparent !important; }
+
+.physical-room.shops-market .physical-object .object-model {
+  opacity: .025 !important;
+  background: #fff5cf !important;
+  border-color: #fff !important;
+  box-shadow: none !important;
+  transition: opacity .2s, filter .2s, transform .2s !important;
+}
+
+.physical-room.shops-market .physical-object:hover .object-model,
+.physical-room.shops-market .physical-object.near .object-model {
+  opacity: .32 !important;
+  outline: 3px solid #fff0a7;
+  filter: drop-shadow(0 0 14px #ffdb70) !important;
+}
+
+.physical-room.shops-market .physical-object .object-name {
+  background: #3c2a1ded !important;
+  border: 1px solid #ecd09c !important;
+  color: #fff9e9 !important;
+  box-shadow: 0 5px 14px #24140866 !important;
+}
+
+.physical-room.shops-market .physical-player {
+  z-index: 24 !important;
+  transform: scale(1.26) !important;
+  filter: drop-shadow(0 8px 5px #26150882);
+}
+
+.physical-room.shops-market .room-npc { z-index: 21 !important; }
+.physical-room.shops-market .npc-a { right: 20% !important; bottom: 18% !important; }
+.physical-room.shops-market .npc-c { left: 40% !important; bottom: 31% !important; }
+
+@media (max-width: 800px) {
+  .physical-room.shops-market .physical-shell { background-position: 52% center !important; }
+  .physical-room.shops-market .physical-player { transform: scale(.9) !important; }
+}
