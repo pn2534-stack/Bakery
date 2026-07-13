@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f8d7d7" />
+  <title>Honeybell Bakery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="gameplay.css" />
+  <link rel="stylesheet" href="interiors.css" />
+  <link rel="stylesheet" href="world3d.css" />
+  <link rel="stylesheet" href="world3d-extra.css" />
+  <link rel="stylesheet" href="cottage-fix.css" />
+  <link rel="stylesheet" href="polish.css" />
+  <link rel="stylesheet" href="polish-fixes.css" />
+  <link rel="stylesheet" href="expansion.css" />
+  <link rel="stylesheet" href="character-fix.css" />
+  <link rel="stylesheet" href="map3d.css" />
+  <link rel="stylesheet" href="creator-pro.css" />
+  <link rel="stylesheet" href="reference-style.css" />
+  <link rel="stylesheet" href="cooking.css" />
+  <link rel="stylesheet" href="creator-reference.css" />
+  <link rel="stylesheet" href="map-reference.css" />
+  <link rel="stylesheet" href="bakery-reference.css" />
+  <link rel="stylesheet" href="kitchen-reference.css" />
+  <link rel="stylesheet" href="cottage-reference.css" />
+</head>
+<body>
+  <div id="game">
+    <section id="start-screen" class="start-screen">
+      <div class="start-bg"></div><div class="start-vignette"></div>
+      <div class="sky-life"><span class="bird b1">⌁</span><span class="bird b2">⌁</span><span class="butterfly bf1">🦋</span><span class="butterfly bf2">🦋</span><span class="leaf lf1">🍃</span><span class="leaf lf2">🍃</span></div>
+      <div class="chimney-smoke"><i></i><i></i><i></i></div>
+      <div class="title-wrap" id="magic-title"><div class="fairy-lights">· ✦ · ✧ · ✦ ·</div><div class="wood-sign"><span class="title-sparkles">✦　✧　✦</span><h1>Cottage Bakery</h1><p>FAIRY LIFE</p><div class="title-flowers">🌸 🌿 🌼 🌿 🌸</div></div></div>
+      <nav class="start-menu" aria-label="Start menu">
+        <button class="menu-main" data-action="new-game">🌸 Play 🌸</button>
+        <button data-action="continue">📖 Continue</button><button data-action="start-settings">⚙️ Settings</button><button data-action="themes">🎨 Themes</button><button data-action="credits">❤️ Credits</button>
+      </nav><p class="start-hint">A gentle bakery life awaits</p>
+    </section>
+    <section id="creator" class="creator" aria-label="Character creation">
+      <div class="creator-panel glass">
+        <div class="creator-copy"><p class="eyebrow">A NEW CHAPTER</p><h1>Create your baker</h1><p>Make a character who feels like you. Everything can be changed again later.</p></div>
+        <div class="character-preview"><div class="avatar-large" id="avatar-large"><span class="hair">⌒</span><span class="face">•‿•</span><span class="body">♟</span><span class="accessory"></span></div><b id="preview-name">Your Baker</b></div>
+        <form class="creator-form" id="creator-form">
+          <label>Name<input id="char-name" maxlength="16" placeholder="Your name" required></label><label>Character<select id="char-gender"><option>Girl</option><option>Boy</option></select></label>
+          <label>Hairstyle<select id="char-hair"><option>Long waves</option><option>Curly bob</option><option>Braids</option><option>Messy bun</option><option>Short curls</option><option>Side part</option></select></label>
+          <label>Hair color<select id="hair-color"><option value="#654436">Chestnut</option><option value="#2e2726">Espresso</option><option value="#c78b58">Honey blonde</option><option value="#9b4c39">Auburn</option><option value="#d7c5b3">Silver</option></select></label>
+          <label>Skin tone<select id="skin-tone"><option value="#f2c7a7">Warm fair</option><option value="#d99a72">Warm tan</option><option value="#a86648">Deep warm</option><option value="#754532">Rich deep</option><option value="#efb98b">Golden</option></select></label>
+          <label>Eye color<select id="eye-color"><option>Brown</option><option>Green</option><option>Blue</option><option>Hazel</option><option>Gray</option></select></label>
+          <label>Outfit<select id="char-outfit"><option>Rose baker overalls</option><option>Sage floral dress</option><option>Cream linen set</option><option>Blue cottage cardigan</option></select></label>
+          <label>Accessory<select id="char-accessory"><option value="">None</option><option value="🌸">Flower clip</option><option value="👒">Straw hat</option><option value="🎀">Ribbon</option><option value="👓">Round glasses</option></select></label>
+          <button class="creator-start" type="submit">START <span>→</span></button>
+        </form>
+      </div>
+    </section>
+    <header class="topbar glass">
+      <button class="brand" data-action="home" aria-label="Return to village"><span class="brand-mark">HB</span><span><b>Honeybell</b><small>BAKERY & VILLAGE</small></span></button>
+      <div class="day-pill"><span class="sun">☀</span><span><b id="season">Spring · Day 1</b><small id="clock">9:00 AM</small></span></div>
+      <div class="resources"><span title="Coins">◉ <b id="coins">302</b></span><span title="Friendship stars">✦ <b id="stars">12</b></span><button class="round" data-action="calendar" aria-label="Open calendar">▦</button><button class="round sound" data-action="sound" aria-label="Toggle ambient sound">♪</button></div>
+    </header>
+
+    <main id="world" class="world scene active" aria-label="Honeybell village world map">
+      <canvas id="map3d" aria-label="Interactive 3D fairy village"></canvas>
+      <div class="world-shade"></div>
+      <div class="town-camera" id="town-camera"><div class="town-board" id="town-board">
+        <div class="river"><i></i><i></i><i></i></div><div class="stone-path path-a"></div><div class="stone-path path-b"></div>
+        <button class="town-building building-cottage" data-location="cottage" aria-label="Enter My Cottage"><i class="roof thatch"></i><i class="building-face"><b class="window left"></b><b class="door"></b><b class="window right"></b></i><span>My Cottage</span></button>
+        <button class="town-building building-bakery" data-location="bakery" aria-label="Enter Bakery"><i class="roof tile"></i><i class="building-face"><b class="window left"></b><b class="door"></b><b class="window right"></b><em class="awning"></em></i><span>Honeybell Bakery</span></button>
+        <button class="town-building building-market" data-location="shops" aria-label="Enter Market Row"><i class="roof sage"></i><i class="building-face"><b class="window left"></b><b class="door"></b><b class="window right"></b><em class="awning"></em></i><span>Market Row</span></button>
+        <button class="town-building building-park" data-location="park" aria-label="Visit Willow Park"><i class="park-tree"></i><i class="picnic"></i><span>Willow Park</span></button>
+        <div class="town-tree t1"></div><div class="town-tree t2"></div><div class="town-tree t3"></div><div class="town-tree t4"></div><div class="flower-bed f1">✿ ✿ ✿</div><div class="flower-bed f2">✿ ✿ ✿</div>
+      </div></div>
+      <div class="welcome">
+        <p class="eyebrow">WELCOME HOME, BAKER</p>
+        <h1>A little village,<br><em>full of wonder.</em></h1>
+        <p>Open your bakery, meet your neighbors, and make every day a little sweeter.</p>
+        <button class="primary" data-action="enter" data-location="bakery">Open the bakery <span>→</span></button>
+      </div>
+      <div class="map-pins" aria-label="Village locations">
+        <button class="pin bakery-pin" data-location="bakery"><span>🥐</span><b>Bakery</b><small>Open until 6 PM</small></button>
+        <button class="pin cottage-pin" id="my-cottage-button" data-location="cottage"><span>⌂</span><b>My Cottage</b></button>
+        <button class="pin shops-pin" data-location="shops"><span>🧺</span><b>Market Row</b></button>
+        <button class="pin park-pin" data-location="park"><span>❀</span><b>Willow Park</b></button>
+      </div>
+      <div class="player character" id="player" aria-label="Player character"><div class="character-shadow"></div><div class="character-legs"><i></i><i></i></div><div class="character-body"><i class="apron"></i><i class="arm left"></i><i class="arm right"></i></div><div class="character-head"><i class="ear left"></i><i class="ear right"></i><i class="hair back"></i><i class="face"><b class="eye left"></b><b class="eye right"></b><b class="blush left"></b><b class="blush right"></b><b class="smile"></b></i><i class="hair fringe"></i></div></div>
+      <aside class="narrator glass" id="narrator"><span>✦</span><p><b>Welcome to your new home.</b> Take your time exploring the village. When you’re ready, you can open your bakery and begin your journey.</p><button data-action="dismiss-narrator">×</button></aside>
+      <div class="controls glass"><b>Move</b><span>↑ ↓ ← →</span><small id="wasd-hint"></small></div>
+      <button class="explore glass" data-action="hide-welcome">Explore village <span>⌄</span></button>
+    </main>
+
+    <section id="location" class="location scene" aria-live="polite">
+      <div class="location-bg"></div><div class="location-tint"></div>
+      <button class="back glass" data-action="home">← <span>Village</span></button>
+      <div class="location-copy"><p class="eyebrow" id="loc-kicker">YOUR BAKERY</p><h2 id="loc-title">Honeybell Bakery</h2><p id="loc-desc"></p></div>
+      <div class="room" id="room"></div>
+      <nav class="room-tabs glass" id="room-tabs"></nav>
+      <div class="npc-card glass" id="npc-card" hidden></div>
+    </section>
+
+    <nav class="dock glass" aria-label="Main menu">
+      <button class="active" data-action="home"><span>⌂</span>Village</button>
+      <button data-location="bakery"><span>♨</span>Bakery</button>
+      <button id="cottage-nav-button" data-location="cottage"><span>⌂</span>Cottage</button>
+      <button data-action="friends"><span>♡</span>Friends<i id="birthday-dot"></i></button>
+      <button data-action="inventory"><span>♧</span>Bag</button>
+      <button data-action="more"><span>•••</span>More</button>
+    </nav>
+
+    <div class="modal-wrap" id="modal-wrap" style="z-index:600" hidden><div class="modal glass" role="dialog" aria-modal="true"><button class="modal-close" data-action="close">×</button><div id="modal-content"></div></div></div>
+    <div class="door-prompt glass" id="door-prompt" hidden>Press <b>E</b> to enter</div>
+    <div class="loading-screen" id="loading-screen"><span>✿</span><p>Opening the door…</p></div>
+    <div class="toast" id="toast"></div>
+    <section class="save-select" id="save-select" aria-label="Save file selection" hidden><div class="save-backdrop"></div><div class="save-panel"><p>CHOOSE YOUR ADVENTURE</p><h2>Save Files</h2><div class="save-slots" id="save-slots"></div><button class="save-return" data-save-back>← Character Creation</button></div></section>
+  </div>
+  <script src="game.js"></script>
+  <script src="world3d.js"></script>
+  <script src="polish.js"></script>
+  <script src="expansion.js"></script>
+  <script src="character-fix.js"></script>
+  <script src="map3d.js"></script>
+  <script src="creator-pro.js"></script>
+  <script src="cooking.js"></script>
+  <script src="creator-reference.js"></script>
+  <script src="map-reference.js"></script>
+  <script src="cottage-reference.js"></script>
+</body>
+</html>

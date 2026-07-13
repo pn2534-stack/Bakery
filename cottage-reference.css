@@ -1,0 +1,80 @@
+.physical-room.cottage-exterior,
+.physical-room.cottage-living-room {
+  clip-path: none !important;
+  border: 9px solid #68482f !important;
+  border-radius: 26px !important;
+  box-shadow: 0 24px 64px #30201270, inset 0 0 0 2px #e0bd83 !important;
+}
+
+.physical-room.cottage-exterior .physical-shell {
+  background: url('assets/honeybell-cottage-exterior.png') center/cover no-repeat !important;
+}
+
+.physical-room.cottage-living-room .physical-shell {
+  background: url('assets/honeybell-cottage-interior.png') center/cover no-repeat !important;
+}
+
+.physical-room.cottage-exterior .physical-shell::before,
+.physical-room.cottage-living-room .physical-shell::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  transform: none !important;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 55%, #301c0e16) !important;
+}
+
+.physical-room.cottage-exterior .physical-shell::after,
+.physical-room.cottage-living-room .physical-shell::after,
+.physical-room.cottage-exterior .physical-window,
+.physical-room.cottage-exterior .curtain,
+.physical-room.cottage-exterior .hanging-plants,
+.physical-room.cottage-exterior .menu-board,
+.physical-room.cottage-living-room .physical-window,
+.physical-room.cottage-living-room .curtain,
+.physical-room.cottage-living-room .hanging-plants,
+.physical-room.cottage-living-room .menu-board { display: none !important; }
+
+.physical-room.cottage-exterior .physical-stage { inset: 12% 4% 5% !important; }
+.physical-room.cottage-living-room .physical-stage { inset: 15% 3% 5% !important; }
+.physical-room.cottage-exterior .physical-object,
+.physical-room.cottage-living-room .physical-object { background: transparent !important; }
+
+.physical-room.cottage-exterior .physical-object .object-model,
+.physical-room.cottage-living-room .physical-object .object-model {
+  opacity: .025 !important;
+  background: #fff8d8 !important;
+  border-color: #fff !important;
+  box-shadow: none !important;
+  transition: opacity .2s, filter .2s, transform .2s !important;
+}
+
+.physical-room.cottage-exterior .physical-object:hover .object-model,
+.physical-room.cottage-exterior .physical-object.near .object-model,
+.physical-room.cottage-living-room .physical-object:hover .object-model,
+.physical-room.cottage-living-room .physical-object.near .object-model {
+  opacity: .3 !important;
+  outline: 3px solid #fff2b6;
+  filter: drop-shadow(0 0 14px #ffe597) !important;
+}
+
+.physical-room.cottage-exterior .physical-object .object-name,
+.physical-room.cottage-living-room .physical-object .object-name {
+  background: #433024ed !important;
+  border: 1px solid #f1d7ae !important;
+  color: #fff9ec !important;
+}
+
+.physical-room.cottage-exterior .physical-player,
+.physical-room.cottage-living-room .physical-player {
+  z-index: 20 !important;
+  transform: scale(1.28) !important;
+  filter: drop-shadow(0 8px 5px #2b190b80);
+}
+
+@media (max-width: 800px) {
+  .physical-room.cottage-exterior .physical-shell { background-position: 50% center !important; }
+  .physical-room.cottage-living-room .physical-shell { background-position: 52% center !important; }
+  .physical-room.cottage-exterior .physical-player,
+  .physical-room.cottage-living-room .physical-player { transform: scale(.92) !important; }
+}
