@@ -1,0 +1,83 @@
+/* Final authority for My Cottage's outdoor tab. Never dress this scene as an interior. */
+.room.physical-room.cottage-exterior {
+  background:#83a968!important;
+  border:9px solid #68482f!important;
+  border-radius:26px!important;
+  clip-path:none!important;
+  box-shadow:0 24px 64px #30201270,inset 0 0 0 2px #e0bd83!important;
+}
+
+.room.physical-room.cottage-exterior .physical-shell {
+  position:absolute!important;
+  inset:0!important;
+  overflow:hidden!important;
+  background-color:#83a968!important;
+  background-image:url('assets/honeybell-cottage-exterior.png')!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+}
+
+.room.physical-room.cottage-exterior .physical-shell::before {
+  content:''!important;
+  position:absolute!important;
+  z-index:2!important;
+  inset:0!important;
+  display:block!important;
+  transform:none!important;
+  background:linear-gradient(180deg,#fff8d51c 0 30%,transparent 52%,#24401924 100%)!important;
+  pointer-events:none!important;
+}
+
+.room.physical-room.cottage-exterior .physical-shell::after,
+.room.physical-room.cottage-exterior .physical-window,
+.room.physical-room.cottage-exterior .curtain,
+.room.physical-room.cottage-exterior .hanging-plants,
+.room.physical-room.cottage-exterior .menu-board,
+.room.physical-room.cottage-exterior .bedroom-style-architecture,
+.room.physical-room.cottage-exterior .organized-room-decor {
+  display:none!important;
+}
+
+.room.physical-room.cottage-exterior .physical-stage {
+  z-index:5!important;
+  inset:9% 3% 4%!important;
+}
+
+.room.physical-room.cottage-exterior .physical-object {
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+.room.physical-room.cottage-exterior .physical-object .object-model {
+  opacity:.02!important;
+  background:#fff8d8!important;
+  border-color:#fff!important;
+  box-shadow:none!important;
+}
+
+.room.physical-room.cottage-exterior .physical-object:hover .object-model,
+.room.physical-room.cottage-exterior .physical-object.near .object-model,
+.room.physical-room.cottage-exterior .physical-object:focus-visible .object-model {
+  opacity:.28!important;
+  outline:3px solid #fff2b6!important;
+  filter:drop-shadow(0 0 14px #ffe597)!important;
+}
+
+.room.physical-room.cottage-exterior .physical-object .object-name {
+  z-index:8!important;
+  background:#433024ed!important;
+  border:1px solid #f1d7ae!important;
+  color:#fff9ec!important;
+}
+
+.room.physical-room.cottage-exterior .physical-player {
+  z-index:20!important;
+  filter:drop-shadow(0 8px 5px #2b190b80)!important;
+}
+
+@media(max-width:800px){
+  .room.physical-room.cottage-exterior .physical-shell{background-position:50% center!important}
+  .room.physical-room.cottage-exterior .physical-player{transform:scale(.92)!important}
+}

@@ -18,6 +18,7 @@
   }
 
   function blocksMovement(object) {
+    if (object.dataset.overlayHit === 'true') return false;
     return !['door', 'art', 'plant', 'animal'].includes(object.dataset.type);
   }
 
@@ -64,7 +65,8 @@
     const closeEnough = nearest && nearest.d < INTERACT_DISTANCE;
     prompt.classList.toggle('show', !!closeEnough);
     if (closeEnough) {
-      const name = nearest.o.querySelector('.object-name')?.textContent.trim();
+      const label = nearest.o.querySelector('.object-name');
+      const name = label?.querySelector('span')?.textContent.trim() || nearest.o.dataset.objectName?.replace(/-/g,' ') || label?.textContent.trim();
       prompt.textContent = `E · ${nearest.o.dataset.actionName} ${name}`;
     }
   }

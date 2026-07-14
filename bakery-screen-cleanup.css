@@ -1,0 +1,25 @@
+/* Final bakery gameplay layer: the generated room is the furniture; controls are hit zones. */
+.physical-room.clean-bakery-gameplay .bedroom-style-architecture,
+.physical-room.clean-bakery-gameplay .physical-window,
+.physical-room.clean-bakery-gameplay .curtain,
+.physical-room.clean-bakery-gameplay .hanging-plants,
+.physical-room.clean-bakery-gameplay .menu-board{display:none!important}
+.physical-room.clean-bakery-gameplay .physical-stage{inset:7% 27% 8% 1%!important}
+.physical-room.clean-bakery-gameplay .physical-object{border:2px solid transparent!important;border-radius:18px!important;background:transparent!important;box-shadow:none!important;outline:0!important;opacity:1!important;transform:none!important}
+.physical-room.clean-bakery-gameplay .physical-object .object-model{display:none!important;opacity:0!important;background:none!important;border:0!important;box-shadow:none!important;outline:0!important;filter:none!important}
+.physical-room.clean-bakery-gameplay .physical-object .object-name.always-visible-name{display:block!important;top:50%!important;bottom:auto!important;left:50%!important;width:max-content!important;max-width:145px!important;opacity:0!important;visibility:hidden!important;transform:translate(-50%,-50%) translateY(7px)!important;padding:7px 10px!important;pointer-events:none!important;transition:opacity .18s,transform .18s!important}
+.physical-room.clean-bakery-gameplay .physical-object:is(:hover,:focus-visible,.near,.todo-highlight) .object-name.always-visible-name{opacity:1!important;visibility:visible!important;transform:translate(-50%,-50%)!important}
+.physical-room.clean-bakery-gameplay .physical-object:is(:hover,:focus-visible,.near,.todo-highlight){border-color:#ffe6a6!important;background:#fff4b51f!important;box-shadow:inset 0 0 22px #fff5b22e,0 0 0 3px #7c4e2b7a!important}
+.physical-room.clean-bakery-gameplay.bakery-layout-mode .physical-object{border:2px dashed #fff0b5!important;background:#6b462a34!important;box-shadow:inset 0 0 0 2px #5f3b2580!important;cursor:grab!important}
+.physical-room.clean-bakery-gameplay.bakery-layout-mode .physical-object .object-name.always-visible-name{opacity:1!important;visibility:visible!important;transform:translate(-50%,-50%)!important}
+.physical-room.clean-bakery-gameplay .physical-object.todo-highlight{animation:cleanStationPulse .85s ease-in-out infinite alternate!important}
+@keyframes cleanStationPulse{to{background:#ffe99135!important;box-shadow:inset 0 0 24px #fff0a14a,0 0 0 4px #ffe279!important}}
+.physical-room.clean-bakery-gameplay .physical-player.character.rendered-character{width:82px!important;height:136px!important;transform:translate(-50%,-58%) scale(.76)!important;z-index:82!important}
+.physical-room.clean-bakery-gameplay .physical-player::before{display:none!important;content:none!important}
+.physical-room.clean-bakery-gameplay .physical-player .rendered-directional-sprite{display:none!important}
+.physical-room.clean-bakery-gameplay .physical-player .rendered-3d-puppet{display:block!important}
+.physical-room.clean-bakery-gameplay .restaurant-hud{right:10px!important;top:10px!important;width:min(410px,25.5%)!important;max-height:calc(100% - 20px)!important;padding:10px!important;font-size:12px!important}
+.physical-room.clean-bakery-gameplay .restaurant-ticket,.physical-room.clean-bakery-gameplay .bakery-todo{padding:8px!important}.physical-room.clean-bakery-gameplay .restaurant-ticket p{margin:4px 0!important;padding:5px!important}.physical-room.clean-bakery-gameplay .bakery-todo button{margin:3px 0!important;padding:6px!important}
+.physical-room.clean-bakery-gameplay .unified-room-controls{right:12px!important;bottom:10px!important;max-width:25%;white-space:normal!important;font-size:9px!important}
+.physical-room.clean-bakery-gameplay .tutorial-reopen{left:14px!important;bottom:14px!important}
+@media(max-width:1050px){.physical-room.clean-bakery-gameplay .physical-stage{right:35%!important}.physical-room.clean-bakery-gameplay .restaurant-hud{width:34%!important}.physical-room.clean-bakery-gameplay .unified-room-controls{display:none!important}}

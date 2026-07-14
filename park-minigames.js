@@ -29,6 +29,7 @@
     const wins = state.minigameWins || {};
     modal(`<div class="park-game-hub"><div class="park-arcade-title"><small>TEA PAVILION ACTIVITY TABLE</small><h2>Willow Park Mini Games</h2><p>Choose a game. Winning earns coins and a friendship star.</p></div><div class="park-game-grid">
       ${Object.keys(titles).map(name => `<button data-park-game="${name}"><i>${icons[name]}</i><b>${titles[name]}</b><span>${wins[name] || 0} wins</span></button>`).join('')}
+      <button class="tea-party-game" data-park-tea-animation><i>🫖</i><b>Tea Party</b><span>Pour, share, and celebrate</span></button>
     </div></div>`);
   }
 
@@ -114,6 +115,7 @@
 
   document.addEventListener('click', event => {
     const game=event.target.closest('[data-park-game]');if(game){starters[game.dataset.parkGame]();return}
+    if(event.target.closest('[data-park-tea-animation]')){window.openParkTeaParty?.();return}
     if(event.target.closest('[data-park-hub]')){openHub();return}
     const reset=event.target.closest('[data-reset-park-game]');if(reset){starters[reset.dataset.resetParkGame]();return}
     const ticCell=event.target.closest('[data-tic-cell]');if(ticCell){playTic(Number(ticCell.dataset.ticCell));return}

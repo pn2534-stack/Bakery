@@ -3,7 +3,7 @@
     const room=document.querySelector('.room.physical-room');
     const shell=room?.querySelector('.physical-shell');
     const stage=room?.querySelector('.physical-stage');
-    if(!room||!shell||!stage||room.classList.contains('topdown-bedroom')||current==='park')return;
+    if(!room||!shell||!stage||room.classList.contains('topdown-bedroom')||current==='park'||(current==='cottage'&&currentTab==='Exterior'))return;
     room.classList.add('bedroom-style-room');
     room.dataset.interiorTheme=current;
     if(!shell.querySelector('.bedroom-style-architecture'))shell.insertAdjacentHTML('afterbegin',`<div class="bedroom-style-architecture" aria-hidden="true"><i class="style-window left"><b></b></i><i class="style-window right"><b></b></i><i class="style-wall-flowers"></i><i class="style-doorway"></i><i class="style-sunlight"></i></div>`);

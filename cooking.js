@@ -25,11 +25,17 @@
     'Mocha':{type:'drink',needs:{'Coffee Beans':1,Milk:1,Cocoa:1,Cream:1},minutes:5},
     'Mint Tea':{type:'drink',needs:{'Tea Leaves':1,Mint:2,Honey:1},minutes:5},
     'Mango Smoothie':{type:'drink',needs:{Mango:2,Yogurt:1,Honey:1,Coconut:1},minutes:5}
+    ,'Hazel’s Heirloom Buns':{type:'bake',needs:{Flour:2,Butter:1,Milk:1,Sugar:1,Cinnamon:2,Honey:1},minutes:28,temp:375,unlock:'Hazel’s Heirloom Buns'}
+    ,'Lily’s Berry Birthday Cake':{type:'bake',needs:{Flour:2,Eggs:2,Milk:1,Sugar:2,Strawberries:3,Vanilla:1},minutes:44,temp:350,unlock:'Lily’s Berry Birthday Cake'}
+    ,'Professor Maple’s Tea Cookies':{type:'bake',needs:{Flour:1,Butter:1,Sugar:1,Eggs:1,'Tea Leaves':1,Honey:1},minutes:18,temp:350,unlock:'Professor Maple’s Tea Cookies'}
+    ,'Honeybell Berry Danish':{type:'bake',needs:{Flour:2,Butter:2,Sugar:1,Raspberries:2,Vanilla:1},minutes:25,temp:375,unlock:'Honeybell Berry Danish'}
+    ,'Rose Garden Macarons':{type:'bake',needs:{Eggs:2,Sugar:2,Vanilla:1,Raspberries:2},minutes:20,temp:325,unlock:'Rose Garden Macarons'}
+    ,'Festival Honey Cake':{type:'bake',needs:{Flour:2,Eggs:2,Butter:1,Honey:2,Cinnamon:1},minutes:38,temp:350,unlock:'Festival Honey Cake'}
   };
   const stationRecipes = {
-    'Bread station':['White Bread','Cinnamon Rolls','Pumpkin Bread'], 'Pastry station':['Croissant','Blueberry Muffins','Apple Pie','Raspberry Scones','Cherry Tart'],
-    'Cake station':['Strawberry Cake','Chocolate Cake'], 'Cupcake station':['Lemon Cupcakes','Blueberry Muffins'],
-    'Cookie station':['Cookies','Oat Honey Cookies','Matcha Cookies'], 'Pie station':['Apple Pie','Cherry Tart'],
+    'Bread station':['White Bread','Cinnamon Rolls','Pumpkin Bread','Hazel’s Heirloom Buns'], 'Pastry station':['Croissant','Blueberry Muffins','Apple Pie','Raspberry Scones','Cherry Tart','Honeybell Berry Danish'],
+    'Cake station':['Strawberry Cake','Chocolate Cake','Lily’s Berry Birthday Cake','Festival Honey Cake'], 'Cupcake station':['Lemon Cupcakes','Blueberry Muffins'],
+    'Cookie station':['Cookies','Oat Honey Cookies','Matcha Cookies','Professor Maple’s Tea Cookies','Rose Garden Macarons'], 'Pie station':['Apple Pie','Cherry Tart'],
     'Coffee station':['Latte','Caramel Latte','Hot Chocolate','Vanilla Frappe','Mocha'],
     'Tea station':['Peach Tea','Spiced Apple Cider','Mint Tea'], 'Smoothie station':['Berry Smoothie','Peach Smoothie','Mango Smoothie'],
     Ovens:Object.keys(recipes2).filter(name => recipes2[name].type === 'bake')
@@ -50,7 +56,8 @@
   function skillProgress() { return (state.bakingSkill.xp || 0) % 120; }
   function available(name) { return state.inventory[name] || 0; }
   function canBake(recipe) { return Object.entries(recipe.needs).every(([name,amount]) => available(name) >= amount); }
-  function isDough(name) { return /Bread|Croissant|Cinnamon Roll|Pie/.test(name); }
+  function isUnlocked(name) { const recipe=recipes2[name];return !recipe?.unlock||(state.unlockedRecipes||[]).includes(recipe.unlock); }
+  function isDough(name) { return /Bread|Croissant|Cinnamon Roll|Bun|Pie/.test(name); }
   function needsDecorating(name) { return /Cake|Cupcake|Cookie|Muffin|Pie/.test(name); }
   function needsPiping(name) { return /Cake|Cupcake/.test(name); }
   function decorationProfile(name) {
@@ -100,9 +107,9 @@
     return steps.map((label,index)=>`<li class="${index < current-1 || cook.stage==='result' ? 'done' : index===Math.max(0,current-1) ? 'active' : ''}">${label}</li>`).join('');
   }
   function openCooking(prefer='') {
-    const direct = recipes2[prefer] ? prefer : null;
+    const direct = recipes2[prefer]&&isUnlocked(prefer) ? prefer : null;
     const category = direct ? (Object.keys(stationRecipes).find(key => stationRecipes[key].includes(direct)) || 'Ovens') : categoryFor(prefer);
-    const recipe = direct || stationRecipes[category][0];
+    const recipe = direct || stationRecipes[category].find(isUnlocked) || 'White Bread';
     cook = freshCook(recipe,category); renderCook();
   }
   window.openSkillBaking = openCooking;
@@ -132,7 +139,7 @@
   }
 
   function renderCook() {
-    const recipe = recipes2[cook.recipe], choices = stationRecipes[cook.category] || Object.keys(recipes2);
+    const recipe = recipes2[cook.recipe], choices = (stationRecipes[cook.category] || Object.keys(recipes2)).filter(isUnlocked);
     modal(`<div class="skill-baking-modal"><header class="baking-header"><div><p>HONEYBELL KITCHEN</p><h2>Interactive baking</h2></div><div class="baking-level"><b>Skill ${skillLevel()}</b><span><i style="width:${skillProgress()/1.2}%"></i></span><small>${skillProgress()} / 120 XP</small></div><div class="quality-stock"><b>${state.stock[cook.recipe]||0}</b><small>in stock</small></div></header><div class="skill-bake-layout"><aside class="skill-recipes"><h3>${cook.category}</h3>${choices.map(name=>`<button class="${name===cook.recipe?'active':''}" data-skill-recipe="${name}">${name}</button>`).join('')}</aside><main class="skill-game-stage">${stageMarkup()}</main><aside class="baking-process"><h3>Recipe process</h3><ol>${processSteps()}</ol><div class="skill-tip"><b>Higher skill</b><p>Wider timing windows and a quality bonus make excellent pastries easier.</p></div>${cook.spent?'<small>Ingredients have been used for this batch.</small>':''}</aside></div></div>`);
   }
 
@@ -147,7 +154,7 @@
     if (cook.ovenScores.length) named.push({name:'Oven',value:percent(average(cook.ovenScores))});
     if (cook.decorateScores.length) named.push({name:'Finishing',value:percent(average(cook.decorateScores))});
     const raw = named.reduce((sum,part)=>sum+part.value,0)/named.length;
-    const score = Math.max(20,Math.min(100,Math.round(raw + (skillLevel()-1)*1.35)));
+    const score = Math.max(20,Math.min(100,Math.round(raw + (skillLevel()-1)*1.35 + (state.reputationEquipmentBonus||0) + (state.chefLessonDay===state.day?2:0))));
     const xp = 12 + Math.round(score/5);
     cook.result = {score,xp,parts:named,note:score>=84?'Customers will pay extra for this batch.':score>=60?'A dependable bakery-quality batch.':'Charming and rustic—practice will improve it.'};
     cook.stage='result'; renderCook();

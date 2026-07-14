@@ -30,7 +30,7 @@
     const room=document.querySelector('.room.physical-room');
     const shell=room?.querySelector('.physical-shell');
     const stage=room?.querySelector('.physical-stage');
-    if(!room||!shell||!stage||room.classList.contains('topdown-bedroom')||current==='park')return;
+    if(!room||!shell||!stage||room.classList.contains('topdown-bedroom')||current==='park'||(current==='cottage'&&currentTab==='Exterior'))return;
     room.classList.add('organized-interior');
     addDecor(shell);
     const objects=[...stage.querySelectorAll(':scope > .physical-object')];
