@@ -1,0 +1,35 @@
+.finished-dish.finished-pie {
+  width: 112px;
+  height: 82px;
+  border: 6px solid #b66f3d;
+  background-image: url("assets/textures/pie_dif.png");
+  background-position: 98% 2%;
+  background-size: 205%;
+  box-shadow: inset 0 0 12px #fff0bd, 0 9px 0 #8b5439;
+  transform: rotateX(12deg);
+}
+
+.finished-pie-product {
+  position: absolute;
+  z-index: 14;
+  right: 7%;
+  top: 55%;
+  width: 74px;
+  height: 49px;
+  border: 4px solid #b66f3d;
+  border-radius: 50%;
+  background-image: url("assets/textures/pie_dif.png");
+  background-position: 98% 2%;
+  background-size: 205%;
+  box-shadow: inset 0 0 9px #fff0bd, 0 7px 5px #32160980;
+  pointer-events: none;
+  transform: perspective(120px) rotateX(24deg);
+}
+
+@media (max-width: 800px) {
+  .finished-pie-product {
+    right: 5%;
+    top: 57%;
+    transform: scale(.78) perspective(120px) rotateX(24deg);
+  }
+}

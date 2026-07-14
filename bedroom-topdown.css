@@ -1,0 +1,139 @@
+.room.physical-room.cottage-bedroom.topdown-bedroom {
+  border: 8px solid #8f5d38 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 18px 55px #42231166, inset 0 0 0 3px #f4cf9d !important;
+}
+
+.physical-room.cottage-bedroom.topdown-bedroom .physical-shell {
+  background: #f3d7b5 url("assets/honeybell-bedroom-topdown.png") center / 100% 100% no-repeat !important;
+  cursor: crosshair;
+}
+
+.physical-room.cottage-bedroom.topdown-bedroom .physical-shell::before {
+  display: none !important;
+}
+
+.physical-room.cottage-bedroom.topdown-bedroom .physical-stage {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 12;
+  perspective: none !important;
+  pointer-events: none;
+}
+
+.physical-room.cottage-bedroom.topdown-bedroom .physical-object.bedroom-hit-area {
+  display: block !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 16px;
+  background: transparent !important;
+  pointer-events: auto;
+  transition: background .16s, outline-color .16s, filter .16s;
+}
+
+.physical-room.cottage-bedroom.topdown-bedroom .bedroom-hit-area .object-model {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+  transform: none !important;
+}
+
+.physical-room.cottage-bedroom.topdown-bedroom .bedroom-hit-area:hover,
+.physical-room.cottage-bedroom.topdown-bedroom .bedroom-hit-area:focus-visible,
+.physical-room.cottage-bedroom.topdown-bedroom .bedroom-hit-area.near {
+  background: #fff4ad26 !important;
+  outline: 3px solid #fff2a5;
+  filter: drop-shadow(0 0 9px #fff0a8);
+}
+
+.physical-room.cottage-bedroom.topdown-bedroom .bedroom-hit-area .object-name {
+  left: 50% !important;
+  bottom: 5px !important;
+  z-index: 3;
+  padding: 6px 9px !important;
+  border: 2px solid #f7d9ac;
+  background: #55351de8 !important;
+  color: #fffaf0 !important;
+  font-size: 11px !important;
+  pointer-events: none;
+}
+
+.physical-room.cottage-bedroom.topdown-bedroom .bedroom-hit-area.near .object-name,
+.physical-room.cottage-bedroom.topdown-bedroom .bedroom-hit-area:hover .object-name {
+  opacity: 1 !important;
+  transform: translateX(-50%) !important;
+}
+
+.physical-room.cottage-bedroom.topdown-bedroom .physical-player.character {
+  z-index: 40 !important;
+  transform: translate(-50%, -58%) scale(.82) !important;
+  transform-origin: center bottom !important;
+  filter: drop-shadow(0 7px 4px #4a281d66) !important;
+  transition: left .1s linear, top .1s linear !important;
+  pointer-events: none;
+}
+
+.physical-room.cottage-bedroom.topdown-bedroom .physical-player::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  bottom: -4px;
+  z-index: -1;
+  width: 36px;
+  height: 13px;
+  border-radius: 50%;
+  background: #43251642;
+}
+
+.physical-room.cottage-bedroom.topdown-bedroom .bedroom-controls {
+  position: absolute;
+  z-index: 45;
+  right: 14px;
+  bottom: 12px;
+  padding: 7px 10px;
+  border: 2px solid #fff7ddaa;
+  border-radius: 999px;
+  background: #563820c9;
+  color: #fff9e8;
+  font-size: 10px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.physical-room.cottage-bedroom.topdown-bedroom .physical-shell.lamp-on::after {
+  display: block !important;
+  content: '' !important;
+  position: absolute;
+  z-index: 8;
+  left: 27%;
+  top: 16%;
+  width: 18%;
+  height: 35%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffd67b75, transparent 68%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.bedroom-outfit {
+  cursor: pointer;
+  font: 700 14px 'DM Sans', sans-serif;
+  color: #5b3c2a;
+}
+
+@media (max-width: 800px) {
+  .physical-room.cottage-bedroom.topdown-bedroom .bedroom-controls {
+    display: none;
+  }
+
+  .physical-room.cottage-bedroom.topdown-bedroom .physical-player.character {
+    transform: translate(-50%, -58%) scale(.65) !important;
+  }
+}

@@ -1,0 +1,38 @@
+.finished-cookie-dish {
+  width: 132px;
+  height: 105px;
+  overflow: visible;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.finished-cookie-model {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff8df 0 48%, transparent 70%);
+  filter: drop-shadow(0 9px 5px #5c321f55);
+}
+
+.finished-cookie-product {
+  position: absolute;
+  z-index: 15;
+  right: 12%;
+  top: 48%;
+  width: 112px;
+  height: 92px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff2cf 0 45%, transparent 72%);
+  filter: drop-shadow(0 7px 5px #32160980);
+  pointer-events: none;
+}
+
+@media (max-width: 800px) {
+  .finished-cookie-product {
+    right: 10%;
+    top: 51%;
+    width: 88px;
+    height: 72px;
+  }
+}

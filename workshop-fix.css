@@ -1,0 +1,50 @@
+/* Let the kitchen workshop fill the game screen instead of a small generic modal. */
+.modal:has(.cooking-modal) {
+  width: min(1380px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  padding: 36px;
+  overflow: auto;
+}
+
+.modal:has(.cooking-modal) .cooking-modal {
+  width: 100%;
+  min-width: 0;
+}
+
+.modal:has(.cooking-modal) .cook-layout {
+  grid-template-columns: minmax(210px, 250px) minmax(430px, 1fr) minmax(270px, 330px);
+  gap: 20px;
+  min-width: 0;
+}
+
+.station-helper {
+  margin: -4px 0 12px;
+  color: #8d7968;
+  font-size: 11px;
+}
+
+.modal:has(.cooking-modal) .recipe-choice {
+  padding: 10px;
+  margin: 6px 0;
+}
+
+.modal:has(.cooking-modal) .pantry-board {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  .modal:has(.cooking-modal) {
+    width: calc(100vw - 16px);
+    padding: 24px 16px;
+  }
+
+  .modal:has(.cooking-modal) .cook-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .modal:has(.cooking-modal) .recipe-book,
+  .modal:has(.cooking-modal) .pantry-board {
+    max-height: 220px;
+    overflow: auto;
+  }
+}

@@ -1,1 +1,1 @@
-.recipe-book{max-height:55vh;overflow:auto;scrollbar-color:#b68b67 #f3dfce}.pantry-board{max-height:55vh;overflow:auto}
+.recipe-book{max-height:55vh;overflow:auto;scrollbar-color:#b68b67 #f3dfce}.pantry-board{max-height:55vh;overflow:auto}@media(min-width:651px) and (max-width:950px){.drag-store-stock{grid-template-columns:repeat(5,minmax(78px,1fr))}}

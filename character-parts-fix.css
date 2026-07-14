@@ -1,0 +1,53 @@
+.creator-avatar .c-eye {
+  background: var(--eyes, #503a2e) !important;
+}
+
+.creator-avatar .c-shoe {
+  background: var(--shoes, #5a4338) !important;
+}
+
+.creator-avatar .c-accessory {
+  border-color: var(--accessory-color, transparent) !important;
+}
+
+#creator.active .creator-avatar {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1;
+  z-index: 30;
+}
+
+#creator.active .character-style-reference {
+  width: 145px;
+  z-index: 24;
+}
+
+.creator-avatar.brows-straight .c-brow {
+  transform: none;
+}
+
+.creator-avatar.brows-rounded .c-brow.l {
+  transform: rotate(12deg);
+}
+
+.creator-avatar.brows-rounded .c-brow.r {
+  transform: rotate(-12deg);
+}
+
+.creator-avatar.brows-bold .c-brow {
+  border-top-width: 5px;
+}
+
+.creator-avatar.mouth-full-lips .c-mouth {
+  left: 20px !important;
+  width: 17px !important;
+}
+
+.creator-avatar.mouth-small-smile .c-mouth {
+  left: 25px !important;
+  width: 8px !important;
+}
+
+.creator-avatar.mouth-cupid-bow .c-mouth {
+  border-radius: 20% 20% 65% 65% !important;
+}
