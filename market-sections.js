@@ -1,13 +1,13 @@
 (()=>{
-  const ingredientInfo={Flour:[8,'🌾'],Eggs:[6,'🥚'],Milk:[7,'🥛'],Sugar:[5,'🍚'],Butter:[9,'🧈'],Honey:[10,'🍯'],Strawberries:[12,'🍓'],Apples:[10,'🍎'],Blueberries:[13,'🫐'],Peaches:[12,'🍑'],Lemons:[9,'🍋'],Chocolate:[14,'🍫'],Cocoa:[12,'🟤'],Cinnamon:[8,'🧂'],Vanilla:[14,'🌼'],Cream:[10,'🥛'],Yogurt:[9,'🥣'],Oats:[7,'🌾'],Nuts:[13,'🥜'],Caramel:[15,'🍮'],'Tea Leaves':[10,'🍃'],'Coffee Beans':[12,'☕']};
+  const ingredientInfo={Flour:[8,'🌾'],Eggs:[6,'🥚'],Milk:[7,'🥛'],Sugar:[5,'🍚'],Butter:[9,'🧈'],Honey:[10,'🍯'],Strawberries:[12,'🍓'],Apples:[10,'🍎'],Blueberries:[13,'🫐'],Peaches:[12,'🍑'],Lemons:[9,'🍋'],Chocolate:[14,'🍫'],Cocoa:[12,'🟤'],Cinnamon:[8,'🧂'],Vanilla:[14,'🌼'],Cream:[10,'🥛'],Yogurt:[9,'🥣'],Oats:[7,'🌾'],Nuts:[13,'🥜'],Caramel:[15,'🍮'],'Tea Leaves':[10,'🍃'],'Coffee Beans':[12,'☕'],Raspberries:[13,'🍇'],Pumpkin:[11,'🎃'],Cherries:[14,'🍒'],Mango:[13,'🥭'],Coconut:[12,'🥥'],Mint:[8,'🌿'],Matcha:[15,'🍵'],'Brown Sugar':[8,'🟫'],'Baking Powder':[7,'🥄']};
   const aisles={
-    'Fresh produce':['Strawberries','Apples','Blueberries','Peaches','Lemons'],
+    'Fresh produce':['Strawberries','Apples','Blueberries','Peaches','Lemons','Raspberries','Pumpkin','Cherries','Mango','Coconut','Mint'],
     'Milk and eggs':['Eggs','Milk','Butter','Cream','Yogurt'],
-    'Flour and sugar':['Flour','Sugar','Oats'],
+    'Flour and sugar':['Flour','Sugar','Oats','Brown Sugar','Baking Powder'],
     'Chocolate':['Chocolate','Cocoa','Caramel','Vanilla'],
-    'Tea and coffee':['Tea Leaves','Coffee Beans','Honey','Cinnamon'],
+    'Tea and coffee':['Tea Leaves','Coffee Beans','Honey','Cinnamon','Mint','Matcha'],
     'Frozen foods':['Strawberries','Blueberries','Cream','Yogurt'],
-    'Bakery supplies':['Nuts','Cinnamon','Vanilla','Caramel'],
+    'Bakery supplies':['Nuts','Cinnamon','Vanilla','Caramel','Brown Sugar','Baking Powder','Matcha'],
     'Cleaning supplies':[],
     'Decorations':[]
   };

@@ -19,6 +19,48 @@
     ['Overalls', 'overalls'], ['Shortcake', 'cream'], ['Picnic', 'picnic']
   ];
   const directions = ['front', 'right', 'back', 'left'];
+  const outfitColors = {
+    Strawberry:'#d98289', Cocoa:'#73504b', Sage:'#91a083', Honey:'#d5a25d',
+    Lavender:'#aa91ad', Blueberry:'#6f91a8', Overalls:'#8d765f',
+    Shortcake:'#d98b96', Picnic:'#c96f78'
+  };
+  const slug = value => String(value).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+  function creatorPuppetMarkup() {
+    return `<span class="rendered-3d-puppet creator-puppet" aria-hidden="true">
+      <span class="puppet-ground-shadow"></span>
+      <span class="puppet-rig">
+        <span class="puppet-hair-puff puff-left"></span><span class="puppet-hair-puff puff-right"></span>
+        <span class="puppet-head"><span class="puppet-ear ear-left"></span><span class="puppet-ear ear-right"></span><span class="puppet-hair-cap"></span><span class="puppet-fringe"></span><span class="puppet-eye eye-left"></span><span class="puppet-eye eye-right"></span><span class="puppet-nose"></span><span class="puppet-mouth"></span><span class="puppet-headband"></span><span class="puppet-hair-bow"></span></span>
+        <span class="puppet-neck"></span>
+        <span class="puppet-arm arm-left"><b></b></span><span class="puppet-arm arm-right"><b></b></span>
+        <span class="puppet-torso"><span class="puppet-collar"></span><span class="puppet-bodice-bow"></span><span class="puppet-apron"></span><span class="puppet-skirt"></span></span>
+        <span class="puppet-leg leg-left"><b></b></span><span class="puppet-leg leg-right"><b></b></span>
+      </span>
+    </span>`;
+  }
+
+  function applyLookToHost(host) {
+    if (!host) return;
+    [...host.classList].filter(name => /^(look-hair|look-face|look-outfit|look-accessory|look-shoes)-/.test(name)).forEach(name => host.classList.remove(name));
+    host.classList.add(`look-hair-${slug(look.hair)}`, `look-face-${slug(look.face)}`, `look-outfit-${slug(look.outfit)}`, `look-accessory-${slug(look.accessory)}`, `look-shoes-${slug(look.shoes)}`);
+    host.style.setProperty('--custom-hair', look.hairColor);
+    host.style.setProperty('--custom-eyes', look.eyes);
+    host.style.setProperty('--custom-outfit', look.palette);
+    host.style.setProperty('--custom-shoes', /brown/i.test(look.shoes) ? '#6b4032' : /black/i.test(look.shoes) ? '#29262a' : /cream/i.test(look.shoes) ? '#ead7b5' : '#dc858f');
+  }
+
+  function applyCreatorLook() {
+    const avatar = stage.querySelector('.rendered-avatar');
+    if (avatar) {
+      avatar.classList.remove(...directions.map(value => `sprite-facing-${value}`));
+      avatar.classList.add(`sprite-facing-${look.direction}`);
+      applyLookToHost(avatar);
+      avatar.classList.remove('look-changing');
+      requestAnimationFrame(() => avatar.classList.add('look-changing'));
+    }
+    document.querySelectorAll('.rendered-character').forEach(applyLookToHost);
+  }
 
   function choice(label, group, value, inner = '') {
     const active = look[group] === value ? ' active' : '';
@@ -59,13 +101,14 @@
   function installCreatorStage() {
     stage.querySelectorAll('.rendered-avatar,.creator-turn-hint').forEach(node => node.remove());
     stage.insertAdjacentHTML('beforeend', `
-      <button type="button" class="rendered-avatar sprite-facing-${look.direction}" data-turn-character aria-label="Turn character to view every direction"></button>
+      <button type="button" class="rendered-avatar sprite-facing-${look.direction}" data-turn-character aria-label="Turn character to view every direction">${creatorPuppetMarkup()}</button>
       <div class="creator-turn-hint"><span>↻</span> Tap the character to turn</div>`);
     footer.innerHTML = `
       <button type="button" class="render-back" data-creator-back>← Back</button>
       <label class="render-name">Baker name <input id="rendered-baker-name" maxlength="16" value="${state.player.name || 'Your Baker'}"></label>
       <button type="button" class="render-save" data-render-save>Save Outfit ♥</button>
       <button class="start-game render-start" type="submit" form="creator-form">Start 🎂</button>`;
+    applyCreatorLook();
   }
 
   function saveLook() {
@@ -91,6 +134,7 @@
         </span>
       </span>`);
     updateCharacterDepth(host);
+    applyLookToHost(host);
   }
 
   function updateCharacterDepth(character) {
@@ -151,7 +195,9 @@
     const choiceButton = event.target.closest('[data-render-group]');
     if (choiceButton) {
       look[choiceButton.dataset.renderGroup] = choiceButton.dataset.renderValue;
+      if (choiceButton.dataset.renderGroup === 'outfit') look.palette = outfitColors[choiceButton.dataset.renderValue] || look.palette;
       renderCreatorPanels();
+      applyCreatorLook();
       saveLook();
       return;
     }
@@ -163,6 +209,7 @@
       if (eyeColor) look.eyes = eyeColor.dataset.eyeColor;
       if (paletteColor) look.palette = paletteColor.dataset.paletteColor;
       renderCreatorPanels();
+      applyCreatorLook();
       saveLook();
       return;
     }
@@ -170,7 +217,8 @@
     if (turn) {
       const next = directions[(directions.indexOf(look.direction) + 1) % directions.length];
       look.direction = next;
-      turn.className = `rendered-avatar sprite-facing-${next}`;
+      applyCreatorLook();
+      saveLook();
       return;
     }
     if (event.target.closest('[data-render-save]')) {

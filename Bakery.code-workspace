@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../../Downloads/pie"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Bakery"
+	}
+}

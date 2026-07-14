@@ -1,0 +1,70 @@
+/* Grounded village characters: articulated bodies, planted feet, and pathway depth. */
+.world.reference-map.webgl-ready > .player.character.rendered-character {
+  display: block !important;
+  width: 94px !important;
+  height: 154px !important;
+  margin: 0 !important;
+  transform: translate(-50%, -86%) !important;
+  transform-origin: 50% 100% !important;
+  transition: left .08s linear, top .08s linear !important;
+  filter: none !important;
+}
+
+.world.reference-map .player .puppet-rig {
+  filter: drop-shadow(0 8px 5px #2c1a1266);
+}
+
+.world.reference-map .player .puppet-ground-shadow,
+.pathway-npc .puppet-ground-shadow {
+  bottom: 0;
+  width: 66px;
+  height: 20px;
+  background: radial-gradient(ellipse,#2c1b125c 0 35%,#2c1b1225 55%,transparent 72%);
+}
+
+.world.reference-map .player.walking .puppet-ground-shadow {
+  animation: pathShadowStep .28s ease-in-out infinite alternate;
+}
+
+.world.reference-map .player.walking .puppet-ground-shadow::after,
+.pathway-npc.walking .puppet-ground-shadow::after {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: -3px;
+  width: 8px;
+  height: 5px;
+  border-radius: 50%;
+  background: #d8c8aa88;
+  box-shadow: 15px 3px #d8c8aa66, 27px -1px #d8c8aa44;
+  animation: pathDust .55s ease-out infinite;
+}
+
+.pathway-npc {
+  width: 88px !important;
+  height: 145px !important;
+  margin: 0;
+  transform: translate(-50%,-86%) !important;
+  transform-origin: center bottom;
+  animation: none !important;
+  overflow: visible !important;
+  pointer-events: none;
+}
+
+.pathway-npc::before,.pathway-npc::after { display:none !important; }
+.pathway-npc > .rendered-3d-puppet { display:block !important; }
+.pathway-npc.walking .puppet-rig { animation:puppetBodyStep .28s ease-in-out infinite alternate; }
+.pathway-npc.walking .puppet-head { animation:puppetHeadStep .28s ease-in-out infinite alternate; }
+.pathway-npc.walking .arm-left { animation:puppetArmLeft .34s ease-in-out infinite alternate; }
+.pathway-npc.walking .arm-right { animation:puppetArmRight .34s ease-in-out infinite alternate; }
+.pathway-npc.walking .leg-left { animation:puppetLegLeft .34s ease-in-out infinite alternate; }
+.pathway-npc.walking .leg-right { animation:puppetLegRight .34s ease-in-out infinite alternate; }
+.pathway-npc.walking .puppet-skirt { animation:puppetSkirtStep .24s ease-in-out infinite alternate; }
+
+@keyframes pathShadowStep { to { transform:translateX(-50%) scale(calc(var(--path-scale,1) * .86),calc(var(--path-scale,1) * .72));opacity:.72; } }
+@keyframes pathDust { from { transform:translate(0,0) scale(.5);opacity:.7 } to { transform:translate(-13px,-8px) scale(1.5);opacity:0 } }
+
+@media(max-width:800px){
+  .world.reference-map.webgl-ready > .player.character.rendered-character{width:80px!important;height:132px!important}
+  .pathway-npc{width:72px!important;height:119px!important}
+}

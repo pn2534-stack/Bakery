@@ -1,0 +1,30 @@
+/* Final interior layout authority: orderly furniture, clear aisles and shared cottage styling. */
+.physical-room.organized-interior .physical-stage{inset:29% 3% 8%!important;overflow:visible!important}
+.physical-room.organized-interior .physical-object{
+  margin:0!important;transform:none!important;max-width:none!important;max-height:none!important;
+  transition:filter .2s ease,transform .2s ease!important;
+}
+.physical-room.organized-interior .physical-object:hover,
+.physical-room.organized-interior .physical-object.near{transform:translateY(-3px)!important;z-index:95!important}
+.physical-room.organized-interior .physical-object .object-name{
+  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px!important;
+  left:50%!important;right:auto!important;bottom:-15px!important;transform:translateX(-50%)!important;
+}
+.physical-room.organized-interior .physical-player{z-index:70;filter:drop-shadow(0 8px 5px #321b1259)}
+
+.organized-room-decor{position:absolute;inset:0;z-index:9;pointer-events:none;overflow:hidden}
+.organized-beam{position:absolute;left:3%;right:3%;top:31%;height:8px;border-radius:5px;background:#845536;box-shadow:0 5px 7px #44281d55,inset 0 2px #c28a5f}
+.organized-garland{position:absolute;left:8%;right:8%;top:27%;height:18px;border-bottom:5px solid #738b67;border-radius:50%;background:radial-gradient(circle,#d9959d 0 3px,transparent 4px) 0 8px/45px 15px}
+.organized-rug{position:absolute;z-index:0;left:36%;top:52%;width:28%;height:32%;border:7px double #c68778;border-radius:50%;background:radial-gradient(ellipse,#f4dfc7 0 43%,#d9aa99 44% 52%,#efd1bc 53%);box-shadow:0 8px 12px #4f2e2030}
+.organized-lamp{position:absolute;top:35%;width:14px;height:34%;border-radius:8px;background:#805336;box-shadow:0 8px 9px #3b221755}
+.organized-lamp::before{content:'';position:absolute;left:-18px;top:-9px;width:48px;height:29px;border-radius:50% 50% 12px 12px;background:#f1c987;border:4px solid #9a683f;box-shadow:0 0 18px #ffdca46b}
+.organized-lamp.left{left:2.2%}.organized-lamp.right{right:2.2%}
+.organized-flowers{position:absolute;bottom:7%;width:42px;height:38px;border-radius:8px 8px 18px 18px;background:#b56f50;box-shadow:inset 0 -8px #8f533e}
+.organized-flowers::before{content:'';position:absolute;left:-18px;right:-18px;top:-32px;height:42px;background:radial-gradient(circle,#e59ba3 0 6px,#e8cf87 7px 9px,transparent 10px) 0 0/25px 25px,radial-gradient(ellipse,#78946b 0 8px,transparent 9px) 11px 10px/28px 24px}
+.organized-flowers.left{left:5%}.organized-flowers.right{right:5%}
+
+.scene-transitioning [data-action="home"],.scene-transitioning [data-location]{pointer-events:none!important}
+@media(max-width:800px){
+  .physical-room.organized-interior .physical-object .object-name{font-size:7px!important;bottom:-12px!important}
+  .organized-lamp,.organized-flowers{transform:scale(.7)}
+}

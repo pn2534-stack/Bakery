@@ -1,0 +1,81 @@
+/* Larger, game-like rooms and genuinely full-screen activity panels. */
+.location.active:has(.room.bakery-café,.room.bakery-kitchen) .room.physical-room{inset:90px 5px 76px!important;border-radius:18px!important}
+.location.active:has(.room.bakery-café,.room.bakery-kitchen) .room-tabs{bottom:80px!important}
+.physical-room:is(.bakery-café,.bakery-kitchen) .physical-player.character.rendered-character{transform:translate(-50%,-58%) scale(.95)!important}
+.physical-room:is(.bakery-café,.bakery-kitchen) .restaurant-hud{width:min(390px,31%);font-size:13px}
+
+/* Bakery equipment identifies itself before the player approaches it. */
+.physical-room:is(.bakery-café,.bakery-kitchen) .physical-object .object-name.always-visible-name{
+  display:block!important;opacity:1!important;visibility:visible!important;z-index:120!important;
+  left:50%!important;top:-20px!important;bottom:auto!important;width:max-content!important;max-width:145px!important;
+  padding:6px 9px!important;overflow:visible!important;text-overflow:clip!important;white-space:normal!important;
+  transform:translateX(-50%)!important;text-align:center!important;line-height:1.08!important;
+  background:#493021f2!important;border:2px solid #ffe6b9!important;border-radius:10px!important;
+  box-shadow:0 5px 10px #2f1b1250!important;pointer-events:none!important;
+}
+.physical-room:is(.bakery-café,.bakery-kitchen) .object-name.always-visible-name span{display:block;font:11px 'DM Serif Display',serif;color:#fff9e9}
+.physical-room:is(.bakery-café,.bakery-kitchen) .object-name.always-visible-name small{display:block;margin-top:3px;color:#f2cfa0;font:7px 'DM Sans',sans-serif;font-weight:700;letter-spacing:.2px}
+.physical-room:is(.bakery-café,.bakery-kitchen) .physical-object:is(:hover,.near) .object-name.always-visible-name{background:#75503af7!important;transform:translateX(-50%) translateY(-3px)!important;box-shadow:0 0 0 3px #fff0ac,0 7px 14px #2f1b1266!important}
+
+#modal-wrap{padding:8px!important;backdrop-filter:blur(9px)}
+#modal-wrap>.modal{width:calc(100vw - 16px)!important;height:calc(100vh - 16px)!important;max-width:none!important;max-height:none!important;padding:30px 42px!important;border-radius:22px!important;overflow:hidden!important}
+#modal-content{height:100%;overflow:auto;overscroll-behavior:contain}
+#modal-wrap .modal-close{position:fixed;z-index:999;right:25px;top:22px;width:44px;height:44px}
+.skill-baking-modal,.drag-shop,.market-scan-panel,.restaurant-management,.restaurant-summary,.closing-checklist,.drink-craft,.open-bakery-card{width:100%!important;min-height:100%;max-width:none!important}
+.skill-bake-layout{grid-template-columns:220px minmax(500px,1fr) 250px!important;min-height:calc(100vh - 155px)}
+.skill-recipes,.skill-game-stage,.baking-process{min-height:calc(100vh - 185px)!important}
+
+/* The measuring fill visibly locks to the target instead of racing beyond it. */
+.skill-hold.pouring{background:linear-gradient(#c87973,#a95655);box-shadow:0 1px 0 #743c3b;transform:translateY(3px)}
+.skill-hold.on-target{background:linear-gradient(#91b77a,#648e5e)!important;box-shadow:0 0 0 5px #dff1d2,0 4px 0 #476b43!important;animation:targetPulse .42s ease both}
+.skill-hold.on-target+.round-dots{filter:drop-shadow(0 0 5px #8eb679)}
+@keyframes targetPulse{50%{transform:translateY(3px) scale(1.06)}}
+
+/* Each cake family has its own toppings, board colors and piping pattern. */
+.decorate-board.strawberry{background:radial-gradient(circle,#fff7e8 0 45%,#f3b1b8 46% 60%,#c96f76 61%)!important}.decorate-board.strawberry button.placed{background:radial-gradient(circle at 45% 42%,#fff 0 10%,#e94755 12% 48%,#67874f 50% 64%,transparent 66%)!important}
+.decorate-board.chocolate{background:radial-gradient(circle,#754536 0 44%,#4c2b25 45% 62%,#2d1b18 63%)!important}.decorate-board.chocolate button.placed{background:radial-gradient(circle,#f1c78e 0 12%,#60372b 14% 52%,#2c1714 54% 68%,transparent 70%)!important}
+.decorate-board.lemon{background:radial-gradient(circle,#fff9d3 0 45%,#f1d36e 46% 61%,#d6a947 62%)!important}.decorate-board.lemon button.placed{background:radial-gradient(circle,#fff 0 20%,#f0cf4f 22% 50%,#7e9c5d 52% 66%,transparent 68%)!important}
+.piping-board.rosette polyline{stroke:#fff8ee!important;stroke-width:7!important}.piping-board.zigzag polyline{stroke:#5e3029!important;stroke-width:6!important}.piping-board.swirls polyline{stroke:#fff5c9!important;stroke-width:7!important}.piping-board.scallop polyline{stroke:#f9e6d5!important;stroke-width:6!important}
+.finished-cake-preview{position:relative;width:180px;height:135px;margin:5px auto 12px;border:8px solid #d49a77;border-radius:50%;background:radial-gradient(circle,#fff0d0 0 49%,#d98d72 50% 68%,#a95c58 69%);box-shadow:0 8px 0 #85543c;overflow:hidden}
+.finished-cake-preview svg{position:absolute;inset:0;width:100%;height:100%}.finished-cake-preview polyline{fill:none;stroke:#fff8ec;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 2px #b8797e)}.finished-cake-preview.zigzag polyline{stroke:#603128}.finished-cake-preview.swirls polyline{stroke:#fff0ac}.finished-cake-preview small{position:absolute;left:50%;bottom:5px;transform:translateX(-50%);padding:3px 7px;border-radius:7px;background:#4f3327d9;color:white;white-space:nowrap;font-size:8px}
+
+/* Opening NPC guide. */
+.village-npc-tutorial{display:grid;grid-template-columns:minmax(260px,38%) 1fr;gap:40px;align-items:center;min-height:100%;padding:5vh 7vw;background:radial-gradient(circle at 21% 40%,#fff1c9,#edcfa8 37%,transparent 38%),linear-gradient(135deg,#f8e8d0,#e6c59f);border-radius:18px}
+.intro-poppy{position:relative;display:grid;place-items:end center;height:min(65vh,570px);border:9px solid #9a6744;border-radius:48% 48% 22px 22px;background:linear-gradient(#cce2d5,#f5d9a6 55%,#b9875c 56%);box-shadow:inset 0 0 0 7px #fff1d1,0 18px 40px #5b37265c;overflow:hidden}
+.intro-poppy i{position:absolute;left:50%;top:19%;width:150px;height:180px;transform:translateX(-50%);border-radius:48% 48% 38% 38%;background:radial-gradient(circle at 38% 35%,#fff 0 5px,#563122 6px 12px,transparent 13px) 35px 61px/65px 35px,radial-gradient(circle at 38% 30%,#f1bd96 0 20%,#ce845f 65%,#9c5944);box-shadow:inset 0 55px #8a4d39,0 12px 0 35px #859b77,0 100px 0 30px #d39b9c}
+.intro-poppy b{z-index:2;margin-bottom:18px;padding:8px 22px;border-radius:12px;background:#563926df;color:white;font:20px 'DM Serif Display'}
+.village-npc-tutorial small{color:#a16a5b;font-weight:900;letter-spacing:2px}.village-npc-tutorial h2{font-size:clamp(38px,5vw,72px)!important}.village-npc-tutorial p{max-width:670px;font-size:18px;line-height:1.7}.village-npc-tutorial button{border:0;border-radius:13px;background:#76926e;color:white;padding:13px 21px;margin:8px 7px 0 0;font-weight:900}.village-npc-tutorial button+button{background:#9b735e}.intro-key-guide{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.intro-key-guide span{min-width:130px;padding:11px;border:2px solid #d6b48f;border-radius:12px;background:#fff7e9}.intro-key-guide b{display:block;font-size:10px;color:#99715e}
+
+/* Interactive order checklist and exact countdown. */
+.order-countdown{padding:3px 7px;border-radius:8px;background:#684535;color:#fff6df;font-weight:900;font-variant-numeric:tabular-nums}.bakery-todo{margin-top:8px;padding:8px;border:2px solid #dcb88d;border-radius:13px;background:#fffdf5}.bakery-todo h4{margin:0 0 6px;font:13px 'DM Serif Display'}.bakery-todo button{display:flex!important;align-items:center!important;gap:7px;width:100%!important;margin:4px 0!important;padding:6px!important;border:0!important;border-radius:8px!important;background:#eee0cd!important;color:#624a3d!important;text-align:left!important;font-size:9px!important}.bakery-todo button span{display:grid;place-items:center;flex:0 0 18px;height:18px;border-radius:50%;background:#a77a60;color:white}.bakery-todo button.done{background:#dcebd7!important;text-decoration:line-through}.bakery-todo button.ready{background:#f2d394!important;box-shadow:0 0 0 2px #fff0b3}.todo-highlight{z-index:140!important;outline:6px solid #ffe275!important;filter:drop-shadow(0 0 20px #fff0a2)!important;animation:todoGlow .8s ease-in-out infinite alternate!important}@keyframes todoGlow{to{transform:translateY(-5px) scale(1.05)!important}}
+
+/* Shelves are stocked with jars, baskets, boxes, bread and colorful groceries. */
+.bedroom-style-room .physical-object[data-type="shelf"] .object-model{
+  background:repeating-linear-gradient(0deg,#75462e 0 6px,#c38a58 7px 24px,#65402c 25px 31px)!important;
+}
+.bedroom-style-room .physical-object[data-type="shelf"] .object-model::before{
+  content:''!important;position:absolute!important;inset:8% 10%!important;
+  background:radial-gradient(ellipse,#e8b66e 0 5px,#9a5c3d 6px 8px,transparent 9px) 0 3px/25px 22px,linear-gradient(90deg,#a5b982 0 12%,transparent 13% 25%,#d9938b 26% 39%,transparent 40% 52%,#e0c07c 53% 67%,transparent 68%) 5px 18px/62px 28px!important;
+  opacity:1!important;border:0!important;box-shadow:none!important;
+}
+.bedroom-style-room .physical-object[data-type="shelf"] .object-model::after{inset:10% 13%!important;background:radial-gradient(circle,#f0d69b 0 4px,#8a674d 5px 7px,transparent 8px) 0 0/22px 24px!important}
+
+/* Doors stand in the side wall instead of lying across the floor plan. */
+.bedroom-style-architecture .style-doorway{left:auto!important;right:-2px!important;bottom:34%!important;width:8%!important;height:31%!important;border:10px solid #f2e2c9!important;border-right:0!important;border-radius:28px 0 0 28px!important}
+.organized-interior .physical-object[data-type="door"] .object-model{inset:0!important;border-radius:30px 4px 4px 30px!important;box-shadow:inset 8px 0 #587064,7px 9px 8px #3e261a55!important}
+
+/* Friendly, non-blocking NPC tutorial. */
+.bakery-tutorial{position:absolute;z-index:110;left:18px;bottom:18px;display:grid;grid-template-columns:78px minmax(250px,390px);gap:12px;align-items:end;padding:14px;border:3px solid #f4dab3;border-radius:22px;background:#fff9eaf5;box-shadow:0 14px 35px #32190e73;color:#5c4336}
+.tutorial-npc{position:relative;display:block;width:74px;height:105px;filter:drop-shadow(0 7px 4px #3a211857)}
+.tutorial-npc-head{position:absolute;left:10px;top:3px;width:56px;height:56px;border-radius:48%;background:radial-gradient(circle at 35% 30%,#f1bd96 0 20%,#ce845f 65%,#9c5944);box-shadow:inset 0 16px #a75f44,0 4px 6px #4e2c2445}
+.tutorial-npc-head::before{content:'';position:absolute;left:-6px;top:-9px;width:28px;height:28px;border-radius:50%;background:#8a4d39;box-shadow:38px 2px #8a4d39}.tutorial-npc-head::after{content:'• ᴗ •';position:absolute;left:10px;top:28px;color:#4f3027;font:bold 13px sans-serif;white-space:nowrap}
+.tutorial-npc-body{position:absolute;left:14px;top:57px;width:48px;height:45px;border-radius:17px 17px 9px 9px;background:linear-gradient(90deg,#e7b1ad,#fff0d5 25% 75%,#d79794);box-shadow:inset 0 -16px #8ca37e}
+.bakery-tutorial small{color:#a56f61;font-size:8px;font-weight:900;letter-spacing:1px}.bakery-tutorial h3{margin:3px 0;font:21px 'DM Serif Display'}.bakery-tutorial p{margin:4px 0 9px;font-size:11px;line-height:1.4}.bakery-tutorial button{border:0;border-radius:9px;background:#7e9a72;color:white;padding:7px 11px;font-weight:800}.bakery-tutorial button+button{background:transparent;color:#967061}.tutorial-reopen{position:absolute;z-index:111;left:18px;bottom:18px;width:42px;height:42px;border:3px solid #f5deb9;border-radius:50%;background:#76513c;color:white;font:bold 20px serif;box-shadow:0 7px 14px #33201466}
+
+/* Drag-to-use support in ordinary simulation rooms. */
+.room-interaction-drop{position:absolute;z-index:100;left:18px;bottom:18px;width:126px;padding:10px;border:3px dashed #f6dcae;border-radius:15px;background:#593b29d9;color:#fff8e7;text-align:center;pointer-events:auto;transition:.2s}
+.room-interaction-drop b,.room-interaction-drop span{display:block}.room-interaction-drop span{font-size:9px;opacity:.8}.room-interaction-drop.dragover{background:#77946a;transform:scale(1.08);box-shadow:0 0 22px #fff0a4}.physical-object.being-dragged{opacity:.5!important;filter:drop-shadow(0 0 15px #fff2a4)!important}
+
+@media(max-width:900px){
+  #modal-wrap>.modal{padding:18px!important}.skill-bake-layout{grid-template-columns:150px 1fr!important}.baking-process{display:none}.bakery-tutorial{grid-template-columns:55px 1fr;max-width:calc(100% - 36px)}.tutorial-npc{transform:scale(.72);transform-origin:bottom left}.room-interaction-drop{width:95px;padding:7px}
+}

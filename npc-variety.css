@@ -1,0 +1,60 @@
+/* NPC identity system: different bodies, faces, hair, clothes, and accessories. */
+.npc-varied { overflow:visible !important; background:none !important; }
+.npc-varied::before,.npc-varied::after { display:none !important; }
+.npc-varied > .rendered-3d-puppet { display:block !important; transform-origin:50% 100%; }
+.npc-varied.npc-build-petite > .rendered-3d-puppet { transform:scale(.88,.92); }
+.npc-varied.npc-build-tall > .rendered-3d-puppet { transform:scale(.94,1.09); }
+.npc-varied.npc-build-broad > .rendered-3d-puppet { transform:scale(1.12,.98); }
+
+.npc-varied .puppet-head { background:radial-gradient(circle at 34% 25%,color-mix(in srgb,var(--npc-skin),white 16%) 0 15%,var(--npc-skin) 58%,var(--npc-skin-dark) 100%) !important; }
+.npc-varied :is(.puppet-ear,.puppet-neck,.puppet-arm b) { background:linear-gradient(135deg,var(--npc-skin),var(--npc-skin-dark)) !important; }
+.npc-varied .puppet-arm { background:linear-gradient(var(--npc-accent) 0 28%,var(--npc-skin) 29% 86%,var(--npc-skin-dark) 100%) !important; }
+.npc-varied .puppet-leg { background:linear-gradient(var(--npc-skin) 0 55%,var(--npc-accent) 56% 67%,var(--npc-shoes) 68%) !important; }
+.npc-varied .puppet-leg b { border-color:color-mix(in srgb,var(--npc-shoes),black 28%) !important;background:linear-gradient(color-mix(in srgb,var(--npc-shoes),white 20%),var(--npc-shoes)) !important; }
+.npc-varied :is(.puppet-hair-cap,.puppet-fringe,.puppet-hair-puff) { background:var(--npc-hair) !important; }
+.npc-varied .puppet-eye { background:radial-gradient(circle at 36% 30%,white 0 2px,var(--npc-eyes) 3px 7px,#17100d 8px) !important; }
+.npc-varied .puppet-torso { background:linear-gradient(90deg,color-mix(in srgb,var(--npc-accent),white 8%),var(--npc-accent) 20% 80%,color-mix(in srgb,var(--npc-accent),black 8%)) !important; }
+.npc-varied .puppet-skirt { background:repeating-linear-gradient(90deg,var(--npc-outfit) 0 9px,color-mix(in srgb,var(--npc-outfit),white 16%) 10px 18px) !important; }
+.npc-varied .puppet-bodice-bow { background:var(--npc-outfit) !important;box-shadow:7px 0 var(--npc-outfit) !important; }
+.npc-varied .puppet-apron { background:linear-gradient(135deg,color-mix(in srgb,var(--npc-accent),white 70%),var(--npc-accent)) !important; }
+
+/* Face proportions */
+.npc-face-long .puppet-head { height:63px;border-radius:44% 44% 48% 48%; }
+.npc-face-heart .puppet-head { border-radius:48% 48% 57% 57%; }
+.npc-face-square .puppet-head,.npc-face-strong .puppet-head { border-radius:38% 38% 44% 44%; }
+.npc-face-round .puppet-head { width:62px;left:13px;border-radius:50%; }
+.npc-face-soft .puppet-eye { height:13px;border-radius:55% 55% 45% 45%; }
+.npc-face-strong .puppet-brow { border-width:4px; }
+.npc-freckles { position:absolute;z-index:13;left:9px;top:39px;width:40px;height:5px;background:radial-gradient(circle,#7d4935 0 1px,transparent 1.5px) 0 0/7px 5px;opacity:.65; }
+.npc-varied:nth-of-type(even) .npc-freckles { opacity:0; }
+.npc-earring { position:absolute;z-index:15;top:39px;width:4px;height:7px;border-radius:50%;background:var(--npc-accent); }
+.npc-earring.left{left:-6px}.npc-earring.right{right:-6px}
+
+/* Eight visibly different hairstyles. */
+.npc-hair-cloud-curls .puppet-hair-puff { width:38px;height:42px;top:-2px;background:radial-gradient(circle at 30% 25%,color-mix(in srgb,var(--npc-hair),white 18%) 0 5px,var(--npc-hair) 6px 12px) 0 0/15px 15px !important; }
+.npc-hair-cloud-curls .puff-left{left:-1px}.npc-hair-cloud-curls .puff-right{right:-1px}
+.npc-hair-short-crop .puppet-hair-puff { display:none; }.npc-hair-short-crop .puppet-hair-cap{height:22px;border-radius:55% 55% 28% 28%}.npc-hair-short-crop .puppet-fringe{height:10px;top:9px}
+.npc-hair-soft-bob .puppet-hair-puff{top:15px;width:31px;height:49px;border-radius:45%}.npc-hair-soft-bob .puff-left{left:7px}.npc-hair-soft-bob .puff-right{right:7px}
+.npc-hair-long-braids .puppet-hair-puff,.npc-hair-ribbon-braids .puppet-hair-puff{top:21px;width:15px;height:72px;border-radius:45%;background:repeating-linear-gradient(180deg,var(--npc-hair) 0 8px,color-mix(in srgb,var(--npc-hair),white 17%) 9px 11px)!important}.npc-hair-long-braids .puff-left,.npc-hair-ribbon-braids .puff-left{left:4px}.npc-hair-long-braids .puff-right,.npc-hair-ribbon-braids .puff-right{right:4px}
+.npc-hair-high-bun .puppet-hair-puff{display:none}.npc-hair-high-bun .puppet-hair-cap::before{content:'';position:absolute;left:17px;top:-23px;width:28px;height:28px;border-radius:50%;background:var(--npc-hair);box-shadow:inset 4px 3px color-mix(in srgb,var(--npc-hair),white 14%)}
+.npc-hair-wavy-short .puppet-hair-puff{display:none}.npc-hair-wavy-short .puppet-hair-cap{height:30px;background:radial-gradient(circle,var(--npc-hair) 0 7px,transparent 8px) 0 0/17px 14px,var(--npc-hair)!important}.npc-hair-wavy-short .puppet-fringe{clip-path:polygon(0 0,100% 0,91% 83%,74% 38%,57% 91%,35% 41%,13% 84%)}
+.npc-hair-side-puff .puff-left{display:none}.npc-hair-side-puff .puff-right{right:-8px;top:8px;width:43px;height:43px}
+
+/* Clothing silhouettes */
+.npc-outfit-vest .puppet-skirt,.npc-outfit-sweater .puppet-skirt{left:1px;width:44px;border-radius:5px 5px 12px 12px}.npc-outfit-vest .puppet-apron{display:none}.npc-outfit-vest .puppet-torso{background:linear-gradient(90deg,var(--npc-accent) 0 24%,var(--npc-outfit) 25% 75%,var(--npc-accent) 76%)!important}
+.npc-outfit-overalls .puppet-skirt{left:2px;width:42px;border-radius:5px}.npc-outfit-overalls .puppet-apron{background:var(--npc-outfit)!important;border-radius:3px 3px 8px 8px}
+.npc-outfit-coat .puppet-torso,.npc-outfit-garden-coat .puppet-torso{height:61px;border-radius:15px 15px 8px 8px;background:linear-gradient(90deg,var(--npc-outfit) 0 46%,var(--npc-accent) 47% 53%,var(--npc-outfit) 54%)!important}.npc-outfit-coat .puppet-skirt,.npc-outfit-garden-coat .puppet-skirt{display:none}.npc-outfit-coat .puppet-apron,.npc-outfit-garden-coat .puppet-apron{display:none}
+.npc-outfit-layered-dress .puppet-skirt{width:70px;left:-12px;box-shadow:inset 0 -6px var(--npc-accent),0 5px 7px #52231e3d}.npc-outfit-baker-apron .puppet-apron{box-shadow:inset 0 0 0 2px #fff8de,0 3px 4px #4a2a2140}
+
+/* Accessories */
+.npc-varied .npc-glasses,.npc-varied .npc-scarf,.npc-varied .npc-satchel { display:none; }
+.npc-accessory-glasses .npc-glasses,.npc-accessory-round-glasses .npc-glasses{display:block;position:absolute;z-index:14;left:5px;top:26px;width:19px;height:16px;border:3px solid #54453e;border-radius:45%;box-shadow:25px 0 0 -3px transparent,25px 0 0 0 #54453e}.npc-accessory-glasses .npc-glasses::after,.npc-accessory-round-glasses .npc-glasses::after{content:'';position:absolute;left:17px;top:5px;width:9px;border-top:3px solid #54453e}
+.npc-accessory-flowers .puppet-hair-bow{left:8px;top:-3px;width:11px;height:11px;border-radius:50%;background:#eaa3ad!important;box-shadow:13px -3px #f2d688,26px 0 #d99eb7,39px -2px #f0c58a!important}
+.npc-accessory-beret .puppet-headband{left:5px;top:-11px;width:53px;height:20px;border:0;background:var(--npc-outfit);border-radius:70% 55% 35% 25%;transform:rotate(-8deg)}.npc-accessory-beret .puppet-hair-bow{display:none}
+.npc-accessory-sun-hat .puppet-headband{left:-12px;top:-13px;width:82px;height:29px;border:8px solid var(--npc-accent);border-bottom-width:4px;background:color-mix(in srgb,var(--npc-accent),white 18%);box-shadow:0 8px 0 5px color-mix(in srgb,var(--npc-accent),black 12%)}.npc-accessory-sun-hat .puppet-hair-bow{display:none}
+.npc-accessory-scarf .npc-scarf{display:block;position:absolute;z-index:15;left:5px;top:0;width:36px;height:12px;border-bottom:6px solid var(--npc-outfit);border-radius:50%}.npc-accessory-satchel .npc-satchel{display:block;position:absolute;z-index:15;left:31px;top:20px;width:19px;height:24px;border:4px solid #8a5d3e;border-radius:5px;background:#b47b4f;transform:translateZ(9px)}
+.npc-accessory-ribbon .puppet-hair-bow{background:var(--npc-accent)!important;box-shadow:18px 0 var(--npc-accent),9px 5px 0 -3px var(--npc-outfit)!important}
+
+.npc-name-tag{position:absolute;z-index:80;left:50%;top:-17px;transform:translateX(-50%);padding:3px 7px;border:1px solid #fff3d9;border-radius:8px;background:#563c31d9;color:#fff9ea;font:8px 'DM Sans',sans-serif;white-space:nowrap;opacity:0;transition:.2s;pointer-events:none}.room-npc.npc-varied .npc-name-tag{opacity:.9}.pathway-npc.npc-varied:hover .npc-name-tag{opacity:1}
+
+@media(max-width:800px){.npc-name-tag{display:none}}

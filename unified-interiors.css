@@ -1,0 +1,151 @@
+/* Every room now follows the full-room, top-down bedroom presentation. */
+.room.physical-room.topdown-unified {
+  border: 8px solid #8f5d38 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 18px 55px #42231166, inset 0 0 0 3px #f4cf9d !important;
+  clip-path: none !important;
+}
+
+.physical-room.topdown-unified .physical-shell {
+  background-position: center !important;
+  background-size: 100% 100% !important;
+  background-repeat: no-repeat !important;
+  cursor: crosshair;
+}
+
+.physical-room.topdown-unified .physical-shell::before {
+  display: block !important;
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 6;
+  transform: none !important;
+  background: linear-gradient(125deg, #fff3cf20 0 24%, transparent 45%), linear-gradient(180deg, transparent 58%, #321b0e24 100%) !important;
+  pointer-events: none;
+}
+
+.physical-room.topdown-unified .physical-shell::after {
+  display: block !important;
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 7;
+  background: radial-gradient(ellipse at center, transparent 55%, #35201425 100%) !important;
+  pointer-events: none;
+}
+
+.physical-room.topdown-unified .physical-stage {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 12;
+  perspective: none !important;
+  pointer-events: none;
+}
+
+.physical-room.topdown-unified .physical-object.unified-hit-area {
+  display: block !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  background: transparent !important;
+  transform: none !important;
+  pointer-events: auto;
+  transition: background .16s, outline-color .16s, filter .16s;
+}
+
+.physical-room.topdown-unified .unified-hit-area .object-model {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  border-radius: inherit !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+  transform: none !important;
+}
+
+.physical-room.topdown-unified .unified-hit-area:hover,
+.physical-room.topdown-unified .unified-hit-area:focus-visible,
+.physical-room.topdown-unified .unified-hit-area.near,
+.physical-room.topdown-unified .unified-hit-area.touching {
+  background: #fff4ad26 !important;
+  outline: 3px solid #fff2a5 !important;
+  filter: drop-shadow(0 0 9px #fff0a8) !important;
+}
+
+.physical-room.topdown-unified .unified-hit-area .object-name {
+  left: 50% !important;
+  bottom: 5px !important;
+  z-index: 3;
+  max-width: calc(100% - 8px);
+  padding: 6px 9px !important;
+  overflow: hidden;
+  border: 2px solid #f7d9ac !important;
+  border-radius: 9px;
+  background: #55351de8 !important;
+  color: #fffaf0 !important;
+  font-size: 11px !important;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+.physical-room.topdown-unified .unified-hit-area:is(:hover,:focus-visible,.near,.touching) .object-name {
+  opacity: 1 !important;
+  transform: translateX(-50%) !important;
+}
+
+.physical-room.topdown-unified .physical-player.character,
+.physical-room.topdown-unified .physical-player.character.rendered-character {
+  z-index: 40 !important;
+  transform: translate(-50%, -58%) scale(.82) !important;
+  transform-origin: center bottom !important;
+  filter: drop-shadow(0 7px 4px #4a281d66) !important;
+  transition: left .1s linear, top .1s linear !important;
+  pointer-events: none;
+}
+
+.physical-room.topdown-unified .physical-player::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  bottom: -4px;
+  z-index: -1;
+  width: 36px;
+  height: 13px;
+  border-radius: 50%;
+  background: #43251642;
+}
+
+.physical-room.topdown-unified .unified-room-controls {
+  position: absolute;
+  z-index: 60;
+  right: 14px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 11px;
+  border: 2px solid #fff7ddaa;
+  border-radius: 999px;
+  background: #563820d9;
+  color: #fff9e8;
+  font-size: 10px;
+  pointer-events: none;
+}
+
+.physical-room.topdown-unified .unified-room-controls b {
+  font-family: 'DM Serif Display', serif;
+  font-size: 12px;
+}
+
+@media (max-width: 800px) {
+  .physical-room.topdown-unified .unified-room-controls { display: none; }
+  .physical-room.topdown-unified .physical-player.character,
+  .physical-room.topdown-unified .physical-player.character.rendered-character {
+    transform: translate(-50%, -58%) scale(.65) !important;
+  }
+}

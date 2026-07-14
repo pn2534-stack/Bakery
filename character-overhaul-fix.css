@@ -1,0 +1,179 @@
+/* Keep the complete creator inside the game window. */
+#creator.active .creator-panel {
+  width: min(1600px, 96vw) !important;
+  height: min(900px, 94vh) !important;
+  grid-template-columns: clamp(250px, 21vw, 330px) minmax(420px, 1fr) clamp(250px, 21vw, 330px) !important;
+}
+
+#creator.active .option-panel,
+#creator.active .creator-categories {
+  position: relative !important;
+  inset: auto !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  align-self: stretch !important;
+  box-sizing: border-box;
+  overscroll-behavior: contain;
+}
+
+#creator.active .creator-footer {
+  display: grid !important;
+  grid-template-columns: auto minmax(240px, 1fr) auto auto;
+  gap: 14px !important;
+  overflow: hidden;
+}
+
+#creator.active .creator-footer button {
+  min-width: 125px !important;
+}
+
+#creator.active .render-name {
+  min-width: 0;
+}
+
+#creator.active .render-name input {
+  width: min(240px, 100%);
+}
+
+/* The creator uses a layered puppet so every selection can change separately. */
+#creator.active .rendered-avatar {
+  --path-scale: 3.35;
+  background-image: none !important;
+  filter: drop-shadow(0 12px 9px #3c241d52);
+  overflow: visible;
+}
+
+#creator.active .rendered-avatar .creator-puppet {
+  display: block !important;
+}
+
+#creator.active .rendered-avatar .puppet-rig {
+  bottom: 4%;
+}
+
+.look-changing .puppet-rig {
+  animation: creatorPartChange .24s ease;
+}
+
+@keyframes creatorPartChange {
+  50% { filter: brightness(1.12); }
+}
+
+/* Independent colors. */
+:is(.rendered-avatar,.rendered-character) :is(.puppet-hair-puff,.puppet-hair-cap,.puppet-fringe) {
+  background: var(--custom-hair, #3b2116) !important;
+}
+
+:is(.rendered-avatar,.rendered-character) .puppet-eye {
+  background: radial-gradient(circle at 36% 30%, white 0 2px, var(--custom-eyes, #4a2619) 3px 7px, #17100d 8px) !important;
+}
+
+:is(.rendered-avatar,.rendered-character) .puppet-skirt {
+  background: repeating-linear-gradient(0deg, transparent 0 7px, #ffffff35 8px 9px), repeating-linear-gradient(90deg, var(--custom-outfit, #d98289) 0 8px, color-mix(in srgb, var(--custom-outfit, #d98289), white 22%) 9px 17px) !important;
+}
+
+:is(.rendered-avatar,.rendered-character) .puppet-bodice-bow,
+:is(.rendered-avatar,.rendered-character) .puppet-hair-bow {
+  background: var(--custom-outfit, #d98289) !important;
+}
+
+:is(.rendered-avatar,.rendered-character) .puppet-bodice-bow {
+  box-shadow: 7px 0 var(--custom-outfit, #d98289) !important;
+}
+
+:is(.rendered-avatar,.rendered-character) .puppet-leg b {
+  background: linear-gradient(color-mix(in srgb, var(--custom-shoes, #dc858f), white 25%), var(--custom-shoes, #dc858f)) !important;
+  border-color: color-mix(in srgb, var(--custom-shoes, #dc858f), black 30%) !important;
+}
+
+/* Hair shapes. */
+.look-hair-braids .puppet-hair-puff {
+  top: 23px;
+  width: 17px;
+  height: 67px;
+  border-radius: 45% 45% 48% 48%;
+  background: repeating-linear-gradient(180deg, var(--custom-hair) 0 9px, color-mix(in srgb, var(--custom-hair), white 18%) 10px 13px) !important;
+}
+.look-hair-braids .puppet-hair-puff.puff-left { left: 3px; }
+.look-hair-braids .puppet-hair-puff.puff-right { right: 3px; }
+
+.look-hair-soft-bob .puppet-hair-puff {
+  top: 14px;
+  width: 32px;
+  height: 50px;
+  border-radius: 48% 48% 42% 42%;
+}
+.look-hair-soft-bob .puppet-hair-puff.puff-left { left: 7px; }
+.look-hair-soft-bob .puppet-hair-puff.puff-right { right: 7px; }
+.look-hair-soft-bob .puppet-hair-cap { height: 39px; }
+
+/* Face variations. */
+.look-face-rosy .puppet-head::before {
+  content: '';
+  position: absolute;
+  z-index: 10;
+  left: 5px;
+  right: 5px;
+  top: 38px;
+  height: 9px;
+  background: radial-gradient(circle, #e7787999 0 4px, transparent 5px) left center/12px 9px no-repeat, radial-gradient(circle, #e7787999 0 4px, transparent 5px) right center/12px 9px no-repeat;
+}
+.look-face-sweet .puppet-mouth { width: 17px; left: 21px; border-bottom-width: 3px; }
+.look-face-soft-smile .puppet-eye { transform: translateZ(10px) scaleY(.92); }
+
+/* Accessories. */
+.look-accessory-flower-crown .puppet-hair-bow {
+  left: 10px;
+  top: -5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #f0a9b1 !important;
+  box-shadow: 14px -3px #fff0bd, 28px 0 #e8a5b3, 39px -2px #f5d485 !important;
+}
+.look-accessory-flower-crown .puppet-headband { border-color: #7b9b69; }
+.look-accessory-sun-hat .puppet-hair-bow { display: none; }
+.look-accessory-sun-hat .puppet-headband {
+  left: -13px;
+  top: -12px;
+  width: 82px;
+  height: 33px;
+  border: 9px solid #d9b86d;
+  border-bottom-width: 5px;
+  background: #e8ce8a;
+  box-shadow: 0 9px 0 5px #cda85f;
+}
+
+/* Outfit silhouettes. */
+.look-outfit-overalls .puppet-skirt {
+  left: 1px;
+  width: 44px;
+  border-radius: 6px 6px 14px 14px;
+}
+.look-outfit-overalls .puppet-apron { background: var(--custom-outfit) !important; }
+.look-outfit-picnic .puppet-skirt {
+  background: repeating-conic-gradient(color-mix(in srgb, var(--custom-outfit), white 25%) 0 25%, var(--custom-outfit) 0 50%) 0 0/14px 14px !important;
+}
+.look-outfit-shortcake .puppet-apron { box-shadow: inset 0 0 0 3px #f2d0c0, 0 3px 5px #4b241d30; }
+
+/* Shoe silhouettes. */
+.look-shoes-brown-shoes .puppet-leg b,
+.look-shoes-black-shoes .puppet-leg b { height: 13px; border-radius: 42% 58% 7px 7px; }
+.look-shoes-cream-shoes .puppet-leg b { height: 9px; border-radius: 60% 60% 5px 5px; }
+
+@media (max-height: 820px) and (min-width: 761px) {
+  #creator.active .creator-panel { height: 96vh !important; grid-template-rows: 60px minmax(0,1fr) 68px !important; }
+  #creator.active .creator-reference-title { height: 52px; line-height: 47px !important; font-size: 28px !important; }
+  .render-outfit-grid .render-choice { height: 88px; }
+  .mini-dress { width: 40px; height: 56px; }
+  .render-section { padding: 6px 8px; }
+  .render-section + .render-section { margin-top: 5px; }
+  .render-options .render-choice { height: 56px; }
+}
+
+@media (max-width: 900px) {
+  #creator.active .creator-panel { grid-template-columns: 210px minmax(330px,1fr) 220px !important; }
+  #creator.active .creator-footer { grid-template-columns: auto 1fr auto; }
+  #creator.active .render-save { display: none; }
+}

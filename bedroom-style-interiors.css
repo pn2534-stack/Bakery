@@ -1,0 +1,69 @@
+/* A single visual language based directly on the finished top-down bedroom. */
+.room.physical-room.bedroom-style-room {
+  border: 11px solid #9a6035 !important;
+  border-radius: 22px !important;
+  background:#f8ebd8 !important;
+  box-shadow:0 19px 58px #42231175,inset 0 0 0 4px #e8b778 !important;
+}
+
+.physical-room.bedroom-style-room .physical-shell {
+  background:
+    linear-gradient(180deg,#f8ead6 0 28%,#8d9872 28% 34%,transparent 34%),
+    repeating-linear-gradient(0deg,transparent 0 61px,#9e673e40 62px 64px),
+    repeating-linear-gradient(90deg,#c77d46 0 3px,#d99351 4px 105px,#b86e3f 106px 109px) !important;
+  background-color:#cf844a !important;
+  background-size:auto,auto,auto !important;
+  overflow:hidden;
+}
+
+.bedroom-style-architecture { position:absolute;inset:0;z-index:8;pointer-events:none;box-shadow:inset 24px 0 #efe0c9,inset -24px 0 #efe0c9,inset 0 18px #a96738,inset 0 -18px #a96738,inset 0 0 0 25px #b77949; }
+.bedroom-style-architecture::before { content:'';position:absolute;left:25px;right:25px;top:21px;height:27%;background:radial-gradient(circle,#dba8a5 0 2px,#7e9a70 3px 4px,transparent 5px) 0 0/44px 37px;opacity:.42; }
+.bedroom-style-architecture::after { content:'';position:absolute;left:25px;right:25px;top:28%;height:7%;background:repeating-linear-gradient(90deg,#788766 0 5px,#95a17d 6px 58px);border-top:5px solid #697759;border-bottom:6px solid #667451;box-shadow:0 8px 12px #43281440; }
+.bedroom-style-architecture .style-window { position:absolute;z-index:2;top:7%;width:16%;height:20%;border:8px solid #8c5a35;border-radius:9px;background:linear-gradient(#bfe0d9,#f4dda1);box-shadow:0 8px 10px #4a2c203f,inset 0 0 0 4px #f5dfbd; }
+.bedroom-style-architecture .style-window.left{left:20%}.bedroom-style-architecture .style-window.right{right:20%}
+.bedroom-style-architecture .style-window::before { content:'';position:absolute;left:-26px;right:-26px;top:-9px;height:105%;border-left:22px solid #d89491;border-right:22px solid #d89491;border-radius:28px 28px 8px 8px;filter:drop-shadow(0 5px 3px #54322645); }
+.bedroom-style-architecture .style-window b::before,.bedroom-style-architecture .style-window b::after { content:'';position:absolute;background:#815331;z-index:3; }.bedroom-style-architecture .style-window b::before{left:50%;top:0;width:5px;height:100%}.bedroom-style-architecture .style-window b::after{left:0;right:0;top:48%;height:5px}
+.style-doorway { position:absolute;z-index:5;left:43%;bottom:-5px;width:14%;height:8%;border:12px solid #f2e2c9;border-bottom:0;border-radius:9px 9px 0 0;background:#754426;box-shadow:inset 0 7px #3e271d; }
+.style-sunlight { position:absolute;z-index:1;left:22%;top:25%;width:31%;height:64%;background:linear-gradient(115deg,#fff6ca5e,transparent 62%);clip-path:polygon(0 0,48% 0,100% 100%,25% 100%);mix-blend-mode:screen; }
+
+/* Replace invisible image hotspots with rounded, dimensional top-down furniture. */
+.physical-room.bedroom-style-room .physical-object.bedroom-style-furniture .object-model {
+  display:block !important;position:absolute !important;inset:8% !important;width:auto !important;height:auto !important;opacity:1 !important;
+  border:5px solid #70472f !important;border-radius:18px !important;background:linear-gradient(145deg,#d39a67,#a96742) !important;
+  box-shadow:inset 5px 5px #f2c38b55,inset -7px -8px #5c352a36,8px 11px 9px #44291d55 !important;
+  transform:none !important;filter:none !important;pointer-events:none;
+}
+.physical-room.bedroom-style-room .bedroom-style-furniture:hover .object-model,.physical-room.bedroom-style-room .bedroom-style-furniture.near .object-model{filter:drop-shadow(0 0 10px #fff0a4)!important;transform:translateY(-3px)!important}
+
+.bedroom-style-room .physical-object[data-type="shelf"] .object-model { border-radius:8px !important;background:repeating-linear-gradient(0deg,#815236 0 7px,#cd9661 8px 28px,#6c432e 29px 34px)!important;box-shadow:inset 12px 0 #70472f,inset -12px 0 #70472f,8px 11px 9px #44291d55!important; }
+.bedroom-style-room .physical-object[data-type="shelf"] .object-model::after { content:'';position:absolute;inset:12% 18%;background:radial-gradient(circle,#e6b972 0 5px,transparent 6px) 0 0/24px 26px,radial-gradient(circle,#9eb17e 0 5px,transparent 6px) 12px 13px/25px 27px; }
+.bedroom-style-room .physical-object[data-type="display"] .object-model { border-color:#986846!important;background:linear-gradient(150deg,#e8f5efcc,#9dc9c3aa 58%,#bd8054 59%)!important;box-shadow:inset 0 -18px #b87b51,8px 11px 9px #44291d55!important; }
+.bedroom-style-room .physical-object[data-type="display"] .object-model::after { content:'';position:absolute;left:10%;right:10%;bottom:20%;height:22%;border-radius:50%;background:radial-gradient(ellipse,#e7a184 0 35%,#9b5f45 37% 49%,transparent 51%) 0 0/34px 22px; }
+.bedroom-style-room .physical-object[data-type="counter"] .object-model,.bedroom-style-room .physical-object[data-type="checkout"] .object-model { border-radius:9px!important;background:repeating-linear-gradient(90deg,#a96b43 0 16px,#c48755 17px 32px)!important;box-shadow:inset 0 14px #e1ad75,8px 11px 9px #44291d55!important; }
+.bedroom-style-room .physical-object[data-type="checkout"] .object-model::after { content:'';position:absolute;right:8%;top:12%;width:28%;height:38%;border:4px solid #4f5952;border-radius:6px;background:#9db3a4;box-shadow:inset 0 9px #d8e1d7; }
+.bedroom-style-room .physical-object[data-type="table"] .object-model { inset:18% 8%!important;border-radius:50%!important;background:radial-gradient(ellipse,#e0b37e,#a86b44 70%)!important;box-shadow:inset 0 0 0 7px #efd0a0,8px 11px 9px #44291d55!important; }
+.bedroom-style-room .physical-object[data-type="table"] .object-model::after { content:'';position:absolute;left:35%;right:35%;top:88%;height:33%;background:#75472e;border-radius:4px;box-shadow:-32px 2px 0 5px #a86f4d,32px 2px 0 5px #a86f4d; }
+.bedroom-style-room .physical-object[data-type="sofa"] .object-model { background:linear-gradient(#e4b8ac 0 35%,#bd8179 36%)!important;border-radius:28px 28px 12px 12px!important;box-shadow:inset 12px 0 #f0cec2,inset -12px 0 #f0cec2,inset 0 -10px #915e5b,8px 11px 9px #44291d55!important; }
+.bedroom-style-room .physical-object[data-type="bed"] .object-model { background:linear-gradient(#f4e4ca 0 28%,#d89b9b 29% 39%,#f6e9d1 40%)!important;border-radius:22px 22px 8px 8px!important;box-shadow:inset 0 -15px #b87768,inset 15px 0 #f1cfb5,inset -15px 0 #f1cfb5,8px 11px 9px #44291d55!important; }
+.bedroom-style-room .physical-object[data-type="rack"] .object-model { background:repeating-linear-gradient(90deg,transparent 0 21px,#95613d 22px 27px)!important;border:8px solid #7a4c31!important;border-radius:9px!important; }
+.bedroom-style-room .physical-object[data-type="rack"] .object-model::after { content:'';position:absolute;left:8%;right:8%;top:14%;bottom:9%;background:linear-gradient(90deg,#d78f91 0 22%,transparent 23% 27%,#879f83 28% 51%,transparent 52% 56%,#d7ae6f 57% 80%,transparent 81%);clip-path:polygon(10% 0,90% 0,100% 100%,0 100%); }
+.bedroom-style-room .physical-object[data-type="oven"] .object-model,.bedroom-style-room .physical-object[data-type="fridge"] .object-model { border-color:#5e7468!important;background:linear-gradient(135deg,#c5d7c9,#86a293)!important;border-radius:10px!important;box-shadow:inset 0 -42px #718b7d,8px 11px 9px #44291d55!important; }
+.bedroom-style-room .physical-object[data-type="oven"] .object-model::after { content:'';position:absolute;left:18%;right:18%;bottom:12%;height:38%;border:5px solid #d6e1d8;border-radius:6px;background:#39433d; }
+.bedroom-style-room .physical-object[data-type="fridge"] .object-model::after { content:'';position:absolute;right:12%;top:12%;bottom:12%;width:5px;border-radius:4px;background:#61766c; }
+.bedroom-style-room .physical-object[data-type="coffee"] .object-model { inset:12% 18%!important;border-color:#4f5b57!important;background:linear-gradient(90deg,#656d68,#d5d8d0 48%,#58605d)!important;border-radius:9px!important; }
+.bedroom-style-room .physical-object[data-type="coffee"] .object-model::after { content:'';position:absolute;left:12%;top:15%;width:20%;height:22%;border-radius:50%;background:#343b38;box-shadow:38px 0 #343b38,18px 37px 0 4px #eee5d0; }
+.bedroom-style-room .physical-object[data-type="plant"] .object-model { inset:35% 28% 8%!important;border-radius:8px 8px 22px 22px!important;background:linear-gradient(90deg,#aa6647,#d18c65,#9b5a40)!important; }
+.bedroom-style-room .physical-object[data-type="plant"] .object-model::after { content:'';position:absolute;left:-55%;right:-55%;top:-75%;height:95%;background:radial-gradient(ellipse,#789667 0 12px,transparent 13px) 0 0/38px 31px,radial-gradient(ellipse,#96ad76 0 10px,transparent 11px) 18px 13px/35px 29px; }
+.bedroom-style-room .physical-object[data-type="door"] .object-model { inset:3% 22%!important;border-radius:37px 37px 6px 6px!important;background:linear-gradient(90deg,#719080,#94ad99,#6c8879)!important;box-shadow:inset 0 0 0 8px #587064,8px 11px 9px #44291d55!important; }
+.bedroom-style-room .physical-object[data-type="door"] .object-model::after { content:'';position:absolute;right:14%;top:50%;width:7px;height:7px;border-radius:50%;background:#e4bb5f; }
+.bedroom-style-room .physical-object[data-type="fireplace"] .object-model { background:repeating-linear-gradient(0deg,#9e715d 0 16px,#c99a7c 17px 20px)!important;box-shadow:inset 0 -55% #3c2c27,8px 11px 9px #44291d55!important; }
+.bedroom-style-room .physical-object[data-type="fireplace"] .object-model::after { content:'';position:absolute;left:35%;bottom:8%;width:30%;height:34%;border-radius:50% 50% 22% 22%;background:#e99849;box-shadow:0 0 18px #ffc96e; }
+.bedroom-style-room .physical-object[data-type="animal"] .object-model { inset:24% 20% 12%!important;border-radius:48% 48% 42% 42%!important;background:radial-gradient(circle at 38% 30%,#efd0ac 0 7px,#b67b57 8px 36%,#89563f 70%)!important; }
+.bedroom-style-room .physical-object[data-type="animal"] .object-model::before { content:'';position:absolute;left:9%;right:9%;top:-25%;height:48%;background:inherit;border-radius:50%;clip-path:polygon(0 20%,20% 0,38% 25%,70% 23%,100% 0,94% 100%,5% 100%); }
+.bedroom-style-room .physical-object[data-type="art"] .object-model { inset:9% 18%!important;border:10px solid #815335!important;border-radius:8px!important;background:linear-gradient(145deg,#d7a58d,#83a99e,#e9d29e)!important; }
+
+/* Room-specific palette accents keep functions clear while retaining one bedroom style. */
+.bedroom-style-room[data-interior-theme="bakery"]{--room-accent:#d68b90}.bedroom-style-room[data-interior-theme="shops"]{--room-accent:#7f9c82}.bedroom-style-room[data-interior-theme="cottage"]{--room-accent:#d19b78}.bedroom-style-room[data-interior-theme="library"]{--room-accent:#8b6c52}.bedroom-style-room[data-interior-theme="greenhouse"]{--room-accent:#799c69}.bedroom-style-room[data-interior-theme="giftshop"]{--room-accent:#c9869b}.bedroom-style-room[data-interior-theme="delivery"]{--room-accent:#7890a0}.bedroom-style-room[data-interior-theme="studio"]{--room-accent:#9a7ca8}
+.bedroom-style-room .physical-object .object-name{border-color:color-mix(in srgb,var(--room-accent,#d19b78),white 55%)!important}
+
+@media(max-width:800px){.bedroom-style-architecture .style-window{border-width:5px}.physical-room.bedroom-style-room .physical-object.bedroom-style-furniture .object-model{border-width:3px!important}.style-doorway{border-width:7px}}

@@ -1,0 +1,50 @@
+(() => {
+  const creator=document.getElementById('creator'),panel=creator?.querySelector('.creator-panel');
+  if(!creator||!panel)return;
+  const defaults={
+    Girl:{hair:'Double puffs',hairColor:'#3b2116',skin:'#a86648',eyes:'#4a2619',face:'Soft',outfit:'Strawberry Dress',outfitColor:'#d98289',accessory:'Pink Bow',shoes:'Mary Janes'},
+    Boy:{hair:'Tousled Crop',hairColor:'#5a341f',skin:'#d99a72',eyes:'#3b2b20',face:'Cheerful',outfit:'Baker Overalls',outfitColor:'#7b633f',accessory:'Brown Cap',shoes:'Work Boots'}
+  };
+  const profiles=state.player.genderProfiles=Object.assign({},defaults,state.player.genderProfiles||{});
+  profiles.Girl=Object.assign({},defaults.Girl,profiles.Girl||{});profiles.Boy=Object.assign({},defaults.Boy,profiles.Boy||{});
+  let gender=state.player.gender==='Boy'?'Boy':'Girl';
+  const choices={
+    Girl:{
+      hair:['Double puffs','Ribbon braids','Soft bob','Long waves'],
+      face:['Soft','Rosy','Sweet'],outfit:['Strawberry Dress','Cocoa Apron Dress','Sage Plaid Dress','Honey Pinafore','Lavender Dress','Blueberry Dress','Cottage Overalls','Shortcake Dress','Picnic Dress'],
+      accessory:['Pink Bow','Flower Crown','Sun Bonnet','Round Glasses'],shoes:['Mary Janes','Lace Boots','Black Flats','Cream Shoes']
+    },
+    Boy:{
+      hair:['Tousled Crop','Short Curls','Side Part','Wavy Mop'],
+      face:['Cheerful','Gentle','Freckled'],outfit:['Baker Overalls','Cocoa Vest','Sage Suspenders','Honey Cardigan','Blue Baker Set','Picnic Shirt','Garden Overalls','Cream Waistcoat','Autumn Dungarees'],
+      accessory:['Brown Cap','Green Beret','Round Glasses','Neckerchief'],shoes:['Work Boots','Brown Oxfords','Black Boots','Cream Sneakers']
+    }
+  };
+  const outfitColors={Girl:['#d98289','#73504b','#91a083','#d5a25d','#aa91ad','#6f91a8','#8d765f','#d98b96','#c96f78'],Boy:['#7b633f','#6d493a','#71876a','#c08f4e','#66869b','#a46d55','#61785c','#a9896f','#8b6544']};
+  const hairColors=['#3b2116','#7a4a29','#e2bd83','#a85f32','#29231f'];
+  const eyeColors=['#4a2619','#718260','#557987','#81708b','#29272a'];
+  const skinColors=['#f2c7a7','#efb98b','#d99a72','#a86648','#754532'];
+  const slug=value=>String(value).toLowerCase().replace(/[^a-z0-9]+/g,'-');
+  const current=()=>profiles[gender];
+
+  function avatarMarkup(){const p=current();return`<div class="gc-avatar gender-${gender.toLowerCase()} hair-${slug(p.hair)} accessory-${slug(p.accessory)}" style="--gc-hair:${p.hairColor};--gc-skin:${p.skin};--gc-eyes:${p.eyes};--gc-outfit:${p.outfitColor};--gc-shoes:${/black/i.test(p.shoes)?'#2d2928':/cream|sneaker/i.test(p.shoes)?'#ead6b3':'#5e3c2d'}"><i class="gc-shadow"></i><div class="gc-rig"><i class="gc-hair-back"></i><div class="gc-head"><i class="gc-ear left"></i><i class="gc-ear right"></i><i class="gc-hair-cap"></i><i class="gc-fringe"></i><i class="gc-eye left"></i><i class="gc-eye right"></i><i class="gc-nose"></i><i class="gc-mouth"></i><i class="gc-accessory"></i></div><i class="gc-neck"></i><i class="gc-arm left"></i><i class="gc-arm right"></i><div class="gc-body"><i class="gc-collar"></i><i class="gc-bib"></i><i class="gc-skirt"></i></div><i class="gc-leg left"></i><i class="gc-leg right"></i><i class="gc-shoe left"></i><i class="gc-shoe right"></i></div></div>`}
+  function button(group,value,index,kind='choice'){const p=current(),active=p[group]===value;return`<button type="button" class="gc-option ${kind} ${active?'active':''}" data-gc-group="${group}" data-gc-value="${value}" ${index!=null?`data-gc-index="${index}"`:''} aria-pressed="${active}"><i></i><span>${value}</span></button>`}
+  function colorButton(group,color,index){return`<button type="button" class="gc-color ${current()[group]===color?'active':''}" data-gc-group="${group}" data-gc-value="${color}" style="--swatch:${color}" aria-label="${group} color ${index+1}"></button>`}
+  function render(){const p=current(),data=choices[gender];panel.innerHTML=`
+    <header class="gc-title">CHARACTER CUSTOMIZATION</header>
+    <aside class="gc-outfits"><h2>✦ OUTFIT ✦</h2><div class="gc-outfit-grid">${data.outfit.map((name,index)=>button('outfit',name,index,'outfit')).join('')}</div><section><h3>✦ COLOR PALETTE ✦</h3><div class="gc-palette">${outfitColors[gender].map((color,index)=>colorButton('outfitColor',color,index)).join('')}</div></section></aside>
+    <main class="gc-stage"><div class="gc-gender-picker"><h3>✦ Choose Your Character ✦</h3><div><button type="button" data-gc-gender="Girl" class="${gender==='Girl'?'active':''}"><i class="girl"></i>GIRL</button><button type="button" data-gc-gender="Boy" class="${gender==='Boy'?'active':''}"><i class="boy"></i>BOY</button></div><small>Each character keeps separate customization settings.</small></div><div class="gc-room-decor"><i></i><b>Today's Special<br>♥<br>Strawberry Shortcake</b></div><div class="gc-platform"></div>${avatarMarkup()}<div class="gc-skin"><b>Skin Tone</b>${skinColors.map((color,index)=>colorButton('skin',color,index)).join('')}</div></main>
+    <aside class="gc-details"><section><h3>✂ HAIR</h3><div class="gc-row">${data.hair.map((name,index)=>button('hair',name,index,'hair')).join('')}</div></section><section><h3>◈ HAIR COLOR</h3><div class="gc-row colors">${hairColors.map((color,index)=>colorButton('hairColor',color,index)).join('')}</div></section><section><h3>❀ FACE</h3><div class="gc-row">${data.face.map((name,index)=>button('face',name,index,'face')).join('')}</div></section><section><h3>◉ EYES</h3><div class="gc-row colors">${eyeColors.map((color,index)=>colorButton('eyes',color,index)).join('')}</div></section><section><h3>🎀 ACCESSORIES</h3><div class="gc-row">${data.accessory.map((name,index)=>button('accessory',name,index,'accessory')).join('')}</div></section><section><h3>♟ SHOES</h3><div class="gc-row">${data.shoes.map((name,index)=>button('shoes',name,index,'shoes')).join('')}</div></section></aside>
+    <footer class="gc-footer"><button type="button" data-gc-back>← Back</button><label>Baker name <input data-gc-name maxlength="16" value="${state.player.name||'Your Baker'}"></label><button type="button" data-gc-save>Save Outfit ♥</button><button type="button" data-gc-start>Start 🍰</button></footer>`;
+  }
+  function saveProfile(){state.player.gender=gender;state.player.name=panel.querySelector('[data-gc-name]')?.value.trim()||state.player.name||'Your Baker';state.player.genderProfiles=profiles;const p=current();state.player.customization={gender,...p};state.player.renderedLook={outfit:p.outfit,hair:p.hair,hairColor:p.hairColor,face:p.face,eyes:p.eyes,palette:p.outfitColor,accessory:p.accessory,shoes:p.shoes,direction:'front'};state.created=true;save();applyPlayerIdentity()}
+  function applyPlayerIdentity(root=document){const p=profiles[state.player.gender==='Boy'?'Boy':'Girl'];root.querySelectorAll?.('#player,.physical-player,.interior-player').forEach(host=>{[...host.classList].filter(name=>name.startsWith('player-gender-')||name.startsWith('player-hair-')).forEach(name=>host.classList.remove(name));host.classList.add(`player-gender-${state.player.gender==='Boy'?'boy':'girl'}`,`player-hair-${slug(p.hair)}`);host.style.setProperty('--custom-hair',p.hairColor);host.style.setProperty('--custom-eyes',p.eyes);host.style.setProperty('--custom-outfit',p.outfitColor);host.style.setProperty('--custom-shoes',/black/i.test(p.shoes)?'#29262a':/cream/i.test(p.shoes)?'#ead7b5':'#6b4032')})}
+  window.applyPlayerGenderIdentity=applyPlayerIdentity;
+  function showSlots(){creator.classList.remove('active');const screen=document.getElementById('save-select');screen.hidden=false;const slots=JSON.parse(localStorage.getItem('honeybell-slots')||'[null,null,null,null]');document.getElementById('save-slots').innerHTML=slots.map((saved,index)=>`<button class="save-slot" data-slot="${index}"><i class="save-portrait ${gender.toLowerCase()}"></i><span><b>${saved?saved.name:'Empty File'}</b><small>${saved?`Level ${saved.level}<br>Honeybell Bakery · ${saved.coins} coins<br>Spring Day ${saved.day}`:'Start New Game'}</small></span>${saved?`<i class="delete-slot" data-delete-slot="${index}">×</i>`:''}</button>`).join('')}
+  document.addEventListener('click',event=>{const target=event.target.closest('button');if(!target)return;if(target.dataset.gcGender){gender=target.dataset.gcGender;render();return}if(target.dataset.gcGroup){const p=current(),group=target.dataset.gcGroup;p[group]=target.dataset.gcValue;if(group==='outfit')p.outfitColor=outfitColors[gender][Number(target.dataset.gcIndex)]||p.outfitColor;render();return}if(target.hasAttribute('data-gc-save')){saveProfile();const presets=JSON.parse(localStorage.getItem('honeybell-gender-presets')||'[]');presets.push({gender,profile:{...current()}});localStorage.setItem('honeybell-gender-presets',JSON.stringify(presets.slice(-10)));toast(`${gender} outfit saved`);return}if(target.hasAttribute('data-gc-start')){saveProfile();showSlots();return}if(target.hasAttribute('data-gc-back')){creator.classList.remove('active');document.getElementById('start-screen').classList.remove('hidden');return}},true);
+  function markNpcGenders(root=document){const boys=['Oliver','Noah','Henry','Lucas','Milo','Theo','Rowan','Finn','Jasper'];root.querySelectorAll?.('.village-npc,.room-npc,.restaurant-customer').forEach((npc,index)=>{const identity=`${npc.dataset.npcName||''} ${npc.querySelector('.customer-order-bubble b')?.textContent||''}`;const boy=boys.some(name=>identity.includes(name))||npc.classList.contains('npc-map-b')||npc.classList.contains('npc-map-c')||(identity.trim()===''&&index%3===1);npc.classList.toggle('npc-gender-boy',boy);npc.classList.toggle('npc-gender-girl',!boy)})}
+  const observer=new MutationObserver(records=>records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType!==1)return;applyPlayerIdentity(node);markNpcGenders(node)})));
+  observer.observe(document.getElementById('game'),{childList:true,subtree:true});
+  const priorEnter=enterVillage;enterVillage=function(){priorEnter();setTimeout(()=>applyPlayerIdentity(),0)};
+  render();applyPlayerIdentity();markNpcGenders();
+})();
