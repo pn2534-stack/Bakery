@@ -1,13 +1,13 @@
 (() => {
   const icons = {
-    tic:'✕', fruit:'🍓', colors:'🎨', water:'🧪', words:'🔤', numbers:'🔢'
+    tic:'✕', fruit:'🍓', colors:'🎨', water:'🧪', words:'🔤', numbers:'🔢', memory:'🌼', catch:'🦋', pattern:'✨'
   };
   const titles = {
-    tic:'Tic-Tac-Toe', fruit:'Fruit Merge', colors:'Color Blocks', water:'Water Sort', words:'Word Finder', numbers:'Number Merge'
+    tic:'Tic-Tac-Toe', fruit:'Fruit Merge', colors:'Color Blocks', water:'Water Sort', words:'Word Finder', numbers:'Number Merge', memory:'Flower Memory', catch:'Butterfly Garden', pattern:'Fairy Pattern'
   };
   const fruitIcons = ['', '🍒', '🍓', '🍊', '🍎', '🍉', '🍍'];
   let activeGame = null;
-  let tic, fruit, blocks, water, words, numbers;
+  let tic, fruit, blocks, water, words, numbers, memory, butterfly, pattern;
 
   function gameShell(name, body, instructions = '') {
     activeGame = name;
@@ -105,7 +105,20 @@
   function slideLine(line){const compact=line.filter(Boolean);for(let i=0;i<compact.length-1;i++){if(compact[i]===compact[i+1]){compact[i]*=2;numbers.score+=compact[i];compact.splice(i+1,1)}}return [...compact,...Array(4-compact.length).fill(0)]}
   function moveNumbers(direction){const before=numbers.cells.join(','),result=Array(16).fill(0);for(let n=0;n<4;n++){let indices;if(direction==='left')indices=[0,1,2,3].map(c=>n*4+c);if(direction==='right')indices=[3,2,1,0].map(c=>n*4+c);if(direction==='up')indices=[0,1,2,3].map(r=>r*4+n);if(direction==='down')indices=[3,2,1,0].map(r=>r*4+n);const moved=slideLine(indices.map(i=>numbers.cells[i]));indices.forEach((i,j)=>result[i]=moved[j])}numbers.cells=result;if(numbers.cells.join(',')!==before)spawnNumber();if(!numbers.rewarded&&numbers.cells.some(value=>value>=128)){numbers.rewarded=true;award('numbers',40)}renderNumbers();}
 
-  const starters={tic:startTic,fruit:startFruit,colors:startBlocks,water:startWater,words:startWords,numbers:startNumbers};
+  function startMemory(){const flowers=['🌷','🌻','🌸','🌹','🌼','🪻'];memory={cards:[...flowers,...flowers].sort(()=>Math.random()-.5),open:[],matched:[],moves:0,locked:false};renderMemory()}
+  function renderMemory(){gameShell('memory',`<div class="memory-grid">${memory.cards.map((flower,i)=>`<button data-memory-card="${i}" class="${memory.open.includes(i)||memory.matched.includes(i)?'open':''}" ${memory.matched.includes(i)?'disabled':''}><span>${memory.open.includes(i)||memory.matched.includes(i)?flower:'?'}</span></button>`).join('')}</div><div class="game-status">${memory.matched.length===12?'Every flower has a pair!':`Moves ${memory.moves} · Find all six flower pairs.`}</div>`,'Turn over two cards. Matching cottage flowers stay open.')}
+  function flipMemory(index){if(memory.locked||memory.open.includes(index)||memory.matched.includes(index))return;memory.open.push(index);if(memory.open.length===2){memory.moves++;const[a,b]=memory.open;if(memory.cards[a]===memory.cards[b]){memory.matched.push(a,b);memory.open=[];if(memory.matched.length===12)award('memory',35);renderMemory()}else{memory.locked=true;renderMemory();setTimeout(()=>{memory.open=[];memory.locked=false;renderMemory()},650)}}else renderMemory()}
+
+  function startCatch(){butterfly={score:0,spot:Math.floor(Math.random()*20),rewarded:false};renderCatch()}
+  function renderCatch(){gameShell('catch',`<div class="butterfly-garden">${Array.from({length:20},(_,i)=>`<button data-catch-spot="${i}" class="${i===butterfly.spot?'flutter':''}">${i===butterfly.spot?'🦋':'🌿'}</button>`).join('')}</div><div class="game-status">Butterflies greeted ${butterfly.score}/10 · Follow the fluttering butterfly.</div>`,'Tap the butterfly as it visits different flowers. Greet ten to win.')}
+  function catchButterfly(index){if(index!==butterfly.spot)return;butterfly.score++;let next;do{next=Math.floor(Math.random()*20)}while(next===butterfly.spot);butterfly.spot=next;if(butterfly.score>=10&&!butterfly.rewarded){butterfly.rewarded=true;award('catch',30)}renderCatch()}
+
+  const patternColors=['rose','sage','gold','blue'];
+  function startPattern(){pattern={sequence:[Math.floor(Math.random()*4),Math.floor(Math.random()*4),Math.floor(Math.random()*4)],input:[],round:1,rewarded:false};renderPattern()}
+  function renderPattern(){gameShell('pattern',`<div class="fairy-sequence">${pattern.sequence.map((color,i)=>`<i class="pattern-${patternColors[color]}">${i+1}</i>`).join('')}</div><div class="pattern-buttons">${patternColors.map((color,i)=>`<button data-pattern-color="${i}" class="pattern-${color}" ${pattern.rewarded?'disabled':''}>${color}</button>`).join('')}</div><div class="game-status">${pattern.rewarded?'All five fairy patterns complete!':`Round ${pattern.round}/5 · Repeat the glowing color order.`}</div>`,'Read the numbered fairy lights from left to right, then press the matching colors.')}
+  function playPattern(color){if(pattern.rewarded)return;const expected=pattern.sequence[pattern.input.length];if(color!==expected){pattern.input=[];toast('The lights twinkled away · try the sequence again');renderPattern();return}pattern.input.push(color);if(pattern.input.length===pattern.sequence.length){pattern.round++;pattern.input=[];if(pattern.round>5){pattern.rewarded=true;award('pattern',40);renderPattern();return}pattern.sequence.push(Math.floor(Math.random()*4))}renderPattern()}
+
+  const starters={tic:startTic,fruit:startFruit,colors:startBlocks,water:startWater,words:startWords,numbers:startNumbers,memory:startMemory,catch:startCatch,pattern:startPattern};
   const previousInteract = interactPhysical;
   interactPhysical = function (element) {
     const name = element.querySelector('.object-name')?.textContent.trim();
@@ -124,6 +137,9 @@
     const tube=event.target.closest('[data-water-tube]');if(tube){pourWater(Number(tube.dataset.waterTube));return}
     const letter=event.target.closest('[data-word-cell]');if(letter){selectLetter(Number(letter.dataset.wordCell));return}
     const move=event.target.closest('[data-number-move]');if(move){moveNumbers(move.dataset.numberMove)}
+    const memoryCard=event.target.closest('[data-memory-card]');if(memoryCard){flipMemory(Number(memoryCard.dataset.memoryCard));return}
+    const catchSpot=event.target.closest('[data-catch-spot]');if(catchSpot){catchButterfly(Number(catchSpot.dataset.catchSpot));return}
+    const patternButton=event.target.closest('[data-pattern-color]');if(patternButton){playPattern(Number(patternButton.dataset.patternColor))}
   });
 
   document.addEventListener('keydown',event=>{if(activeGame!=='numbers'||document.getElementById('modal-wrap').hidden)return;const direction={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right'}[event.key];if(direction){event.preventDefault();event.stopImmediatePropagation();moveNumbers(direction)}},true);

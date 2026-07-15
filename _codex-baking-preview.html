@@ -1,0 +1,5 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="gameplay.css"><link rel="stylesheet" href="cooking.css"><style>body{background:linear-gradient(135deg,#d9b89f,#80604c)}.modal-wrap{display:grid!important}.modal{width:auto!important;max-width:none!important}</style></head><body><div id="game"><div class="modal-wrap" id="modal-wrap"><div class="modal glass"><button class="modal-close">×</button><div id="modal-content"></div></div></div><div id="room"></div></div><script>
+const state={inventory:{},stock:{},player:{},bakingSkill:{xp:175,batches:4,best:87},stockQuality:{},minute:480,energy:100,coins:300,shift:{rating:5},npcs:[{name:'Mia'}]};
+function save(){} function updateHUD(){} function toast(){} function renderRoom(){} function interactPhysical(){} let current='bakery',currentTab='Kitchen';
+function modal(html){document.getElementById('modal-content').innerHTML=html;document.getElementById('modal-wrap').hidden=false}
+</script><script src="cooking.js"></script><script>openSkillBaking('Strawberry Cake')</script></body></html>

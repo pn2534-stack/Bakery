@@ -1,0 +1,14 @@
+/* Clickable bakery stock: baked batches remain here until placed on an order tray. */
+.serving-counter{margin-top:8px;border:2px solid #dcb88d;border-radius:13px;background:#fffdf5;padding:8px}
+.serving-counter>header{display:flex;align-items:end;justify-content:space-between;gap:8px}
+.serving-counter h4{margin:0;font:15px 'DM Serif Display'}
+.serving-counter header small{font-size:7px;letter-spacing:1.5px;color:#a1705c}
+.serving-counter header>span{font-size:8px;color:#7d6b5e;text-align:right}
+.serving-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:7px}
+.serving-grid button{min-width:0;border:2px solid #ead4b7;border-radius:10px;background:#fff8ea;padding:6px;display:grid;grid-template-columns:26px 1fr;text-align:left;cursor:pointer}
+.serving-grid button i{grid-row:1/3;font-style:normal;font-size:20px;align-self:center}
+.serving-grid button b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px}
+.serving-grid button span{font-size:8px;color:#856f5f}
+.serving-grid button.on-tray{border-color:#8dad83;background:#e3efdc}
+.serving-grid button:disabled{opacity:.38;cursor:not-allowed}
+.empty-servings{grid-column:1/-1;margin:0;padding:8px;border-radius:8px;background:#f4e7d4;color:#887363;font-size:9px;text-align:center}
