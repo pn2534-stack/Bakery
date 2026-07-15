@@ -18,7 +18,21 @@
   }
   async function applyShelfImages(){
     const objects=[...document.querySelectorAll('.bedroom-style-room .physical-object')];
-    await Promise.all(objects.map(async object=>{const name=object.querySelector('.object-name')?.textContent.trim()||'',match=rules.find(([,pattern])=>pattern.test(name));if(!match)return;object.dataset.shelfArt=match[0];object.style.setProperty('--shelf-image',`url("${await removeMagenta(art[match[0]])}")`)}));
+    await Promise.all(objects.map(async object=>{
+      const name=object.querySelector('.object-name')?.textContent.trim()||'',match=rules.find(([,pattern])=>pattern.test(name));
+      if(!match)return;
+      const shelfImage=await removeMagenta(art[match[0]]);
+      // Illustrated rooms already contain shelves in their background art.
+      // Keep the object as an invisible interaction target without drawing a
+      // second shelf image over the scene.
+      if(object.closest('.scene-integrated-interior,.clean-bakery-gameplay')){
+        delete object.dataset.shelfArt;
+        object.style.removeProperty('--shelf-image');
+        return;
+      }
+      object.dataset.shelfArt=match[0];
+      object.style.setProperty('--shelf-image',`url("${shelfImage}")`);
+    }));
   }
   const previous=renderRoom;renderRoom=function(){previous();applyShelfImages()};applyShelfImages();
 })();

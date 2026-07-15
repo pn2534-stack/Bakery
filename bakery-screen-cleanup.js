@@ -26,6 +26,8 @@
     stage.querySelectorAll('.physical-object').forEach(object=>{
       object.dataset.overlayHit='true';
       delete object.dataset.visibleShelf;
+      delete object.dataset.shelfArt;
+      object.style.removeProperty('--shelf-image');
       object.draggable=false;
       object.removeAttribute('draggable');
       delete object.dataset.roomDrag;
@@ -41,6 +43,8 @@
       const label=object.querySelector('.object-name'),name=label?.querySelector('span')?.textContent.trim()||label?.textContent.trim()||'',box=layout[name];
       object.dataset.overlayHit='true';
       delete object.dataset.visibleShelf;
+      delete object.dataset.shelfArt;
+      object.style.removeProperty('--shelf-image');
       const id=`${label?.textContent.trim()||object.dataset.type||'furniture'}#${index}`,position=saved[id];
       if(box){const [left,top,width,height]=box;Object.assign(object.style,{left:`${left}%`,top:`${top}%`,width:`${width}%`,height:`${height}%`,transform:'none'})}
       else if(position)Object.assign(object.style,{left:`${position.x}%`,top:`${position.y}%`,transform:'none'});
