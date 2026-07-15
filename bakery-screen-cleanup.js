@@ -14,6 +14,23 @@
     'Espresso machine':[47,25,10,17],'Tea and honey bar':[58,10,14,29],'Dining table':[58,58,15,22],
     'Booth seating':[49,61,17,20],'Piano':[4,72,12,18],'Kitchen door':[78,43,8,24]
   };
+  function cleanIllustratedInterior(){
+    const room=document.querySelector('.physical-room'),shell=room?.querySelector('.physical-shell'),stage=room?.querySelector('.physical-stage');
+    if(!room||!shell||!stage||room.classList.contains('topdown-bedroom')||current==='park'||(current==='cottage'&&currentTab==='Exterior'))return;
+    // The background already contains the finished furniture. Keep the DOM
+    // objects solely as invisible, accessible interaction maps like Bakery.
+    room.classList.add('scene-integrated-interior');
+    room.classList.remove('organized-interior');
+    shell.querySelector('.organized-room-decor')?.remove();
+    shell.querySelector('.room-interaction-drop')?.remove();
+    stage.querySelectorAll('.physical-object').forEach(object=>{
+      object.dataset.overlayHit='true';
+      delete object.dataset.visibleShelf;
+      object.draggable=false;
+      object.removeAttribute('draggable');
+      delete object.dataset.roomDrag;
+    });
+  }
   function cleanBakeryScreen(){
     if(current!=='bakery')return;
     const room=document.querySelector('.physical-room'),shell=room?.querySelector('.physical-shell'),layout=currentTab==='Kitchen'?kitchenLayout:caféLayout;
@@ -30,6 +47,7 @@
     });
     shell.querySelector('[data-station-guide]')?.remove();
   }
-  const previous=renderRoom;renderRoom=function(){previous();cleanBakeryScreen()};
+  const previous=renderRoom;renderRoom=function(){previous();cleanIllustratedInterior();cleanBakeryScreen()};
+  cleanIllustratedInterior();
   cleanBakeryScreen();
 })();

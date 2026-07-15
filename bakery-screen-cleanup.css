@@ -45,7 +45,8 @@
 .physical-room.scene-integrated-interior .curtain,
 .physical-room.scene-integrated-interior .hanging-plants,
 .physical-room.scene-integrated-interior .menu-board,
-.physical-room.scene-integrated-interior .organized-room-decor{display:none!important}
+.physical-room.scene-integrated-interior .organized-room-decor,
+.physical-room.scene-integrated-interior .room-interaction-drop{display:none!important}
 .physical-room.scene-integrated-interior .physical-stage{inset:0!important;overflow:visible!important}
 .physical-room.scene-integrated-interior .physical-object,
 #room.physical-room.scene-integrated-interior .physical-stage>.physical-object,
