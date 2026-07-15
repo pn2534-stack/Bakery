@@ -39,6 +39,9 @@
       room.classList.remove('organized-interior');
       room.classList.add('scene-integrated-interior');
       shell.querySelector('.organized-room-decor')?.remove();
+      // Interaction maps sit over furniture already painted into the scene;
+      // they must not become invisible walls that trap keyboard movement.
+      stage.querySelectorAll('.physical-object').forEach(object=>object.dataset.overlayHit='true');
       return;
     }
     room.classList.add('organized-interior');
