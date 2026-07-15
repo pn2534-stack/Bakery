@@ -66,6 +66,45 @@
 }
 .physical-room.clean-bakery-gameplay .physical-object[data-shelf-art] .object-model,
 .physical-room.scene-integrated-interior .physical-object[data-shelf-art] .object-model{display:none!important;background:none!important;background-image:none!important}
+
+/* Final authority for picture-based simulation rooms.  Cottage, Market and
+   Boutique furniture is already drawn in the room image; these buttons are
+   interaction geometry, never replacement furniture. */
+#room.physical-room.topdown-unified.cottage-living-room .physical-object,
+#room.physical-room.topdown-unified.cottage-kitchen .physical-object,
+#room.physical-room.topdown-unified.cottage-bathroom .physical-object,
+#room.physical-room.topdown-unified.shops-market .physical-object,
+#room.physical-room.topdown-unified.shops-boutique .physical-object{
+  background:transparent!important;background-image:none!important;
+  border:2px solid transparent!important;outline:0!important;
+  box-shadow:none!important;filter:none!important;opacity:1!important
+}
+#room.physical-room.topdown-unified.cottage-living-room .physical-object::before,
+#room.physical-room.topdown-unified.cottage-living-room .physical-object::after,
+#room.physical-room.topdown-unified.cottage-kitchen .physical-object::before,
+#room.physical-room.topdown-unified.cottage-kitchen .physical-object::after,
+#room.physical-room.topdown-unified.cottage-bathroom .physical-object::before,
+#room.physical-room.topdown-unified.cottage-bathroom .physical-object::after,
+#room.physical-room.topdown-unified.shops-market .physical-object::before,
+#room.physical-room.topdown-unified.shops-market .physical-object::after,
+#room.physical-room.topdown-unified.shops-boutique .physical-object::before,
+#room.physical-room.topdown-unified.shops-boutique .physical-object::after,
+#room.physical-room.topdown-unified:is(.cottage-living-room,.cottage-kitchen,.cottage-bathroom,.shops-market,.shops-boutique) .physical-object .object-model,
+#room.physical-room.topdown-unified:is(.cottage-living-room,.cottage-kitchen,.cottage-bathroom,.shops-market,.shops-boutique) .physical-object .object-model::before,
+#room.physical-room.topdown-unified:is(.cottage-living-room,.cottage-kitchen,.cottage-bathroom,.shops-market,.shops-boutique) .physical-object .object-model::after{
+  display:none!important;content:none!important;background:none!important;
+  border:0!important;box-shadow:none!important;opacity:0!important
+}
+#room.physical-room.topdown-unified:is(.cottage-living-room,.cottage-kitchen,.cottage-bathroom,.shops-market,.shops-boutique) .physical-object .object-name{
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important
+}
+#room.physical-room.topdown-unified:is(.cottage-living-room,.cottage-kitchen,.cottage-bathroom,.shops-market,.shops-boutique) .physical-object:is(:hover,:focus-visible,.near,.touching) .object-name{
+  opacity:1!important;visibility:visible!important
+}
+#room.physical-room.topdown-unified:is(.cottage-living-room,.cottage-kitchen,.cottage-bathroom,.shops-market,.shops-boutique) .physical-object:is(:hover,:focus-visible,.near,.touching){
+  background:#fff4b51f!important;border-color:#ffe6a6!important;
+  box-shadow:inset 0 0 22px #fff5b22e,0 0 0 3px #7c4e2b7a!important
+}
 .physical-room.scene-integrated-interior .physical-object .object-name{
   display:block!important;left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;
   width:max-content!important;max-width:150px!important;padding:7px 10px!important;
