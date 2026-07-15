@@ -16,7 +16,8 @@ const locations={
 const names=['Emma Brooks','Oliver Baker','Lily Foster','Noah Wilson','Sophia Carter','Henry Green','Ruby Walker','Lucas Reed'];
 const traits=['Cheerful · Gardener','Shy · Book Lover','Friendly · Coffee Lover','Calm · Animal Lover','Funny · Artist','Kind · Retired Baker','Bright · Student','Warm · Teacher'];
 const foods=['Strawberry Cake','Croissant','Apple Pie','Fairy Cupcake','Cinnamon Roll','Peach Tea','Baguette','Berry Smoothie'];
-let state=JSON.parse(localStorage.getItem('honeybell-save')||'null')||{coins:302,stars:12,day:1,minute:540,sound:true,npcs:names.map((name,i)=>({name,trait:traits[i],favorite:foods[i],birthday:1+((i*7+1)%28),friendship:1+(i%3),gifted:false}))};
+let state=JSON.parse(localStorage.getItem('honeybell-save')||'null')||{coins:1000,stars:12,day:1,minute:540,sound:true,startingCoinsGranted:true,npcs:names.map((name,i)=>({name,trait:traits[i],favorite:foods[i],birthday:1+((i*7+1)%28),friendship:1+(i%3),gifted:false}))};
+if(!state.startingCoinsGranted){state.coins=Math.max(1000,state.coins||0);state.startingCoinsGranted=true}
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s); let current='bakery',currentTab='Café';
 function save(){localStorage.setItem('honeybell-save',JSON.stringify(state))} function toast(t){const x=$('#toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),2200)}
 function updateHUD(){ $('#coins').textContent=state.coins;$('#stars').textContent=state.stars;$('#season').textContent=`Spring · Day ${state.day}`; const h=Math.floor(state.minute/60),m=state.minute%60;$('#clock').textContent=`${h>12?h-12:h}:${String(m).padStart(2,'0')} ${h>=12?'PM':'AM'}`;const birthday=state.npcs.some(n=>n.birthday===state.day&&!n.gifted);$('#birthday-dot').style.display=birthday?'block':'none';save() }
