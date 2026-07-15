@@ -1,0 +1,7 @@
+/* Some guests return to the tables after ordering and visibly sit in the pictured chairs. */
+.restaurant-customer.phase-waiting-seated{left:72%!important;top:58%!important;transform:scale(.82)!important;z-index:46!important}
+.restaurant-customer.phase-waiting-seated.seat-right{left:82%!important;top:57%!important;transform:scale(.78)!important}
+.restaurant-customer.phase-waiting-seated .restaurant-customer-puppet{transform:translateY(18px)}
+.restaurant-customer.phase-waiting-seated .puppet-leg{height:25px!important;transform:rotate(76deg) translateY(4px)!important;transform-origin:top!important}
+.restaurant-customer.phase-waiting-seated .puppet-ground-shadow{transform:scaleX(.85) translateY(10px)}
+.restaurant-customer.phase-waiting-seated .customer-order-bubble{right:80%;top:-35px}

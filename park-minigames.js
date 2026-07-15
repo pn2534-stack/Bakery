@@ -5,8 +5,9 @@
   const titles = {
     tic:'Tic-Tac-Toe', fruit:'Fruit Merge', colors:'Color Blocks', water:'Water Sort', words:'Word Finder', numbers:'Number Merge', memory:'Flower Memory', catch:'Butterfly Garden', pattern:'Fairy Pattern'
   };
+  const rewards={tic:25,fruit:30,colors:30,water:35,words:40,numbers:40,memory:35,catch:30,pattern:40};
   const fruitIcons = ['', '🍒', '🍓', '🍊', '🍎', '🍉', '🍍'];
-  let activeGame = null;
+  let activeGame = null, wordPointer={active:false,moved:false,suppressClickUntil:0};
   let tic, fruit, blocks, water, words, numbers, memory, butterfly, pattern;
 
   function gameShell(name, body, instructions = '') {
@@ -19,6 +20,7 @@
     state.minigameWins[game] = (state.minigameWins[game] || 0) + 1;
     state.coins += coins;
     state.stars += 1;
+    window.honeybellSkills?.gain('play',Math.max(8,Math.round(coins/2)));
     updateHUD();
     save();
     toast(`${titles[game]} complete · +${coins} coins · +1 star`);
@@ -28,7 +30,7 @@
     activeGame = null;
     const wins = state.minigameWins || {};
     modal(`<div class="park-game-hub"><div class="park-arcade-title"><small>TEA PAVILION ACTIVITY TABLE</small><h2>Willow Park Mini Games</h2><p>Choose a game. Winning earns coins and a friendship star.</p></div><div class="park-game-grid">
-      ${Object.keys(titles).map(name => `<button data-park-game="${name}"><i>${icons[name]}</i><b>${titles[name]}</b><span>${wins[name] || 0} wins</span></button>`).join('')}
+      ${Object.keys(titles).map(name => `<button data-park-game="${name}"><i>${icons[name]}</i><b>${titles[name]}</b><span>${wins[name] || 0} wins · Reward ${rewards[name]} coins + 1 star</span></button>`).join('')}
       <button class="tea-party-game" data-park-tea-animation><i>🫖</i><b>Tea Party</b><span>Pour, share, and celebrate</span></button>
     </div></div>`);
   }
@@ -95,9 +97,14 @@
   function renderWater(){gameShell('water',`<div class="water-tubes">${water.tubes.map((tube,i)=>`<button data-water-tube="${i}" class="${water.selected===i?'selected':''}"><span>${tube.map(color=>`<i class="water-${color}"></i>`).join('')}</span></button>`).join('')}</div><div class="game-status">${water.over?'Every color is sorted!':'Select a tube, then select where to pour.'}</div>`,'Pour matching colors together. Each glass holds four layers.');}
   function pourWater(index){if(water.over)return;if(water.selected===null){if(water.tubes[index].length){water.selected=index;renderWater()}return}const from=water.tubes[water.selected],to=water.tubes[index],color=from[from.length-1];if(index!==water.selected&&to.length<4&&(!to.length||to[to.length-1]===color)){let count=0;for(let i=from.length-1;i>=0&&from[i]===color;i--)count++;while(count--&&to.length<4)to.push(from.pop())}water.selected=null;if(waterWon()){water.over=true;award('water',35)}renderWater();}
 
-  function startWords(){const targets=['BERRY','CAKE','FAIRY','TEA','PARK','DUCK'],size=8,grid=Array(size*size).fill('');const placements=[[0,0,0,1],[1,6,1,0],[2,1,1,1],[7,0,0,1],[4,3,0,1],[0,7,1,-1]];targets.forEach((word,w)=>{const [r,c,dr,dc]=placements[w];[...word].forEach((letter,i)=>grid[(r+dr*i)*size+c+dc*i]=letter)});const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ';words={targets,found:[],grid:grid.map(letter=>letter||alphabet[Math.floor(Math.random()*alphabet.length)]),selected:[]};renderWords();}
-  function renderWords(){gameShell('words',`<div class="word-list">${words.targets.map(word=>`<span class="${words.found.includes(word)?'found':''}">${word}</span>`).join('')}</div><div class="word-grid">${words.grid.map((letter,i)=>`<button data-word-cell="${i}" class="${words.selected.includes(i)?'selected':''}">${letter}</button>`).join('')}</div><div class="game-status">Select neighboring letters in order to find each word.</div>`,'Find BERRY, CAKE, FAIRY, TEA, PARK, and DUCK in the letter garden.');}
+  function startWords(){const targets=['BERRY','CAKE','FAIRY','TEA','PARK','DUCK'],size=8,grid=Array(size*size).fill('');const placements=[[0,0,0,1],[1,6,1,0],[2,1,1,1],[7,0,0,1],[4,3,0,1],[0,7,1,-1]];targets.forEach((word,w)=>{const [r,c,dr,dc]=placements[w];[...word].forEach((letter,i)=>grid[(r+dr*i)*size+c+dc*i]=letter)});const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ';words={targets,found:[],foundPaths:[],grid:grid.map(letter=>letter||alphabet[Math.floor(Math.random()*alphabet.length)]),selected:[]};wordPointer={active:false,moved:false,suppressClickUntil:0};renderWords();}
+  function renderWords(){const foundCells=new Set((words.foundPaths||[]).flat());gameShell('words',`<div class="word-list">${words.targets.map(word=>`<span class="${words.found.includes(word)?'found':''}">${word}</span>`).join('')}</div><div class="word-grid ${wordPointer.active?'dragging':''}">${words.grid.map((letter,i)=>`<button data-word-cell="${i}" class="${words.selected.includes(i)?'selected':''} ${foundCells.has(i)?'found-letter':''}">${letter}</button>`).join('')}</div><div class="game-status" data-word-status>${words.selected.length?`Highlighting ${words.selected.map(i=>words.grid[i]).join('')}`:'Press a letter, drag across the word, then release.'}</div>`,'Find BERRY, CAKE, FAIRY, TEA, PARK, and DUCK. Drag forward or backward; found words stay highlighted.');}
   function selectLetter(index){if(!words.selected.length){words.selected=[index];renderWords();return}const last=words.selected.at(-1),lr=Math.floor(last/8),lc=last%8,r=Math.floor(index/8),c=index%8;if(words.selected.includes(index)||Math.max(Math.abs(r-lr),Math.abs(c-lc))!==1){words.selected=[index];renderWords();return}words.selected.push(index);const value=words.selected.map(i=>words.grid[i]).join('');const possible=words.targets.find(word=>!words.found.includes(word)&&word.startsWith(value));if(!possible){words.selected=[index]}else if(possible===value){words.found.push(value);words.selected=[];if(words.found.length===words.targets.length)award('words',40)}renderWords();}
+  function wordNeighbor(a,b){const ar=Math.floor(a/8),ac=a%8,br=Math.floor(b/8),bc=b%8;return Math.max(Math.abs(ar-br),Math.abs(ac-bc))===1}
+  function paintWordDrag(){const selected=new Set(words.selected),found=new Set((words.foundPaths||[]).flat());document.querySelectorAll('[data-word-cell]').forEach((cell,index)=>{cell.classList.toggle('selected',selected.has(index));cell.classList.toggle('found-letter',found.has(index))});const status=document.querySelector('[data-word-status]');if(status)status.textContent=words.selected.length?`Highlighting ${words.selected.map(i=>words.grid[i]).join('')}`:'Drag across a word'}
+  function beginWordDrag(index){wordPointer.active=true;wordPointer.moved=false;words.selected=[index];document.querySelector('.word-grid')?.classList.add('dragging');paintWordDrag()}
+  function extendWordDrag(index){if(!wordPointer.active||words.selected.at(-1)===index)return;const previous=words.selected.at(-2);if(previous===index){words.selected.pop();wordPointer.moved=true;paintWordDrag();return}if(words.selected.includes(index)||!wordNeighbor(words.selected.at(-1),index))return;words.selected.push(index);wordPointer.moved=true;paintWordDrag()}
+  function finishWordDrag(){if(!wordPointer.active)return;wordPointer.active=false;document.querySelector('.word-grid')?.classList.remove('dragging');if(!wordPointer.moved){paintWordDrag();return}wordPointer.suppressClickUntil=performance.now()+450;const path=[...words.selected],value=path.map(i=>words.grid[i]).join(''),reverse=[...value].reverse().join(''),match=words.targets.find(word=>!words.found.includes(word)&&(word===value||word===reverse));if(match){words.found.push(match);words.foundPaths.push(path);toast(`${match} found · ${words.found.length}/${words.targets.length}`);if(words.found.length===words.targets.length)award('words',40)}else toast(`${value||'That path'} is not one of the hidden words`);words.selected=[];renderWords()}
 
   function spawnNumber(){const empty=numbers.cells.map((v,i)=>v?null:i).filter(i=>i!==null);if(empty.length)numbers.cells[empty[Math.floor(Math.random()*empty.length)]]=Math.random()<.9?2:4;}
   function startNumbers(){numbers={cells:Array(16).fill(0),score:0,rewarded:false};spawnNumber();spawnNumber();renderNumbers();}

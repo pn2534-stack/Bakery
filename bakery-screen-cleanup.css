@@ -3,7 +3,8 @@
 .physical-room.clean-bakery-gameplay .physical-window,
 .physical-room.clean-bakery-gameplay .curtain,
 .physical-room.clean-bakery-gameplay .hanging-plants,
-.physical-room.clean-bakery-gameplay .menu-board{display:none!important}
+.physical-room.clean-bakery-gameplay .menu-board,
+.physical-room.clean-bakery-gameplay .organized-rug{display:none!important}
 .physical-room.clean-bakery-gameplay .physical-stage{inset:7% 27% 8% 1%!important}
 .physical-room.clean-bakery-gameplay .physical-object{border:2px solid transparent!important;border-radius:18px!important;background:transparent!important;box-shadow:none!important;outline:0!important;opacity:1!important;transform:none!important}
 .physical-room.clean-bakery-gameplay .physical-object .object-model{display:none!important;opacity:0!important;background:none!important;border:0!important;box-shadow:none!important;outline:0!important;filter:none!important}

@@ -67,6 +67,8 @@
   <link rel="stylesheet" href="serving-counter.css" />
   <link rel="stylesheet" href="park-minigames-extra.css" />
   <link rel="stylesheet" href="bakery-cleaning.css" />
+  <link rel="stylesheet" href="npc-seating.css" />
+  <link rel="stylesheet" href="player-skills.css" />
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js"></script>
 </head>
 <body>
@@ -100,7 +102,7 @@
     <header class="topbar glass">
       <button class="brand" data-action="home" aria-label="Return to village"><span class="brand-mark">HB</span><span><b>Honeybell</b><small>BAKERY & VILLAGE</small></span></button>
       <div class="day-pill"><span class="sun">☀</span><span><b id="season">Spring · Day 1</b><small id="clock">9:00 AM</small></span></div>
-      <div class="resources"><span title="Coins">◉ <b id="coins">1000</b></span><span title="Friendship stars">✦ <b id="stars">12</b></span><button class="round" data-action="calendar" aria-label="Open calendar">▦</button><button class="round sound" data-action="sound" aria-label="Toggle ambient sound">♪</button></div>
+      <div class="resources"><span title="Coins">◉ <b id="coins">1000</b></span><span title="Friendship stars">✦ <b id="stars">12</b></span><button class="round" data-action="skills" aria-label="Open player skills">★</button><button class="round" data-action="calendar" aria-label="Open calendar">▦</button><button class="round sound" data-action="sound" aria-label="Toggle ambient sound">♪</button></div>
     </header>
 
     <main id="world" class="world scene active" aria-label="Honeybell village world map">
@@ -193,5 +195,6 @@
   <script src="home-park-activities.js"></script>
   <script src="shelf-image-assets.js"></script>
   <script src="bakery-screen-cleanup.js"></script>
+  <script src="player-skills.js"></script>
 </body>
 </html>

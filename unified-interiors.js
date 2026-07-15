@@ -112,6 +112,7 @@
   };
 
   document.addEventListener('keydown', event => {
+    if (event.target.matches?.('input,textarea,select') || event.target.isContentEditable) return;
     if (!isRoomActive() || isBedroom()) return;
     const movement = {
       arrowup: [0, -2.4], w: [0, -2.4], arrowdown: [0, 2.4], s: [0, 2.4],

@@ -9,7 +9,7 @@
     ['Take the order','Let a customer reach the counter, then select them to add their request to the order queue.'],
     ['Gather real groceries','Open the order checklist, choose “Collect ingredients,” and enter the kitchen. Walk to every glowing pantry, fridge, fruit basket, or tea shelf and press E or Space. Watch each count change from 0/2 to 2/2.'],
     ['Prepare the recipe','Select the food or drink task in the checklist. The correct station glows. Walk to it, press E or Space, and finish every cooking step.'],
-    ['Serve your customer','Finished batches appear in the Serving counter. Click each ordered food or drink to place it on the tray, then choose “Serve customer” before the 5:00 timer reaches zero.']
+    ['Serve your customer','Collect the finished batch after cooking. It appears on the physical Serving Table in the kitchen. Click each ordered food or drink onto the tray, return to the café, then choose “Serve customer” before the 5:00 timer reaches zero.']
   ];
   const introSteps=[
     {icon:'🌸',title:'Welcome to Honeybell!',text:"I’m Poppy, your village guide. We’ll practice the important controls together. You can reopen this guide at any time.",tip:'Follow the glowing prompts—there is no time limit while exploring.'},
