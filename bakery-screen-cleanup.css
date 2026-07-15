@@ -4,7 +4,9 @@
 .physical-room.clean-bakery-gameplay .curtain,
 .physical-room.clean-bakery-gameplay .hanging-plants,
 .physical-room.clean-bakery-gameplay .menu-board,
-.physical-room.clean-bakery-gameplay .organized-rug{display:none!important}
+.physical-room.clean-bakery-gameplay .organized-room-decor,
+.physical-room.clean-bakery-gameplay .finished-cookie-product,
+.physical-room.clean-bakery-gameplay .finished-pie-product{display:none!important}
 .physical-room.clean-bakery-gameplay .physical-stage{inset:7% 27% 8% 1%!important}
 .physical-room.clean-bakery-gameplay .physical-object{border:2px solid transparent!important;border-radius:18px!important;background:transparent!important;box-shadow:none!important;outline:0!important;opacity:1!important;transform:none!important}
 .physical-room.clean-bakery-gameplay .physical-object .object-model{display:none!important;opacity:0!important;background:none!important;border:0!important;box-shadow:none!important;outline:0!important;filter:none!important}
@@ -35,3 +37,41 @@
 .physical-room.clean-bakery-gameplay .unified-room-controls{right:12px!important;bottom:10px!important;max-width:25%;white-space:normal!important;font-size:9px!important}
 .physical-room.clean-bakery-gameplay .tutorial-reopen{left:14px!important;bottom:14px!important}
 @media(max-width:1050px){.physical-room.clean-bakery-gameplay .physical-stage{right:35%!important}.physical-room.clean-bakery-gameplay .restaurant-hud{width:34%!important}.physical-room.clean-bakery-gameplay .unified-room-controls{display:none!important}}
+
+/* Scene-integrated rooms use the furniture painted into their background.
+   DOM furniture remains as accessible interaction/collision hit areas. */
+.physical-room.scene-integrated-interior .bedroom-style-architecture,
+.physical-room.scene-integrated-interior .physical-window,
+.physical-room.scene-integrated-interior .curtain,
+.physical-room.scene-integrated-interior .hanging-plants,
+.physical-room.scene-integrated-interior .menu-board,
+.physical-room.scene-integrated-interior .organized-room-decor{display:none!important}
+.physical-room.scene-integrated-interior .physical-stage{inset:0!important;overflow:visible!important}
+.physical-room.scene-integrated-interior .physical-object,
+#room.physical-room.scene-integrated-interior .physical-stage>.physical-object,
+#room.physical-room.scene-integrated-interior .physical-stage>.physical-object.bedroom-style-furniture{
+  margin:0!important;transform:none!important;border:2px solid transparent!important;
+  border-radius:18px!important;background:transparent!important;box-shadow:none!important;
+  filter:none!important;outline:0!important;opacity:1!important
+}
+.physical-room.scene-integrated-interior .physical-object .object-model,
+.physical-room.scene-integrated-interior .physical-object .object-model::before,
+.physical-room.scene-integrated-interior .physical-object .object-model::after,
+.physical-room.scene-integrated-interior .physical-object::before,
+.physical-room.scene-integrated-interior .physical-object::after{
+  display:none!important;content:none!important;opacity:0!important;background:transparent!important;
+  border:0!important;box-shadow:none!important;filter:none!important
+}
+.physical-room.scene-integrated-interior .physical-object .object-name{
+  display:block!important;left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;
+  width:max-content!important;max-width:150px!important;padding:7px 10px!important;
+  opacity:0!important;visibility:hidden!important;transform:translate(-50%,-50%) translateY(7px)!important;
+  pointer-events:none!important;transition:opacity .18s,transform .18s!important
+}
+.physical-room.scene-integrated-interior .physical-object:is(:hover,:focus-visible,.near,.touching) .object-name{
+  opacity:1!important;visibility:visible!important;transform:translate(-50%,-50%)!important
+}
+.physical-room.scene-integrated-interior .physical-object:is(:hover,:focus-visible,.near,.touching){
+  border-color:#ffe6a6!important;background:#fff4b51f!important;
+  box-shadow:inset 0 0 22px #fff5b22e,0 0 0 3px #7c4e2b7a!important
+}

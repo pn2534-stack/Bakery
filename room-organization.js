@@ -31,6 +31,16 @@
     const shell=room?.querySelector('.physical-shell');
     const stage=room?.querySelector('.physical-stage');
     if(!room||!shell||!stage||room.classList.contains('topdown-bedroom')||current==='park'||(current==='cottage'&&currentTab==='Exterior'))return;
+
+    // Illustrated interiors already receive carefully matched hit boxes from
+    // image-interactions/all-interiors.  Do not replace those positions with
+    // the old generic furniture grid or add duplicate scenery over the art.
+    if(stage.classList.contains('image-hit-stage')){
+      room.classList.remove('organized-interior');
+      room.classList.add('scene-integrated-interior');
+      shell.querySelector('.organized-room-decor')?.remove();
+      return;
+    }
     room.classList.add('organized-interior');
     addDecor(shell);
     const objects=[...stage.querySelectorAll(':scope > .physical-object')];
