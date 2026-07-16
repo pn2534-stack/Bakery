@@ -61,7 +61,7 @@
   };
   const stationRecipes = {
     'Bread station':['White Bread','Cinnamon Rolls','Pumpkin Bread','Hazel’s Heirloom Buns'], 'Pastry station':['Croissant','Blueberry Muffins','Apple Pie','Raspberry Scones','Cherry Tart','Honeybell Berry Danish'],
-    'Cake station':['Strawberry Cake','Chocolate Cake','Red Velvet Cake','Cookies & Cream Cake','Dubai Chocolate Cake','Lily’s Berry Birthday Cake','Festival Honey Cake'], 'Cupcake station':['Lemon Cupcakes','Cake Pops','Red Velvet Cake Pops'],
+    'Cake station':['Strawberry Cake','Chocolate Cake','Red Velvet Cake','Cookies & Cream Cake','Dubai Chocolate Cake','Lily’s Berry Birthday Cake','Festival Honey Cake'], 'Cupcake station':['Lemon Cupcakes'],
     'Cookie station':['Cookies','Biscoff Cookies','Cookies & Cream Cookies','Marshmallow Cookies','Red Velvet Cookies','Oat Honey Cookies','Matcha Cookies','Classic Brownies','Biscoff Brownies','Red Velvet Brownies','Professor Maple’s Tea Cookies','Rose Garden Macarons'], 'Pie station':['Apple Pie','Cherry Tart'],
     'Donut & muffin station':['Glazed Donuts','Strawberry Donuts','Biscoff Donuts','Blueberry Muffins','Chocolate Chip Muffins','Lemon Poppy Muffins'],
     'Snack station':['Cake Pops','Red Velvet Cake Pops','Fruit Cake Popsicles','Biscoff Cake Popsicles'],
