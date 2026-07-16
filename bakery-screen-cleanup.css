@@ -118,3 +118,30 @@
   border-color:#ffe6a6!important;background:#fff4b51f!important;
   box-shadow:inset 0 0 22px #fff5b22e,0 0 0 3px #7c4e2b7a!important
 }
+
+/* Pet and furniture shop artwork already contains every shelf and display.
+   Their DOM objects are interaction geometry only, never visible furniture. */
+#room.physical-room.scene-integrated-interior:is(.shops-pet-shop,.shops-furniture) .physical-stage>.physical-object,
+#room.physical-room.topdown-unified:is(.shops-pet-shop,.shops-furniture) .physical-stage>.physical-object{
+  background:transparent!important;background-image:none!important;
+  border:2px solid transparent!important;box-shadow:none!important;
+  outline:0!important;filter:none!important;opacity:1!important
+}
+#room.physical-room:is(.shops-pet-shop,.shops-furniture) .physical-stage>.physical-object::before,
+#room.physical-room:is(.shops-pet-shop,.shops-furniture) .physical-stage>.physical-object::after,
+#room.physical-room:is(.shops-pet-shop,.shops-furniture) .physical-stage>.physical-object>.object-model,
+#room.physical-room:is(.shops-pet-shop,.shops-furniture) .physical-stage>.physical-object>.object-model::before,
+#room.physical-room:is(.shops-pet-shop,.shops-furniture) .physical-stage>.physical-object>.object-model::after{
+  display:none!important;content:none!important;background:none!important;
+  border:0!important;box-shadow:none!important;opacity:0!important
+}
+#room.physical-room:is(.shops-pet-shop,.shops-furniture) .physical-stage>.physical-object>.object-name{
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important
+}
+#room.physical-room:is(.shops-pet-shop,.shops-furniture) .physical-stage>.physical-object:is(:hover,:focus-visible,.near,.touching)>.object-name{
+  opacity:1!important;visibility:visible!important
+}
+
+/* Finished batches are collected in the HUD serving counter.  Do not place a
+   second panel over kitchen stations or their interaction areas. */
+.physical-room.bakery-kitchen .physical-serving-table{display:none!important;pointer-events:none!important}

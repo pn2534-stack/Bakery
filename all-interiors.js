@@ -9,7 +9,7 @@
     'cottage|Kitchen':{'Refrigerator':[20,14,14,34],'Stove':[46,19,13,26],'Sink':[64,18,16,25],'Cabinets':[75,22,20,28],'Dining table':[36,45,24,27],'Pantry':[88,14,11,34],'Tea kettle':[49,20,7,12],'Coffee machine':[78,21,9,15]},
     'cottage|Bedroom':{'Cottage bed':[24,22,36,42],'Nightstand':[17,34,10,22],'Wardrobe':[52,10,17,34],'Vanity':[75,22,17,28],'Mirror':[66,13,10,30],'Window plant':[4,19,17,34]},
     'cottage|Bathroom':{'Shower':[53,14,24,41],'Sink':[15,27,22,29],'Toilet':[82,42,13,28],'Towel rack':[39,31,12,24]},
-    'shops|Furniture':{'Living room display':[4,24,28,27],'Bedroom display':[43,8,22,28],'Kitchen display':[67,15,22,30],'Bathroom display':[84,37,15,25],'Garden display':[0,55,25,32],'Pet furniture':[66,55,25,31]},
+    'shops|Furniture':{'Living room display':[4,17,27,26],'Bedroom display':[67,5,27,25],'Kitchen display':[35,3,25,25],'Bathroom display':[84,31,14,27],'Garden display':[2,47,27,31],'Pet furniture':[59,50,25,30]},
     'shops|Boutique':{'Women clothing':[36,34,18,26],'Men clothing':[55,35,19,25],'Shoes':[35,54,25,18],'Accessories':[8,37,20,25],'Hats':[5,29,20,22],'Jewelry':[80,43,18,24],'Changing room':[42,13,16,24],'Mirror':[22,22,11,32],'Cashier':[64,17,18,24]},
     'park|Pavilion':{'Tea tables':[35,38,22,25],'Tea set':[59,38,10,18],'Cake stand':[71,38,10,18],'Mini games':[82,22,15,22]},
     'park|Gardens':{'Flower garden':[35,31,25,26],'Butterfly garden':[60,27,22,25],'Walking trail':[37,49,27,32],'Duck pond':[0,48,28,37],'Playground':[66,7,22,27],'Picnic blanket':[67,55,21,23],'Food stand':[83,34,16,28]},

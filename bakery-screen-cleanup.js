@@ -42,6 +42,10 @@
     const objects=[...room.querySelectorAll('.physical-object')],saved=state.bakeryDesign?.layouts?.[`${current}|${currentTab}`]||{};
     objects.forEach((object,index)=>{
       const label=object.querySelector('.object-name'),name=label?.querySelector('span')?.textContent.trim()||label?.textContent.trim()||'',box=layout[name];
+      // Finished food is collected from the dedicated HUD counter. Removing
+      // this duplicate room hotspot prevents it intercepting Packaging or
+      // another nearby station.
+      if(currentTab==='Kitchen'&&name==='Serving table'){object.remove();return}
       object.dataset.overlayHit='true';
       delete object.dataset.visibleShelf;
       delete object.dataset.shelfArt;

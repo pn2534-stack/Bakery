@@ -264,5 +264,5 @@
   const previousKitchenRender=renderRoom;
   renderRoom=function(){previousKitchenRender();if(current==='bakery'&&currentTab==='Kitchen'&&(state.stock['Apple Pie']||0)>0)document.querySelector('.physical-shell')?.insertAdjacentHTML('beforeend','<div class="finished-pie-product" role="img" aria-label="One finished apple pie on the serving table"></div>');};
   const previousInteract=interactPhysical;
-  interactPhysical=function(element){if(current==='bakery'&&currentTab==='Kitchen'){const action=element.dataset.actionName||'',name=element.querySelector('.object-name')?.textContent||'';if(/Bake|Coffee|Tea|Smoothie|Oven|Bread|Pastry|Cake|Cupcake|Cookie|Pie|Blend/i.test(`${action} ${name}`)){openCooking(`${action} ${name}`);return;}}previousInteract(element);};
+  interactPhysical=function(element){if(current==='bakery'&&currentTab==='Kitchen'){const action=element.dataset.actionName||'',name=element.querySelector('.object-name')?.textContent||'';if(/Bake|Make|Coffee|Tea|Smoothie|Oven|Bread|Pastry|Cake|Cupcake|Cookie|Pie|Blend|Sandwich|Donut|Muffin|Snack|Ice cream/i.test(`${action} ${name}`)){openCooking(name||action);return;}}previousInteract(element);};
 })();
