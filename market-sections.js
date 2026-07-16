@@ -1,13 +1,13 @@
 (()=>{
-  const ingredientInfo={Flour:[8,'🌾'],Eggs:[6,'🥚'],Milk:[7,'🥛'],Sugar:[5,'🍚'],Butter:[9,'🧈'],Honey:[10,'🍯'],Strawberries:[12,'🍓'],Apples:[10,'🍎'],Blueberries:[13,'🫐'],Peaches:[12,'🍑'],Lemons:[9,'🍋'],Chocolate:[14,'🍫'],Cocoa:[12,'🟤'],Cinnamon:[8,'🧂'],Vanilla:[14,'🌼'],Cream:[10,'🥛'],Yogurt:[9,'🥣'],Oats:[7,'🌾'],Nuts:[13,'🥜'],Caramel:[15,'🍮'],'Tea Leaves':[10,'🍃'],'Coffee Beans':[12,'☕'],Raspberries:[13,'🍇'],Pumpkin:[11,'🎃'],Cherries:[14,'🍒'],Mango:[13,'🥭'],Coconut:[12,'🥥'],Mint:[8,'🌿'],Matcha:[15,'🍵'],'Brown Sugar':[8,'🟫'],'Baking Powder':[7,'🥄'],'Surface Spray':[10,'🧴'],'Dish Soap':[8,'🫧'],Sponges:[6,'🧽'],'Floor Cleaner':[12,'🪣'],'Trash Bags':[7,'🗑️']};
+  const ingredientInfo={Flour:[8,'🌾'],Eggs:[6,'🥚'],Milk:[7,'🥛'],Sugar:[5,'🍚'],Butter:[9,'🧈'],Honey:[10,'🍯'],Strawberries:[12,'🍓'],Apples:[10,'🍎'],Blueberries:[13,'🫐'],Peaches:[12,'🍑'],Lemons:[9,'🍋'],Chocolate:[14,'🍫'],Cocoa:[12,'🟤'],Cinnamon:[8,'🧂'],Vanilla:[14,'🌼'],Cream:[10,'🥛'],Yogurt:[9,'🥣'],Oats:[7,'🌾'],Nuts:[13,'🥜'],Caramel:[15,'🍮'],'Tea Leaves':[10,'🍃'],'Coffee Beans':[12,'☕'],Raspberries:[13,'🍇'],Pumpkin:[11,'🎃'],Cherries:[14,'🍒'],Mango:[13,'🥭'],Coconut:[12,'🥥'],Mint:[8,'🌿'],Matcha:[15,'🍵'],'Brown Sugar':[8,'🟫'],'Baking Powder':[7,'🥄'],Biscoff:[14,'🍪'],'Chocolate Cookies':[13,'🍪'],Marshmallows:[9,'☁️'],Pistachios:[18,'🥜'],'Poppy Seeds':[8,'🌱'],Bread:[7,'🍞'],Cucumber:[8,'🥒'],Herbs:[7,'🌿'],Tomatoes:[9,'🍅'],Cheese:[12,'🧀'],Chicken:[15,'🍗'],Lettuce:[8,'🥬'],'Surface Spray':[10,'🧴'],'Dish Soap':[8,'🫧'],Sponges:[6,'🧽'],'Floor Cleaner':[12,'🪣'],'Trash Bags':[7,'🗑️']};
   const aisles={
-    'Fresh produce':['Strawberries','Apples','Blueberries','Peaches','Lemons','Raspberries','Pumpkin','Cherries','Mango','Coconut','Mint'],
-    'Milk and eggs':['Eggs','Milk','Butter','Cream','Yogurt'],
-    'Flour and sugar':['Flour','Sugar','Oats','Brown Sugar','Baking Powder'],
-    'Chocolate':['Chocolate','Cocoa','Caramel','Vanilla'],
+    'Fresh produce':['Strawberries','Apples','Blueberries','Peaches','Lemons','Raspberries','Pumpkin','Cherries','Mango','Coconut','Mint','Cucumber','Herbs','Tomatoes','Lettuce'],
+    'Milk and eggs':['Eggs','Milk','Butter','Cream','Yogurt','Cheese','Chicken'],
+    'Flour and sugar':['Flour','Sugar','Oats','Brown Sugar','Baking Powder','Bread','Poppy Seeds'],
+    'Chocolate':['Chocolate','Cocoa','Caramel','Vanilla','Biscoff','Chocolate Cookies','Marshmallows','Pistachios'],
     'Tea and coffee':['Tea Leaves','Coffee Beans','Honey','Cinnamon','Mint','Matcha'],
     'Frozen foods':['Strawberries','Blueberries','Cream','Yogurt'],
-    'Bakery supplies':['Nuts','Cinnamon','Vanilla','Caramel','Brown Sugar','Baking Powder','Matcha'],
+    'Bakery supplies':['Nuts','Cinnamon','Vanilla','Caramel','Brown Sugar','Baking Powder','Matcha','Biscoff','Chocolate Cookies','Marshmallows','Pistachios','Poppy Seeds'],
     'Cleaning supplies':['Surface Spray','Dish Soap','Sponges','Floor Cleaner','Trash Bags'],
     'Decorations':[]
   };

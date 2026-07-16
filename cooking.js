@@ -81,12 +81,16 @@
   let measureTimer = null, measureLockTimer = null;
 
   function freshCook(recipe, category) {
-    return {recipe,category,stage:'intro',measureIndex:0,measureScores:[],techniqueScores:[],ovenScores:[],decorateScores:[],pipeHits:new Set(),pipePoints:[],kneadExpected:'left',kneadTaps:0,lastKnead:0,spent:false,result:null,collected:false};
+    const requested=window.requestedBakerySize,drink=recipes2[recipe]?.type==='drink'||recipes2[recipe]?.type==='frozen';
+    const size=requested||(drink?'Medium':'Regular');window.requestedBakerySize=null;
+    return {recipe,category,size,stage:'intro',measureIndex:0,measureScores:[],techniqueScores:[],ovenScores:[],decorateScores:[],pipeHits:new Set(),pipePoints:[],kneadExpected:'left',kneadTaps:0,lastKnead:0,spent:false,result:null,collected:false};
   }
   function skillLevel() { return Math.min(10, 1 + Math.floor((state.bakingSkill.xp || 0) / 120)); }
   function skillProgress() { return (state.bakingSkill.xp || 0) % 120; }
   function available(name) { return state.inventory[name] || 0; }
-  function canBake(recipe) { return Object.entries(recipe.needs).every(([name,amount]) => available(name) >= amount); }
+  function sizeFactor(){return /Mini|Small/.test(cook.size) ? .75 : /Large/.test(cook.size) ? 1.5 : 1}
+  function sizedAmount(amount){return Math.max(1,Math.ceil(amount*sizeFactor()))}
+  function canBake(recipe) { return Object.entries(recipe.needs).every(([name,amount]) => available(name) >= sizedAmount(amount)); }
   function isUnlocked(name) { const recipe=recipes2[name];return (!recipe?.level||skillLevel()>=recipe.level)&&(!recipe?.unlock||(state.unlockedRecipes||[]).includes(recipe.unlock)); }
   function isDough(name) { return /Bread|Croissant|Cinnamon Roll|Bun|Pie/.test(name); }
   function needsDecorating(name) { return /Cake|Cupcake|Cookie|Muffin|Pie/.test(name); }
@@ -111,7 +115,7 @@
     if (cook.spent) return true;
     const recipe = recipes2[cook.recipe];
     if (!canBake(recipe)) return false;
-    Object.entries(recipe.needs).forEach(([name,amount]) => state.inventory[name] -= amount);
+    Object.entries(recipe.needs).forEach(([name,amount]) => state.inventory[name] -= sizedAmount(amount));
     cook.spent = true; save(); return true;
   }
   function percent(score) { return Math.round((score || 0) * 100); }
@@ -147,7 +151,7 @@
 
   function stageMarkup() {
     const recipe = recipes2[cook.recipe];
-    if (cook.stage === 'intro') return `<section class="skill-intro"><div class="recipe-hero ${recipe.type}"><i></i></div><h3>${cook.recipe}</h3><p>${recipe.type==='bake'?'Measure, prepare, bake and finish this recipe by hand.':'Measure and prepare this drink by hand.'}</p><div class="ingredient-check">${Object.entries(recipe.needs).map(([name,amount])=>`<span class="${available(name)>=amount?'ready':'missing'}"><b>${name}</b>${available(name)} / ${amount}</span>`).join('')}</div><button class="skill-primary" data-start-batch ${canBake(recipe)?'':'disabled'}>${canBake(recipe)?'Start interactive batch':'Buy missing ingredients first'}</button></section>`;
+    if (cook.stage === 'intro') {const sizes=recipe.type==='drink'||recipe.type==='frozen'?['Small','Medium','Large']:['Mini','Regular','Large'];return `<section class="skill-intro"><div class="recipe-hero ${recipe.type}"><i></i></div><h3>${cook.recipe}</h3><p>${recipe.type==='bake'?'Measure, prepare, bake and finish this recipe by hand.':'Measure and prepare this item by hand.'}</p><div class="bakery-size-picker"><b>Choose size</b>${sizes.map(size=>`<button data-batch-size="${size}" class="${cook.size===size?'active':''}" ${cook.spent?'disabled':''}>${size}</button>`).join('')}</div><div class="ingredient-check">${Object.entries(recipe.needs).map(([name,amount])=>{const needed=sizedAmount(amount);return`<span class="${available(name)>=needed?'ready':'missing'}"><b>${name}</b>${available(name)} / ${needed}</span>`}).join('')}</div><button class="skill-primary" data-start-batch ${canBake(recipe)?'':'disabled'}>${canBake(recipe)?`Start ${cook.size.toLowerCase()} batch`:'Buy missing ingredients first'}</button></section>`;}
     if (cook.stage === 'measure') {
       const entries = Object.entries(recipe.needs), [name,amount] = entries[cook.measureIndex] || entries.at(-1);
       const target = 43 + (cook.measureIndex * 11) % 34, tolerance = 7 + skillLevel();
@@ -242,6 +246,7 @@
   document.addEventListener('input',event=>{if(event.target.matches('[data-oven-temp]'))document.querySelector('[data-temp-output]').textContent=`${event.target.value}°F`;});
   document.addEventListener('click',event=>{
     const button=event.target.closest('button'); if(!button)return;
+    if(button.dataset.batchSize){cook.size=button.dataset.batchSize;renderCook();return;}
     if(button.dataset.skillRecipe){clearInterval(cook.ovenInterval);cook=freshCook(button.dataset.skillRecipe,Object.keys(stationRecipes).find(key=>stationRecipes[key].includes(button.dataset.skillRecipe))||cook.category);renderCook();return;}
     if(button.dataset.startBatch!==undefined){if(!spendIngredients())return;cook.stage='measure';renderCook();return;}
     if(button.dataset.mixHit!==undefined){const cycle=1600,phase=((performance.now()-(cook.mixStarted||(cook.mixStarted=performance.now())))%cycle)/cycle,position=phase<.5?phase*200:(1-phase)*200;const error=Math.max(0,Math.abs(position-50)-skillLevel()*1.3);cook.techniqueScores.push(Math.max(0,1-error/50));if(cook.techniqueScores.length>=4)nextAfterTechnique();else{renderCook();cook.mixStarted=performance.now();}return;}
@@ -251,7 +256,7 @@
     if(button.dataset.decoration!==undefined){cook.decorations=cook.decorations||new Set();cook.decorations.add(+button.dataset.decoration);button.classList.add('placed');const finish=document.querySelector('[data-finish-decorate]');if(finish)finish.disabled=cook.decorations.size<5;return;}
     if(button.dataset.finishDecorate!==undefined){nextAfterDecorate();return;}
     if(button.dataset.finishPipe!==undefined){cook.decorateScores.push(cook.pipeHits.size/8);finishBatch();return;}
-    if(button.dataset.collectBatch!==undefined&&!cook.collected){const score=cook.result.score;state.stock[cook.recipe]=(state.stock[cook.recipe]||0)+3;state.stockQuality[cook.recipe]=state.stockQuality[cook.recipe]||[];state.stockQuality[cook.recipe].push(score,score,score);state.bakingSkill.xp+=cook.result.xp;state.bakingSkill.batches++;state.bakingSkill.best=Math.max(state.bakingSkill.best||0,score);state.minute+=recipes2[cook.recipe].minutes;state.energy=Math.max(0,(state.energy||100)-4);cook.collected=true;updateHUD();save();toast(`${grade(score)[0]} ${cook.recipe} · +3 stock`);renderCook();return;}
+    if(button.dataset.collectBatch!==undefined&&!cook.collected){const score=cook.result.score;state.stock[cook.recipe]=(state.stock[cook.recipe]||0)+3;state.stockQuality[cook.recipe]=state.stockQuality[cook.recipe]||[];state.stockQuality[cook.recipe].push(score,score,score);state.stockSizes=state.stockSizes||{};state.stockSizes[cook.recipe]=state.stockSizes[cook.recipe]||[];state.stockSizes[cook.recipe].push(cook.size,cook.size,cook.size);state.bakingSkill.xp+=cook.result.xp;state.bakingSkill.batches++;state.bakingSkill.best=Math.max(state.bakingSkill.best||0,score);state.minute+=recipes2[cook.recipe].minutes;state.energy=Math.max(0,(state.energy||100)-4);cook.collected=true;updateHUD();save();toast(`${grade(score)[0]} ${cook.size} ${cook.recipe} · +3 stock`);renderCook();return;}
     if(button.dataset.bakeAgain!==undefined){cook=freshCook(cook.recipe,cook.category);renderCook();}
   });
 
