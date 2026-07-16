@@ -1,0 +1,143 @@
+/*
+ * Cottage living-room outline proof of concept.
+ * Existing .physical-object buttons remain the interaction and proximity
+ * authority; this layer is presentation-only and never receives input.
+ */
+#room.cottage-living-room.cottage-outline-room .physical-shell {
+  isolation: isolate;
+}
+
+#room.cottage-living-room.cottage-outline-room .cottage-outline-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 16;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#room.cottage-living-room.cottage-outline-room
+  .cottage-outline-overlay [data-hotspot-key] {
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+#room.cottage-living-room.cottage-outline-room
+  .cottage-outline-overlay path.traced-silhouette {
+  fill: rgba(255, 252, 238, 0.008);
+  stroke: rgba(255, 253, 239, 0.78);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  filter:
+    drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))
+    drop-shadow(0 1px 3px rgba(62, 39, 24, 0.42));
+  transition:
+    opacity 160ms ease,
+    stroke 160ms ease,
+    fill 160ms ease,
+    filter 160ms ease;
+}
+
+#room.cottage-living-room.cottage-outline-room
+  .cottage-outline-overlay [data-hotspot-key].is-active {
+  opacity: 1;
+}
+
+#room.cottage-living-room.cottage-outline-room
+  .cottage-outline-overlay path.traced-silhouette.is-active {
+  fill: rgba(255, 245, 183, 0.035);
+  stroke: rgba(255, 252, 220, 0.98);
+  filter:
+    drop-shadow(0 0 3px rgba(255, 255, 255, 0.82))
+    drop-shadow(0 0 8px rgba(255, 232, 157, 0.62))
+    drop-shadow(0 2px 3px rgba(56, 34, 19, 0.44));
+}
+
+/*
+ * Remove only the old rectangular visual treatment. The buttons retain their
+ * original size, position, focusability, click/tap handling and proximity use.
+ */
+#room.physical-room.cottage-living-room.cottage-outline-room.aligned-picture-hotspots
+  .physical-stage.aligned-hit-stage > .physical-object,
+#room.physical-room.cottage-living-room.cottage-outline-room.aligned-picture-hotspots
+  .physical-stage.aligned-hit-stage > .physical-object:is(
+  :hover,
+  :focus-visible,
+  .near,
+  .touching,
+  .todo-highlight
+) {
+  appearance: none !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  filter: none !important;
+  animation: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+#room.physical-room.cottage-living-room.cottage-outline-room
+  .physical-stage > .physical-object::before,
+#room.physical-room.cottage-living-room.cottage-outline-room
+  .physical-stage > .physical-object::after {
+  display: none !important;
+  content: none !important;
+  border: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+/* Keep the existing hotspot labels above the non-interactive SVG layer. */
+#room.cottage-living-room.cottage-outline-room .physical-stage {
+  z-index: 18;
+}
+
+#room.physical-room.cottage-living-room.cottage-outline-room
+  .physical-stage > .physical-object > .object-name {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) !important;
+  padding: 5px 9px !important;
+  border: 1px solid rgba(255, 247, 221, 0.72) !important;
+  border-radius: 8px !important;
+  background: rgba(69, 48, 36, 0.9) !important;
+  color: #fffaf0 !important;
+  box-shadow: 0 2px 7px rgba(41, 26, 18, 0.34) !important;
+  font-size: clamp(8px, 0.7vw, 11px) !important;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+}
+
+#room.cottage-living-room.cottage-outline-room .physical-player {
+  z-index: 30;
+}
+
+@media (max-width: 800px) {
+  #room.cottage-living-room.cottage-outline-room
+    .cottage-outline-overlay path.traced-silhouette {
+    stroke-width: 1.6;
+  }
+
+  #room.physical-room.cottage-living-room.cottage-outline-room
+    .physical-stage > .physical-object > .object-name {
+    padding: 4px 6px !important;
+    max-width: 82px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #room.cottage-living-room.cottage-outline-room
+    .cottage-outline-overlay [data-hotspot-key] {
+    transition: none;
+  }
+}

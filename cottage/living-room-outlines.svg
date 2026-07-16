@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 1672 941"
+     preserveAspectRatio="xMidYMid slice"
+     aria-hidden="true">
+  <!--
+    Five complete silhouettes are sourced from the user's transparent
+    cottage-hotspot-reference.png and transformed onto the live 1672 x 941
+    room artwork. The reference labels are removed by the masks below.
+
+    Couch and Pet bed are clipped by the bottom of the supplied reference,
+    while Indoor plants are absent, so those three retain complete paths
+    traced against the live room image.
+  -->
+  <defs>
+    <filter id="reference-outline" x="-20%" y="-20%" width="140%" height="140%"
+            color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="2.2" result="expanded"/>
+      <feComposite in="expanded" in2="SourceAlpha" operator="out" result="edge"/>
+      <feGaussianBlur in="edge" stdDeviation="0.65" result="soft-edge"/>
+      <feFlood flood-color="#fffceb" flood-opacity="0.98" result="white"/>
+      <feComposite in="white" in2="soft-edge" operator="in" result="outline"/>
+      <feMerge>
+        <feMergeNode in="outline"/>
+      </feMerge>
+    </filter>
+
+    <clipPath id="clip-fireplace" clipPathUnits="userSpaceOnUse">
+      <rect x="118" y="620" width="430" height="330"/>
+    </clipPath>
+    <mask id="mask-fireplace" maskUnits="userSpaceOnUse" x="118" y="620" width="430" height="330">
+      <rect x="118" y="620" width="430" height="330" fill="white"/>
+      <rect x="216" y="709" width="154" height="54" rx="18" fill="black"/>
+    </mask>
+
+    <clipPath id="clip-television" clipPathUnits="userSpaceOnUse">
+      <rect x="550" y="615" width="345" height="280"/>
+    </clipPath>
+    <mask id="mask-television" maskUnits="userSpaceOnUse" x="550" y="615" width="345" height="280">
+      <rect x="550" y="615" width="345" height="280" fill="white"/>
+      <rect x="655" y="685" width="145" height="56" rx="18" fill="black"/>
+    </mask>
+
+    <clipPath id="clip-bookshelf" clipPathUnits="userSpaceOnUse">
+      <rect x="1172" y="612" width="285" height="290"/>
+    </clipPath>
+    <mask id="mask-bookshelf" maskUnits="userSpaceOnUse" x="1172" y="612" width="285" height="290">
+      <rect x="1172" y="612" width="285" height="290" fill="white"/>
+      <rect x="1218" y="731" width="162" height="58" rx="18" fill="black"/>
+    </mask>
+
+    <clipPath id="clip-armchair" clipPathUnits="userSpaceOnUse">
+      <path d="M1310 770 H1536 V1000 H1310 Z"/>
+    </clipPath>
+    <mask id="mask-armchair" maskUnits="userSpaceOnUse" x="1310" y="770" width="226" height="230">
+      <rect x="1310" y="770" width="226" height="230" fill="white"/>
+      <rect x="1344" y="848" width="153" height="64" rx="18" fill="black"/>
+    </mask>
+
+    <clipPath id="clip-coffee-table" clipPathUnits="userSpaceOnUse">
+      <rect x="742" y="800" width="330" height="224"/>
+    </clipPath>
+    <mask id="mask-coffee-table" maskUnits="userSpaceOnUse" x="742" y="800" width="330" height="224">
+      <rect x="742" y="800" width="330" height="224" fill="white"/>
+      <rect x="826" y="919" width="194" height="61" rx="18" fill="black"/>
+    </mask>
+  </defs>
+
+  <g class="cottage-outline-shapes">
+    <g data-hotspot-key="Fireplace" class="reference-silhouette"
+       transform="matrix(1.27 0 0 1.58 -3 -980)">
+      <image href="cottage/cottage-hotspot-reference.png"
+             xlink:href="cottage/cottage-hotspot-reference.png"
+             x="0" y="0" width="1536" height="1024"
+             clip-path="url(#clip-fireplace)"
+             mask="url(#mask-fireplace)"
+             filter="url(#reference-outline)"/>
+    </g>
+
+    <g data-hotspot-key="Television" class="reference-silhouette"
+       transform="matrix(.83 0 0 1.10 183 -542)">
+      <image href="cottage/cottage-hotspot-reference.png"
+             xlink:href="cottage/cottage-hotspot-reference.png"
+             x="0" y="0" width="1536" height="1024"
+             clip-path="url(#clip-television)"
+             mask="url(#mask-television)"
+             filter="url(#reference-outline)"/>
+    </g>
+
+    <g data-hotspot-key="Bookshelf" class="reference-silhouette"
+       transform="matrix(1.29 0 0 1.67 -575 -1038)">
+      <image href="cottage/cottage-hotspot-reference.png"
+             xlink:href="cottage/cottage-hotspot-reference.png"
+             x="0" y="0" width="1536" height="1024"
+             clip-path="url(#clip-bookshelf)"
+             mask="url(#mask-bookshelf)"
+             filter="url(#reference-outline)"/>
+    </g>
+
+    <g data-hotspot-key="Armchair" class="reference-silhouette"
+       transform="matrix(1.34 0 0 1.28 -482 -686)">
+      <image href="cottage/cottage-hotspot-reference.png"
+             xlink:href="cottage/cottage-hotspot-reference.png"
+             x="0" y="0" width="1536" height="1024"
+             clip-path="url(#clip-armchair)"
+             mask="url(#mask-armchair)"
+             filter="url(#reference-outline)"/>
+    </g>
+
+    <g data-hotspot-key="Coffee table" class="reference-silhouette"
+       transform="matrix(1.10 0 0 1.04 -65 -420)">
+      <image href="cottage/cottage-hotspot-reference.png"
+             xlink:href="cottage/cottage-hotspot-reference.png"
+             x="0" y="0" width="1536" height="1024"
+             clip-path="url(#clip-coffee-table)"
+             mask="url(#mask-coffee-table)"
+             filter="url(#reference-outline)"/>
+    </g>
+
+    <path data-hotspot-key="Cottage sofa" class="traced-silhouette"
+          d="M1202 494 C1264 482 1341 494 1387 521
+             C1420 541 1448 574 1454 611
+             L1451 682 L1433 718 L1402 738
+             L1360 745 L1320 733 L1308 770
+             L1272 796 L1191 811 L1150 851
+             L1069 876 L997 891 L946 878
+             L905 850 L875 824 L841 807
+             L819 773 L811 725 L819 683
+             L842 654 L878 639 L928 635
+             L1017 594 L1109 550 Z"/>
+
+    <path data-hotspot-key="Pet bed" class="traced-silhouette"
+          d="M272 632 C325 614 410 619 456 644
+             C488 662 501 694 493 731
+             C485 774 451 802 403 813
+             C347 825 280 815 244 786
+             C216 763 209 723 221 688
+             C230 661 249 641 272 632 Z"/>
+
+    <path data-hotspot-key="Indoor plants" class="traced-silhouette"
+          d="M0 337
+             C28 334 54 344 70 365
+             C87 386 91 414 81 438
+             C107 445 127 463 134 487
+             C142 515 132 543 111 560
+             C126 579 130 605 120 628
+             C108 655 86 670 58 673
+             L0 668 Z
+
+             M0 637
+             C25 623 54 625 75 643
+             C96 661 103 688 96 714
+             C119 725 133 747 132 774
+             C131 802 114 825 91 836
+             C109 858 109 888 94 911
+             C84 927 70 937 54 941
+             L0 941 Z"/>
+  </g>
+</svg>
