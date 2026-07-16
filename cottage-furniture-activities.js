@@ -71,6 +71,78 @@
       items:[['Watering Can','🪴'],['Plant Food','🌱'],['Soft Cloth','🧽']],
       instruction:'Water, feed, and gently clean the leaves.',
       finish:'Admire the plants',energy:4,minutes:12
+    },
+    Mirror:{
+      title:'Polish and Use the Mirror',subtitle:'BEDROOM MIRROR',scene:'vanity',
+      items:[['Soft Cloth','🧽'],['Flower Pin','🌸'],['Hand Mirror','🪞']],
+      instruction:'Polish the mirror, then arrange a finishing accessory.',
+      finish:'Check your outfit',energy:3,minutes:8
+    },
+    'Window plant':{
+      title:'Tend the Window Planter',subtitle:'BEDROOM GARDEN',scene:'plants',
+      items:[['Watering Can','💧'],['Plant Food','🌱'],['Flower Seeds','🌼']],
+      instruction:'Drag each gardening item to the planter beneath the window.',
+      finish:'Watch the flowers bloom',energy:4,minutes:10
+    },
+    'Kitchen|Refrigerator':{
+      title:'Organize the Refrigerator',subtitle:'COTTAGE KITCHEN',scene:'wardrobe',
+      items:[['Milk','🥛'],['Fresh Fruit','🍓'],['Vegetables','🥬'],['Leftovers','🥘']],
+      instruction:'Drag groceries onto the refrigerator shelves.',
+      finish:'Close the refrigerator',energy:2,minutes:8
+    },
+    'Kitchen|Sink':{
+      title:'Wash the Cottage Dishes',subtitle:'KITCHEN SINK',scene:'coffee-table',
+      items:[['Dish Soap','🫧'],['Cup','☕'],['Plate','🍽️'],['Tea Towel','🧻']],
+      instruction:'Drag the soap and dishes to the sink, then add the towel.',
+      finish:'Put away clean dishes',energy:3,minutes:10
+    },
+    'Kitchen|Cabinets':{
+      title:'Organize the Cabinets',subtitle:'KITCHEN STORAGE',scene:'bookshelf',
+      items:[['Plates','🍽️'],['Cups','☕'],['Mixing Bowls','🥣'],['Jars','🫙']],
+      instruction:'Return each kitchen item to the cabinet.',
+      finish:'Close the cabinets',energy:2,minutes:8
+    },
+    'Kitchen|Pantry':{
+      title:'Restock the Pantry',subtitle:'PANTRY STORAGE',scene:'bookshelf',
+      items:[['Flour Jar','🌾'],['Sugar Jar','🫙'],['Tea Tin','🍃'],['Snack Basket','🧺']],
+      instruction:'Drag the pantry goods onto their shelves.',
+      finish:'Finish restocking',energy:2,minutes:10
+    },
+    'Bathroom|Shower':{
+      title:'Prepare a Cozy Shower',subtitle:'BATHROOM ROUTINE',scene:'shower',
+      items:[['Soap','🧼'],['Shampoo','🧴'],['Warm Towel','🧻']],
+      instruction:'Place the bath supplies by the shower.',
+      finish:'Take a refreshing shower',energy:8,minutes:20
+    },
+    'Bathroom|Sink':{
+      title:'Freshen Up at the Sink',subtitle:'BATHROOM SINK',scene:'vanity',
+      items:[['Hand Soap','🧼'],['Toothbrush','🪥'],['Face Towel','🧻']],
+      instruction:'Arrange the sink supplies for your morning routine.',
+      finish:'Wash and freshen up',energy:5,minutes:10
+    },
+    'Bathroom|Toilet':{
+      title:'Tidy the Bathroom Corner',subtitle:'BATHROOM CARE',scene:'nightstand',
+      items:[['Cleaning Brush','🧹'],['Fresh Roll','🧻'],['Flower Spray','🌸']],
+      instruction:'Drag each cleaning item into place.',
+      finish:'Finish tidying',energy:2,minutes:8
+    },
+    'Bathroom|Towel rack':{
+      title:'Arrange Fresh Towels',subtitle:'LINEN ROUTINE',scene:'wardrobe',
+      items:[['Bath Towel','🧻'],['Hand Towel','🟩'],['Flower Sachet','🌼']],
+      instruction:'Hang the clean towels and add a flower sachet.',
+      finish:'Save towel arrangement',energy:2,minutes:6
+    },
+    'Exterior|Garden bench':{
+      title:'Prepare the Garden Bench',subtitle:'COTTAGE GARDEN',scene:'sofa',
+      items:[['Seat Cushion','🟩'],['Picnic Blanket','🧶'],['Lemonade','🥤']],
+      instruction:'Set up the bench for a peaceful outdoor break.',
+      finish:'Rest in the garden',energy:8,minutes:18
+    },
+    'Exterior|Flower garden':{
+      title:'Tend the Cottage Flowers',subtitle:'FRONT GARDEN',scene:'plants',
+      items:[['Seeds','🌱'],['Watering Can','💧'],['Compost','🪴']],
+      instruction:'Plant, feed, and water the cottage flower bed.',
+      finish:'Admire the flower garden',energy:5,minutes:15
     }
   };
   let activity=null;
@@ -95,7 +167,8 @@
     </div>`);
   }
   function open(name,object){
-    const config=activities[name];if(!config)return false;
+    const activityKey=activities[`${currentTab}|${name}`]?`${currentTab}|${name}`:name;
+    const config=activities[activityKey];if(!config)return false;
     activity={name,config,object,placed:new Set()};render();return true;
   }
   function addItem(index){

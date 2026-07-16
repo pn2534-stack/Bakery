@@ -37,9 +37,9 @@
       'Pantry':[76,9,18,33],'Dining table':[55,52,29,35]
     },
     'cottage|Bedroom':{
-      'Cottage bed':[24,25,33,39],'Nightstand':[17,38,11,22],
-      'Wardrobe':[51,7,17,34],'Mirror':[64,12,10,31],
-      'Vanity':[76,26,16,27],'Window plant':[7,21,17,35]
+      'Cottage bed':[9,19,23,49],'Nightstand':[30,24,9,17],
+      'Wardrobe':[62,9,16,34],'Mirror':[80,15,10,19],
+      'Vanity':[78,45,13,27],'Window plant':[40,18,14,14]
     },
     'cottage|Bathroom':{
       'Shower':[29,4,23,43],'Sink':[49,25,23,34],

@@ -3,19 +3,19 @@
   const INTERACT_DISTANCE = 19;
   const spawn = { x: 50, y: 82 };
   const hotspots = {
-    'Cottage bed': [7, 18, 25, 49],
-    'Nightstand': [30, 23, 9, 20],
+    'Cottage bed': [9, 19, 23, 49],
+    'Nightstand': [30, 24, 9, 17],
     'Wardrobe': [62, 9, 16, 34],
-    'Vanity': [77, 43, 16, 34],
-    'Mirror': [81, 14, 10, 25],
-    'Window plant': [2, 62, 14, 29]
+    'Vanity': [78, 45, 13, 27],
+    'Mirror': [80, 15, 10, 19],
+    'Window plant': [40, 18, 14, 14]
   };
   const obstacles = [
-    [5, 16, 29, 51],
-    [29, 21, 12, 23],
+    [7, 17, 27, 52],
+    [29, 22, 11, 21],
     [60, 7, 19, 38],
-    [76, 41, 19, 36],
-    [1, 60, 16, 31]
+    [76, 42, 18, 34],
+    [38, 15, 18, 18]
   ];
 
   function isBedroom() {

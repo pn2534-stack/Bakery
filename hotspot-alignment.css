@@ -38,3 +38,13 @@
 @media(max-width:900px){
   #room.physical-room.aligned-picture-hotspots .physical-stage.aligned-hit-stage>.physical-object>.object-name{font-size:8px!important}
 }
+
+/* The order checklist can collapse to a small corner control, exposing every
+   station underneath without stopping the active shift. */
+.restaurant-hud-actions{display:flex;align-items:flex-start;gap:5px}
+.restaurant-hud-actions button{border:0;border-radius:9px;background:#9d6d5a;color:#fff;padding:6px;white-space:nowrap}
+.restaurant-hud.hud-collapsed{width:auto!important;max-width:230px!important;max-height:58px!important;padding:8px 10px!important;overflow:hidden!important;background:#fff8eaf5!important}
+.restaurant-hud.hud-collapsed .restaurant-hud-body{display:none!important}
+.restaurant-hud.hud-collapsed>header{align-items:center!important}
+.restaurant-hud.hud-collapsed>header small,.restaurant-hud.hud-collapsed [data-restaurant-close]{display:none!important}
+.restaurant-hud.hud-collapsed h3{font-size:14px!important}
