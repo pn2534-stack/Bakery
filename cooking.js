@@ -5,6 +5,7 @@
     'Strawberry Cake':{type:'bake',needs:{Flour:2,Eggs:2,Milk:1,Sugar:2,Strawberries:2},minutes:40,temp:350},
     'Cookies':{type:'bake',needs:{Flour:1,Butter:1,Sugar:1,Eggs:1},minutes:15,temp:350},
     'Latte':{type:'drink',needs:{'Coffee Beans':1,Milk:1},minutes:5},
+    'Lavender Tea':{type:'drink',needs:{'Tea Leaves':1,Honey:1,Vanilla:1},minutes:5},
     'Peach Tea':{type:'drink',needs:{'Tea Leaves':1,Honey:1},minutes:5},
     'Berry Smoothie':{type:'drink',needs:{Strawberries:2,Milk:1,Honey:1},minutes:5},
     'Apple Pie':{type:'bake',needs:{Flour:2,Butter:1,Sugar:1,Apples:3,Cinnamon:1},minutes:38,temp:375},
@@ -37,7 +38,7 @@
     'Cake station':['Strawberry Cake','Chocolate Cake','Lily’s Berry Birthday Cake','Festival Honey Cake'], 'Cupcake station':['Lemon Cupcakes','Blueberry Muffins'],
     'Cookie station':['Cookies','Oat Honey Cookies','Matcha Cookies','Professor Maple’s Tea Cookies','Rose Garden Macarons'], 'Pie station':['Apple Pie','Cherry Tart'],
     'Coffee station':['Latte','Caramel Latte','Hot Chocolate','Vanilla Frappe','Mocha'],
-    'Tea station':['Peach Tea','Spiced Apple Cider','Mint Tea'], 'Smoothie station':['Berry Smoothie','Peach Smoothie','Mango Smoothie'],
+    'Tea station':['Lavender Tea','Peach Tea','Mint Tea','Spiced Apple Cider'], 'Smoothie station':['Berry Smoothie','Peach Smoothie','Mango Smoothie'],
     Ovens:Object.keys(recipes2).filter(name => recipes2[name].type === 'bake')
   };
   const ingredients = [...new Set(Object.values(recipes2).flatMap(recipe => Object.keys(recipe.needs)))];

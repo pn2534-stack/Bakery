@@ -72,8 +72,17 @@
     if(enabled){applyRoomDesign();toast('Drag each outline onto the matching item in the background')}else{save();renderRoom();toast('Interactions organized · outlines hidden')}
   }
 
+  function stopLayoutForNavigation(){
+    if(!layoutMode)return;
+    layoutMode=false;drag?.object?.classList.remove('design-dragging');drag=null;
+    document.getElementById('room')?.classList.remove('bakery-layout-mode');
+    document.querySelector('.bakery-layout-toolbar')?.remove();
+    save();
+  }
+
   const previousRender=renderRoom;renderRoom=function(){previousRender();applyRoomDesign()};
   const previousShowScene=showScene;showScene=function(id){previousShowScene(id);if(id==='world')renderOutdoors()};
+  const previousOpenLocation=openLocation;openLocation=function(key){if(key!=='bakery')stopLayoutForNavigation();previousOpenLocation(key)};
 
   document.addEventListener('click',event=>{
     if(event.target.closest('[data-bakery-design]')){event.preventDefault();event.stopImmediatePropagation();if(state.restaurant?.open)return toast('Close the bakery before redecorating');studio();return}

@@ -11,7 +11,7 @@
     [{x:18,y:65},{x:12,y:69}], [{x:83,y:65},{x:89,y:69}]
   ];
   const doors = {
-    bakery:{x:20,y:62}, market:{x:40,y:57}, boutique:{x:62,y:56}, cottage:{x:82,y:63}
+    bakery:{x:20,y:62}, market:{x:40,y:57}, boutique:{x:62,y:56}, cottage:{x:82,y:63}, park:{x:50,y:81}
   };
   let routeFrame = 0;
 
@@ -89,7 +89,7 @@
   }
 
   window.walkToVillageBuilding=function(hotspot,enter){
-    const key=hotspot.classList.contains('hotspot-bakery')?'bakery':hotspot.classList.contains('hotspot-market')?'market':hotspot.classList.contains('hotspot-boutique')?'boutique':'cottage';
+    const key=hotspot.classList.contains('hotspot-bakery')?'bakery':hotspot.classList.contains('hotspot-market')?'market':hotspot.classList.contains('hotspot-boutique')?'boutique':hotspot.classList.contains('hotspot-park')?'park':'cottage';
     walkRoute(doors[key],enter);
   };
 

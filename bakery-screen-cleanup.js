@@ -46,8 +46,8 @@
       delete object.dataset.shelfArt;
       object.style.removeProperty('--shelf-image');
       const id=`${label?.textContent.trim()||object.dataset.type||'furniture'}#${index}`,position=saved[id];
-      if(box){const [left,top,width,height]=box;Object.assign(object.style,{left:`${left}%`,top:`${top}%`,width:`${width}%`,height:`${height}%`,transform:'none'})}
-      else if(position)Object.assign(object.style,{left:`${position.x}%`,top:`${position.y}%`,transform:'none'});
+      if(position)Object.assign(object.style,{left:`${position.x}%`,top:`${position.y}%`,transform:'none'});
+      else if(box){const [left,top,width,height]=box;Object.assign(object.style,{left:`${left}%`,top:`${top}%`,width:`${width}%`,height:`${height}%`,transform:'none'})}
     });
     shell.querySelector('[data-station-guide]')?.remove();
   }
