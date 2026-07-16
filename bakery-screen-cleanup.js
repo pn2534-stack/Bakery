@@ -7,6 +7,7 @@
     'Pantry':[31,61,10,18],'Refrigerator':[62,61,11,19],'Ovens':[58,27,11,23],
     'Serving table':[6,78,13,16],'Flour & Sugar Shelf':[0,49,14,29],'Butter Fridge':[58,59,12,24],
     'Fruit Basket':[44,69,12,17],'Tea & Coffee Shelf':[58,7,14,29]
+    ,'Donut & muffin station':[74,23,11,18],'Snack station':[74,43,11,18],'Ice cream machine':[74,63,11,18]
   };
   const caféLayout={
     'Front counter':[28,29,22,23],'Register':[47,27,9,16],'Cake display':[12,33,17,22],

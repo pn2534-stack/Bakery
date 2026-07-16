@@ -26,6 +26,32 @@
     'Mocha':{type:'drink',needs:{'Coffee Beans':1,Milk:1,Cocoa:1,Cream:1},minutes:5},
     'Mint Tea':{type:'drink',needs:{'Tea Leaves':1,Mint:2,Honey:1},minutes:5},
     'Mango Smoothie':{type:'drink',needs:{Mango:2,Yogurt:1,Honey:1,Coconut:1},minutes:5}
+    ,'Biscoff Cookies':{type:'bake',needs:{Flour:1,Butter:1,'Brown Sugar':1,Biscoff:2,Eggs:1},minutes:17,temp:350,level:2}
+    ,'Cookies & Cream Cookies':{type:'bake',needs:{Flour:1,Butter:1,Sugar:1,'Chocolate Cookies':2,Cream:1},minutes:17,temp:350,level:2}
+    ,'Marshmallow Cookies':{type:'bake',needs:{Flour:1,Butter:1,'Brown Sugar':1,Marshmallows:2,Eggs:1},minutes:18,temp:350,level:3}
+    ,'Red Velvet Cookies':{type:'bake',needs:{Flour:1,Butter:1,Sugar:1,Cocoa:1,Cream:1},minutes:18,temp:350,level:4}
+    ,'Classic Brownies':{type:'bake',needs:{Flour:1,Butter:1,Sugar:1,Cocoa:2,Eggs:2},minutes:25,temp:350,level:2}
+    ,'Biscoff Brownies':{type:'bake',needs:{Flour:1,Butter:1,'Brown Sugar':1,Cocoa:2,Biscoff:2},minutes:27,temp:350,level:4}
+    ,'Red Velvet Brownies':{type:'bake',needs:{Flour:1,Butter:1,Sugar:1,Cocoa:1,Cream:1},minutes:26,temp:350,level:4}
+    ,'Red Velvet Cake':{type:'bake',needs:{Flour:2,Eggs:2,Butter:1,Sugar:2,Cocoa:1,Cream:2},minutes:42,temp:350,level:3}
+    ,'Dubai Chocolate Cake':{type:'bake',needs:{Flour:2,Eggs:2,Butter:1,Sugar:2,Cocoa:2,Pistachios:2},minutes:46,temp:350,level:6}
+    ,'Cookies & Cream Cake':{type:'bake',needs:{Flour:2,Eggs:2,Milk:1,Sugar:2,'Chocolate Cookies':2,Cream:2},minutes:43,temp:350,level:4}
+    ,'Glazed Donuts':{type:'bake',needs:{Flour:2,Milk:1,Eggs:1,Sugar:1,Vanilla:1},minutes:22,temp:375,level:2}
+    ,'Strawberry Donuts':{type:'bake',needs:{Flour:2,Milk:1,Eggs:1,Sugar:1,Strawberries:2},minutes:23,temp:375,level:3}
+    ,'Biscoff Donuts':{type:'bake',needs:{Flour:2,Milk:1,Eggs:1,'Brown Sugar':1,Biscoff:2},minutes:24,temp:375,level:4}
+    ,'Cake Pops':{type:'snack',needs:{Flour:1,Eggs:1,Sugar:1,Butter:1,Cream:1},minutes:12,level:2}
+    ,'Red Velvet Cake Pops':{type:'snack',needs:{Flour:1,Eggs:1,Sugar:1,Cocoa:1,Cream:1},minutes:13,level:4}
+    ,'Fruit Cake Popsicles':{type:'snack',needs:{Strawberries:2,Mango:1,Yogurt:1,Honey:1},minutes:10,level:3}
+    ,'Biscoff Cake Popsicles':{type:'snack',needs:{Biscoff:2,Cream:1,Milk:1,'Brown Sugar':1},minutes:11,level:5}
+    ,'Vanilla Ice Cream':{type:'frozen',needs:{Milk:2,Cream:2,Sugar:1,Vanilla:1},minutes:9,level:2}
+    ,'Cookies & Cream Ice Cream':{type:'frozen',needs:{Milk:2,Cream:2,'Chocolate Cookies':2,Sugar:1},minutes:10,level:3}
+    ,'Dubai Chocolate Ice Cream':{type:'frozen',needs:{Milk:2,Cream:2,Cocoa:1,Pistachios:2},minutes:11,level:6}
+    ,'Ice Cream Sandwiches':{type:'frozen',needs:{Flour:1,Butter:1,Sugar:1,Milk:1,Cream:1,Vanilla:1},minutes:14,level:4}
+    ,'Chocolate Chip Muffins':{type:'bake',needs:{Flour:2,Eggs:1,Milk:1,Sugar:1,Chocolate:2},minutes:24,temp:375,level:2}
+    ,'Lemon Poppy Muffins':{type:'bake',needs:{Flour:2,Eggs:1,Milk:1,Sugar:1,Lemons:2,'Poppy Seeds':1},minutes:24,temp:375,level:3}
+    ,'Cucumber Tea Sandwich':{type:'lunch',needs:{Bread:2,Cucumber:2,Cream:1,Herbs:1},minutes:8,level:1}
+    ,'Caprese Sandwich':{type:'lunch',needs:{Bread:2,Tomatoes:2,Cheese:1,Herbs:1},minutes:9,level:2}
+    ,'Chicken Salad Sandwich':{type:'lunch',needs:{Bread:2,Chicken:1,Lettuce:1,Herbs:1},minutes:10,level:3}
     ,'Hazel’s Heirloom Buns':{type:'bake',needs:{Flour:2,Butter:1,Milk:1,Sugar:1,Cinnamon:2,Honey:1},minutes:28,temp:375,unlock:'Hazel’s Heirloom Buns'}
     ,'Lily’s Berry Birthday Cake':{type:'bake',needs:{Flour:2,Eggs:2,Milk:1,Sugar:2,Strawberries:3,Vanilla:1},minutes:44,temp:350,unlock:'Lily’s Berry Birthday Cake'}
     ,'Professor Maple’s Tea Cookies':{type:'bake',needs:{Flour:1,Butter:1,Sugar:1,Eggs:1,'Tea Leaves':1,Honey:1},minutes:18,temp:350,unlock:'Professor Maple’s Tea Cookies'}
@@ -35,8 +61,12 @@
   };
   const stationRecipes = {
     'Bread station':['White Bread','Cinnamon Rolls','Pumpkin Bread','Hazel’s Heirloom Buns'], 'Pastry station':['Croissant','Blueberry Muffins','Apple Pie','Raspberry Scones','Cherry Tart','Honeybell Berry Danish'],
-    'Cake station':['Strawberry Cake','Chocolate Cake','Lily’s Berry Birthday Cake','Festival Honey Cake'], 'Cupcake station':['Lemon Cupcakes','Blueberry Muffins'],
-    'Cookie station':['Cookies','Oat Honey Cookies','Matcha Cookies','Professor Maple’s Tea Cookies','Rose Garden Macarons'], 'Pie station':['Apple Pie','Cherry Tart'],
+    'Cake station':['Strawberry Cake','Chocolate Cake','Red Velvet Cake','Cookies & Cream Cake','Dubai Chocolate Cake','Lily’s Berry Birthday Cake','Festival Honey Cake'], 'Cupcake station':['Lemon Cupcakes','Cake Pops','Red Velvet Cake Pops'],
+    'Cookie station':['Cookies','Biscoff Cookies','Cookies & Cream Cookies','Marshmallow Cookies','Red Velvet Cookies','Oat Honey Cookies','Matcha Cookies','Classic Brownies','Biscoff Brownies','Red Velvet Brownies','Professor Maple’s Tea Cookies','Rose Garden Macarons'], 'Pie station':['Apple Pie','Cherry Tart'],
+    'Donut & muffin station':['Glazed Donuts','Strawberry Donuts','Biscoff Donuts','Blueberry Muffins','Chocolate Chip Muffins','Lemon Poppy Muffins'],
+    'Snack station':['Cake Pops','Red Velvet Cake Pops','Fruit Cake Popsicles','Biscoff Cake Popsicles'],
+    'Ice cream machine':['Vanilla Ice Cream','Cookies & Cream Ice Cream','Dubai Chocolate Ice Cream','Ice Cream Sandwiches'],
+    'Sandwich station':['Cucumber Tea Sandwich','Caprese Sandwich','Chicken Salad Sandwich'],
     'Coffee station':['Latte','Caramel Latte','Hot Chocolate','Vanilla Frappe','Mocha'],
     'Tea station':['Lavender Tea','Peach Tea','Mint Tea','Spiced Apple Cider'], 'Smoothie station':['Berry Smoothie','Peach Smoothie','Mango Smoothie'],
     Ovens:Object.keys(recipes2).filter(name => recipes2[name].type === 'bake')
@@ -57,7 +87,7 @@
   function skillProgress() { return (state.bakingSkill.xp || 0) % 120; }
   function available(name) { return state.inventory[name] || 0; }
   function canBake(recipe) { return Object.entries(recipe.needs).every(([name,amount]) => available(name) >= amount); }
-  function isUnlocked(name) { const recipe=recipes2[name];return !recipe?.unlock||(state.unlockedRecipes||[]).includes(recipe.unlock); }
+  function isUnlocked(name) { const recipe=recipes2[name];return (!recipe?.level||skillLevel()>=recipe.level)&&(!recipe?.unlock||(state.unlockedRecipes||[]).includes(recipe.unlock)); }
   function isDough(name) { return /Bread|Croissant|Cinnamon Roll|Bun|Pie/.test(name); }
   function needsDecorating(name) { return /Cake|Cupcake|Cookie|Muffin|Pie/.test(name); }
   function needsPiping(name) { return /Cake|Cupcake/.test(name); }
@@ -140,8 +170,8 @@
   }
 
   function renderCook() {
-    const recipe = recipes2[cook.recipe], choices = (stationRecipes[cook.category] || Object.keys(recipes2)).filter(isUnlocked);
-    modal(`<div class="skill-baking-modal"><header class="baking-header"><div><p>HONEYBELL KITCHEN</p><h2>Interactive baking</h2></div><div class="baking-level"><b>Skill ${skillLevel()}</b><span><i style="width:${skillProgress()/1.2}%"></i></span><small>${skillProgress()} / 120 XP</small></div><div class="quality-stock"><b>${state.stock[cook.recipe]||0}</b><small>in stock</small></div></header><div class="skill-bake-layout"><aside class="skill-recipes"><h3>${cook.category}</h3>${choices.map(name=>`<button class="${name===cook.recipe?'active':''}" data-skill-recipe="${name}">${name}</button>`).join('')}</aside><main class="skill-game-stage">${stageMarkup()}</main><aside class="baking-process"><h3>Recipe process</h3><ol>${processSteps()}</ol><div class="skill-tip"><b>Higher skill</b><p>Wider timing windows and a quality bonus make excellent pastries easier.</p></div>${cook.spent?'<small>Ingredients have been used for this batch.</small>':''}</aside></div></div>`);
+    const recipe = recipes2[cook.recipe], choices = stationRecipes[cook.category] || Object.keys(recipes2);
+    modal(`<div class="skill-baking-modal"><header class="baking-header"><div><p>HONEYBELL KITCHEN</p><h2>Interactive baking</h2></div><div class="baking-level"><b>Skill ${skillLevel()}</b><span><i style="width:${skillProgress()/1.2}%"></i></span><small>${skillProgress()} / 120 XP</small></div><div class="quality-stock"><b>${state.stock[cook.recipe]||0}</b><small>in stock</small></div></header><div class="skill-bake-layout"><aside class="skill-recipes"><h3>${cook.category}</h3>${choices.map(name=>{const locked=!isUnlocked(name),level=recipes2[name]?.level||1;return`<button class="${name===cook.recipe?'active':''} ${locked?'recipe-locked':''}" data-skill-recipe="${name}" ${locked?'disabled':''}>${name}${locked?`<small>Skill ${level}</small>`:''}</button>`}).join('')}</aside><main class="skill-game-stage">${stageMarkup()}</main><aside class="baking-process"><h3>Recipe process</h3><ol>${processSteps()}</ol><div class="skill-tip"><b>Unlock guide</b><p>Your recipe list shows every station item. Locked foods display the baking skill level required.</p></div>${cook.spent?'<small>Ingredients have been used for this batch.</small>':''}</aside></div></div>`);
   }
 
   function nextAfterTechnique() { cook.stage = recipes2[cook.recipe].type === 'bake' ? 'oven' : 'result'; if (cook.stage==='result') finishBatch(); else renderCook(); }
