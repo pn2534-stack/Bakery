@@ -78,7 +78,7 @@
   save();
 
   let cook = freshCook('White Bread', 'Bread station');
-  let measureTimer = null, measureLockTimer = null;
+  let measureTimer = null, measureLockTimer = null, mixLockUntil = 0;
 
   function freshCook(recipe, category) {
     const requested=window.requestedBakerySize,drink=recipes2[recipe]?.type==='drink'||recipes2[recipe]?.type==='frozen';
@@ -180,7 +180,7 @@
 
   function nextAfterTechnique() { cook.stage = recipes2[cook.recipe].type === 'bake' ? 'oven' : 'result'; if (cook.stage==='result') finishBatch(); else renderCook(); }
   function nextAfterOven() { cook.stage = needsDecorating(cook.recipe) ? 'decorate' : 'result'; if (cook.stage==='result') finishBatch(); else { cook.decorations = new Set(); renderCook(); } }
-  function nextAfterDecorate() { cook.decorateScores.push((cook.decorations?.size||0)/5); cook.stage = needsPiping(cook.recipe) ? 'pipe' : 'result'; if (cook.stage==='result') finishBatch(); else renderCook(); }
+  function nextAfterDecorate() { const total=decorationProfile(cook.recipe).points.length;cook.decorateScores.push((cook.decorations?.size||0)/total); cook.stage = needsPiping(cook.recipe) ? 'pipe' : 'result'; if (cook.stage==='result') finishBatch(); else renderCook(); }
   function finishBatch() {
     const named = [
       {name:'Measuring',value:percent(average(cook.measureScores))},
@@ -236,7 +236,8 @@
   window.addEventListener('blur',releasePointer);
   function addPipePoint(event,board){
     const rect=board.getBoundingClientRect(),x=Math.max(0,Math.min(100,(event.clientX-rect.left)/rect.width*100)),y=Math.max(0,Math.min(100,(event.clientY-rect.top)/rect.height*100));
-    cook.pipePoints.push([x.toFixed(1),y.toFixed(1)]); if(cook.pipePoints.length>160)cook.pipePoints.shift();
+    const point=[x.toFixed(1),y.toFixed(1)],last=cook.pipePoints.at(-1);
+    if(!last||Math.hypot(point[0]-last[0],point[1]-last[1])>.45)cook.pipePoints.push(point);
     pipingProfile(cook.recipe).targets.forEach((point,index)=>{if(Math.hypot(x-point[0],y-point[1])<10)cook.pipeHits.add(index)});
     const line=board.querySelector('[data-pipe-line]');if(line)line.setAttribute('points',cook.pipePoints.map(p=>p.join(',')).join(' '));
     board.querySelectorAll('[data-pipe-target]').forEach((target,index)=>target.classList.toggle('hit',cook.pipeHits.has(index)));
@@ -249,13 +250,13 @@
     if(button.dataset.batchSize){cook.size=button.dataset.batchSize;renderCook();return;}
     if(button.dataset.skillRecipe){clearInterval(cook.ovenInterval);cook=freshCook(button.dataset.skillRecipe,Object.keys(stationRecipes).find(key=>stationRecipes[key].includes(button.dataset.skillRecipe))||cook.category);renderCook();return;}
     if(button.dataset.startBatch!==undefined){if(!spendIngredients())return;cook.stage='measure';renderCook();return;}
-    if(button.dataset.mixHit!==undefined){const cycle=1600,phase=((performance.now()-(cook.mixStarted||(cook.mixStarted=performance.now())))%cycle)/cycle,position=phase<.5?phase*200:(1-phase)*200;const error=Math.max(0,Math.abs(position-50)-skillLevel()*1.3);cook.techniqueScores.push(Math.max(0,1-error/50));if(cook.techniqueScores.length>=4)nextAfterTechnique();else{renderCook();cook.mixStarted=performance.now();}return;}
+    if(button.dataset.mixHit!==undefined){const now=performance.now();if(now<mixLockUntil)return;mixLockUntil=now+220;const cycle=1600,phase=((now-(cook.mixStarted||(cook.mixStarted=now)))%cycle)/cycle,position=1+(phase<.5?phase*188:(1-phase)*188);const error=Math.max(0,Math.abs(position-50)-skillLevel()*1.3);cook.techniqueScores.push(Math.max(0,1-error/50));if(cook.techniqueScores.length>=4)nextAfterTechnique();else{renderCook();requestAnimationFrame(()=>{cook.mixStarted=performance.now()})}return;}
     if(button.dataset.knead){if(button.dataset.knead!==cook.kneadExpected)return toast(`Use the ${cook.kneadExpected} hand next`);const now=performance.now(),elapsed=cook.lastKnead?now-cook.lastKnead:500,error=Math.max(0,Math.abs(elapsed-500)-skillLevel()*12);cook.techniqueScores.push(Math.max(0,1-error/550));cook.lastKnead=now;cook.kneadExpected=cook.kneadExpected==='left'?'right':'left';cook.kneadTaps++;if(cook.kneadTaps>=8)nextAfterTechnique();else renderCook();return;}
     if(button.dataset.ovenStart!==undefined){const selected=+(document.querySelector('[data-oven-temp]')?.value||350),recipe=recipes2[cook.recipe],error=Math.max(0,Math.abs(selected-recipe.temp)-skillLevel()*2);cook.ovenScores.push(Math.max(0,1-error/80));cook.ovenStarted=performance.now();renderCook();cook.ovenInterval=setInterval(()=>{const elapsed=performance.now()-cook.ovenStarted,progress=Math.min(100,elapsed/65);const bar=document.querySelector('[data-oven-progress]'),clock=document.querySelector('[data-oven-clock]');if(bar)bar.style.width=`${progress}%`;if(clock)clock.textContent=`${(elapsed/1000).toFixed(1)}s`;},40);return;}
     if(button.dataset.ovenTake!==undefined){clearInterval(cook.ovenInterval);const elapsed=performance.now()-cook.ovenStarted,error=Math.max(0,Math.abs(elapsed-5200)-skillLevel()*90);cook.ovenScores.push(Math.max(0,1-error/3500));nextAfterOven();return;}
-    if(button.dataset.decoration!==undefined){cook.decorations=cook.decorations||new Set();cook.decorations.add(+button.dataset.decoration);button.classList.add('placed');const finish=document.querySelector('[data-finish-decorate]');if(finish)finish.disabled=cook.decorations.size<5;return;}
-    if(button.dataset.finishDecorate!==undefined){nextAfterDecorate();return;}
-    if(button.dataset.finishPipe!==undefined){cook.decorateScores.push(cook.pipeHits.size/8);finishBatch();return;}
+    if(button.dataset.decoration!==undefined){cook.decorations=cook.decorations||new Set();const index=+button.dataset.decoration;if(cook.decorations.has(index))return;cook.decorations.add(index);button.classList.add('placed');button.disabled=true;const total=decorationProfile(cook.recipe).points.length,finish=document.querySelector('[data-finish-decorate]');if(finish)finish.disabled=cook.decorations.size<total;return;}
+    if(button.dataset.finishDecorate!==undefined){if((cook.decorations?.size||0)<decorationProfile(cook.recipe).points.length)return;nextAfterDecorate();return;}
+    if(button.dataset.finishPipe!==undefined){if(cook.pipeHits.size<4)return;cook.decorateScores.push(cook.pipeHits.size/8);finishBatch();return;}
     if(button.dataset.collectBatch!==undefined&&!cook.collected){const score=cook.result.score;state.stock[cook.recipe]=(state.stock[cook.recipe]||0)+3;state.stockQuality[cook.recipe]=state.stockQuality[cook.recipe]||[];state.stockQuality[cook.recipe].push(score,score,score);state.stockSizes=state.stockSizes||{};state.stockSizes[cook.recipe]=state.stockSizes[cook.recipe]||[];state.stockSizes[cook.recipe].push(cook.size,cook.size,cook.size);state.bakingSkill.xp+=cook.result.xp;state.bakingSkill.batches++;state.bakingSkill.best=Math.max(state.bakingSkill.best||0,score);state.minute+=recipes2[cook.recipe].minutes;state.energy=Math.max(0,(state.energy||100)-4);cook.collected=true;updateHUD();save();toast(`${grade(score)[0]} ${cook.size} ${cook.recipe} · +3 stock`);renderCook();return;}
     if(button.dataset.bakeAgain!==undefined){cook=freshCook(cook.recipe,cook.category);renderCook();}
   });

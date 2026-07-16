@@ -45,6 +45,26 @@
       'Shower':[29,4,23,43],'Sink':[49,25,23,34],
       'Toilet':[75,39,14,29],'Towel rack':[75,18,14,20]
     },
+    'shops|Market':{
+      'Shopping carts':[72,57,20,32],'Fresh produce':[0,28,67,25],
+      'Milk and eggs':[29,15,14,28],'Flour and sugar':[43,8,11,29],
+      'Chocolate':[54,7,7,24],'Tea and coffee':[70,8,19,34],
+      'Frozen foods':[57,15,13,22],'Bakery supplies':[21,22,8,27],
+      'Cleaning supplies':[43,55,17,39],'Decorations':[0,39,8,17],
+      'Checkout':[4,52,25,25]
+    },
+    'shops|Furniture':{
+      'Living room display':[0,14,31,31],'Bedroom display':[60,5,30,29],
+      'Kitchen display':[27,3,30,27],'Bathroom display':[74,38,26,30],
+      'Garden display':[5,43,32,48],'Pet furniture':[57,48,29,43]
+    },
+    'shops|Boutique':{
+      'Women clothing':[23,18,18,31],'Men clothing':[67,15,17,31],
+      'Shoes':[45,47,19,21],'Accessories':[14,62,22,24],
+      'Hats':[14,45,22,18],'Jewelry':[83,18,16,32],
+      'Changing room':[40,5,17,31],'Mirror':[58,12,9,30],
+      'Cashier':[73,49,20,24]
+    },
     'park|Pavilion':{
       'Tea tables':[37,31,37,38],'Tea set':[0,18,22,33],
       'Cake stand':[81,39,17,28],'Mini games':[70,70,25,25]

@@ -72,7 +72,7 @@
     setTimeout(()=>{
       currentTab='Living room';renderTabs();renderRoom();
       document.querySelectorAll('#room-tabs button').forEach(button=>button.classList.toggle('active',button.dataset.tab==='Living room'));
-    },760);
+    },230);
   }
 
   // The old map pin did not share the cottage interior handler used by the 3D house.
@@ -84,10 +84,11 @@
   let navigationLocked=false;
   document.addEventListener('click',event=>{
     const navigation=event.target.closest('[data-action="home"],[data-location]');
-    if(!navigation||navigationLocked)return;
+    if(!navigation)return;
+    if(navigationLocked){event.preventDefault();event.stopImmediatePropagation();return}
     navigationLocked=true;
     document.body.classList.add('scene-transitioning');
-    setTimeout(()=>{navigationLocked=false;document.body.classList.remove('scene-transitioning')},850);
+    setTimeout(()=>{navigationLocked=false;document.body.classList.remove('scene-transitioning')},320);
   },true);
 
   if(document.querySelector('.room.physical-room'))organizeRoom();
