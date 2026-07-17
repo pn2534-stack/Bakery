@@ -2,7 +2,7 @@
   'use strict';
 
   const ROOM_KEY = 'cottage|Living room';
-  const SVG_URL = 'cottage/living-room-outlines.svg';
+  const SVG_URL = 'cottage/living-room-outlines.svg?v=20260716-4';
   const OUTLINED_OBJECTS = new Set([
     'Fireplace',
     'Television',
@@ -29,7 +29,7 @@
 
   function loadOutlineMarkup() {
     if (!svgMarkupPromise) {
-      svgMarkupPromise = fetch(SVG_URL, { cache: 'force-cache' })
+      svgMarkupPromise = fetch(SVG_URL, { cache: 'no-store' })
         .then(response => {
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           return response.text();
@@ -55,7 +55,14 @@
     if (!overlay) return;
 
     overlay.querySelectorAll('[data-hotspot-key]').forEach(path => {
-      path.classList.toggle('is-active', path.dataset.hotspotKey === activeName);
+      const active = path.dataset.hotspotKey === activeName;
+      path.classList.toggle('is-active', active);
+      /*
+       * Inline opacity is intentional. It makes the visible state resilient
+       * to the project's many later !important rules and SVG cascade quirks.
+       */
+      path.style.opacity = active ? '1' : '0';
+      path.style.visibility = 'visible';
     });
   }
 
@@ -110,15 +117,60 @@
     });
   }
 
+  function bindHotspotButtons(room, objects) {
+    objects.forEach(object => {
+      if (object.dataset.cottageOutlineBound === 'true') return;
+      object.dataset.cottageOutlineBound = 'true';
+      const name = objectName(object);
+      if (!OUTLINED_OBJECTS.has(name)) return;
+
+      object.addEventListener('pointerenter', () => {
+        setActiveOutline(room, name);
+      }, { passive: true });
+
+      object.addEventListener('pointermove', () => {
+        setActiveOutline(room, name);
+      }, { passive: true });
+
+      object.addEventListener('pointerleave', event => {
+        const next = hoveredHotspot(room, event.relatedTarget);
+        setActiveOutline(room, next ? objectName(next) : clickedHotspotName);
+      }, { passive: true });
+
+      /*
+       * This does not prevent, stop, or replace the existing interaction.
+       * The established document click handler still receives the event.
+       */
+      object.addEventListener('click', () => {
+        clickedHotspotName = name;
+        setActiveOutline(room, name);
+      });
+    });
+  }
+
+  function validateVisibleOverlay(room, overlay) {
+    requestAnimationFrame(() => {
+      const bounds = overlay.getBoundingClientRect();
+      const paths = overlay.querySelectorAll('[data-hotspot-key]');
+      if (!bounds.width || !bounds.height || paths.length !== OUTLINED_OBJECTS.size) {
+        console.error('[Cottage outlines] Overlay did not initialize correctly.', {
+          width: bounds.width,
+          height: bounds.height,
+          paths: paths.length,
+          expectedPaths: OUTLINED_OBJECTS.size
+        });
+      }
+    });
+  }
+
   async function applyCottageOutlines() {
     const room = document.querySelector('#room.physical-room');
     if (!room || roomKey() !== ROOM_KEY || !room.classList.contains('cottage-living-room')) {
       return;
     }
 
-    const shell = room.querySelector('.physical-shell');
     const objects = [...room.querySelectorAll('.physical-stage > .physical-object')];
-    if (!shell || !objects.length) return;
+    if (!objects.length) return;
 
     /*
      * Validate against the existing object list. The SVG never creates,
@@ -129,7 +181,7 @@
       if (OUTLINED_OBJECTS.has(name)) object.dataset.cottageOutline = name;
     });
 
-    let overlay = shell.querySelector('.cottage-outline-overlay');
+    let overlay = room.querySelector(':scope > .cottage-outline-overlay');
     if (!overlay) {
       const markup = await loadOutlineMarkup();
       if (!markup || roomKey() !== ROOM_KEY || !room.isConnected) return;
@@ -142,11 +194,13 @@
       overlay.classList.add('cottage-outline-overlay');
       overlay.setAttribute('focusable', 'false');
       overlay.setAttribute('aria-hidden', 'true');
-      shell.appendChild(overlay);
+      overlay.setAttribute('preserveAspectRatio', 'none');
+      room.appendChild(overlay);
     }
 
     room.classList.add('cottage-outline-room');
     bindPointerState(room);
+    bindHotspotButtons(room, objects);
 
     const missingObjects = [...OUTLINED_OBJECTS]
       .filter(name => !objects.some(object => objectName(object) === name));
@@ -161,6 +215,7 @@
     }
 
     setActiveOutline(room, clickedHotspotName);
+    validateVisibleOverlay(room, overlay);
   }
 
   /*

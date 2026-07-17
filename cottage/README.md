@@ -5,8 +5,8 @@ Rosemary Cottage living room.
 
 ## Files
 
-- `living-room-outlines.svg` — eight independently selectable silhouettes
-  using the room image's `1672 x 941` coordinate system.
+- `living-room-outlines.svg` — eight independently selectable native SVG
+  silhouettes using the room image's `1672 x 941` coordinate system.
 - `cottage-hotspot-reference.png` — the user's transparent separation
   reference. Five complete objects are used as SVG alpha-mask sources.
 - `cottage-hotspot-outlines.css` — cottage-only outline styling and removal of
@@ -31,10 +31,10 @@ The outlines are traced against:
 `assets/honeybell-cottage-interior-bedroom-style.png`
 
 The supplied reference crops the Couch and Pet bed at its bottom edge and does
-not contain Indoor plants. Those three use complete paths traced against the
-live room background. Fireplace, Television, Bookshelf, Armchair, and Coffee
-table use separately clipped and transformed alpha silhouettes from the
-reference PNG.
+not contain Indoor plants. It was used to refine the visible shape language,
+but the runtime overlay uses native SVG paths for all eight objects. This avoids
+browser inconsistencies caused by external PNG alpha masks inside an SVG loaded
+at runtime.
 
 If either image is replaced, cropped, or recomposed, update the transforms or
 paths in `living-room-outlines.svg` while retaining their `data-hotspot-key`
