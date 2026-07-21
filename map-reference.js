@@ -10,7 +10,14 @@
     <button class="reference-hotspot hotspot-park" data-reference-location="park" data-reference-tab="Pavilion" aria-label="Willow Park · Mini Games"></button>
     <i class="village-npc npc-map-a"></i><i class="village-npc npc-map-b"></i><i class="village-npc npc-map-c"></i>
     <i class="reference-butterfly butterfly-a"></i><i class="reference-butterfly butterfly-b"></i>
-  </div><div class="map-mini"></div>`);
+  </div><nav class="village-destinations" aria-label="More village locations">
+    <span>Village places</span>
+    <button data-reference-location="library">📚 <b>Library</b></button>
+    <button data-reference-location="studio">🎨 <b>Art Studio</b></button>
+    <button data-reference-location="giftshop">🎁 <b>Gift Shop</b></button>
+    <button data-reference-location="greenhouse">🌿 <b>Greenhouse</b></button>
+    <button data-reference-location="delivery">📦 <b>Delivery Center</b></button>
+  </nav><div class="map-mini"></div>`);
 
   let entryRequest=0;
   document.addEventListener('click',event=>{
